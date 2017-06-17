@@ -282,3 +282,157 @@
   const nums = [ 1, 2, 3, 4 ]
   const evens = nums.filter( theEvens )
   ```
+
+
+## λRefatorandoooo
+
+```js
+function rot13(str) { // LBH QVQ VG!
+  var valoresUnicode = []
+
+  for (let i in str) {
+    valoresUnicode.push(str.charCodeAt(i))
+  }
+  
+  var str13 = valoresUnicode.map((x) =>  {
+    if (x == 32) return String.fromCharCode(x) //preserva o espaço
+    if (x >= 65 && x <=90) { // range A-Z  
+      if (x >= 78) return String.fromCharCode(x - 13) //Maior que 'N'
+      if (x <= 78) return String.fromCharCode(x + 13) //Menor que 'N'
+    } else {
+      return String.fromCharCode(x) //Demais caracteres ñ aplica mudança
+    }
+  }).join('')
+  
+  return str13
+}
+```
+
+Vamos aplicar nosso codestyle nesse código:
+
+```js
+function rot13 ( str ) { // LBH QVQ VG!
+  const valoresUnicode = []
+
+  for ( let i in str ) {
+    valoresUnicode.push( str.charCodeAt( i ) )
+  }
+  
+  var str13 = valoresUnicode.map( ( x ) =>  {
+    if ( x === 32 ) return String.fromCharCode(  x ) //preserva o espaço
+    if ( x >= 65 && x <=90 ) { // range A-Z  
+      if ( x >= 78 ) return String.fromCharCode( x - 13 ) //Maior que 'N'
+      if ( x <= 78 ) return String.fromCharCode( x + 13 ) //Menor que 'N'
+    } else {
+      return String.fromCharCode( x ) //Demais caracteres ñ aplica mudança
+    }
+  } ).join( '' )
+  
+  return str13
+}
+```
+
+Depois dessa ajeitadinha bora encapsular os testes lógicos em funções:
+
+
+```js
+const isSpace = ( x ) => ( x === 32 )
+const isLowerThenN = ( x ) => ( x <= 78 )
+
+function rot13 ( str ) { // LBH QVQ VG!
+  const valoresUnicode = []
+
+  for ( let i in str ) {
+    valoresUnicode.push( str.charCodeAt( i ) )
+  }
+  
+  var str13 = valoresUnicode.map( ( x ) =>  {
+    if ( isSpace( x ) ) return String.fromCharCode( x ) //preserva o espaço
+    if ( x >= 65 && x <=90 ) { // range A-Z  
+      if ( !isLowerThenN( x ) ) return String.fromCharCode( x - 13 ) //Maior que 'N'
+      if ( isLowerThenN( x ) ) return String.fromCharCode( x + 13 ) //Menor que 'N'
+    } else {
+      return String.fromCharCode( x ) //Demais caracteres ñ aplica mudança
+    }
+  }).join('')
+  
+  return str13
+}
+```
+
+Agora perceba que chamamos a função `String.fromCharCode` em diversos lugares?
+
+Podemos encapsula-la para facilitarmos a legibilidade:
+
+```js
+const isSpace = ( x ) => ( x === 32 )
+const isLowerThenN = ( x ) => ( x <= 78 )
+const getCharCode = String.fromCharCode
+
+const rot13 = ( str ) => { // LBH QVQ VG!
+  const valoresUnicode = []
+
+  for ( let i in str ) {
+    valoresUnicode.push( str.charCodeAt( i ) )
+  }
+  
+  var str13 = valoresUnicode.map( ( x ) =>  {
+    if ( isSpace( x ) ) return getCharCode( x ) //preserva o espaço
+    if ( x >= 65 && x <=90 ) { // range A-Z  
+      if ( !isLowerThenN( x ) ) return getCharCode( x - 13 ) //Maior que 'N'
+      if ( isLowerThenN( x ) ) return getCharCode( x + 13 ) //Menor que 'N'
+    } else {
+      return getCharCode( x ) //Demais caracteres ñ aplica mudança
+    }
+  }).join('')
+  
+  return str13
+}
+```
+
+Agora quero que você perceba que temos 2 `return`s iguais:
+
+`return getCharCode( x )`
+
+Logo podemos agrupar seus testes para que usemos o mesmo retorno: 
+
+```js
+
+const CYPHER_LIMIT = 78
+const A = 65
+const Z = 90
+
+const add = ( c ) => ( s ) => s.concat( c )
+const getCharCode = String.fromCharCode
+const isSpace = ( x ) => ( x === 32 )
+
+const isInRange = ( min, max ) => ( x ) => 
+  ( ( x >= min ) &&  ( x <= max ) )
+
+const toCharCode = ( letter, i, str ) => 
+  str.join( '' ).charCodeAt( i )
+
+const getPosition = ( CYPHER_LENGTH ) => ( x ) =>
+  ( x >= CYPHER_LIMIT ) ? x - CYPHER_LENGTH  : x + CYPHER_LENGTH 
+
+const getCharCodeFromCypher = ( CYPHER_LENGTH ) => ( x ) => 
+  ( isInRange( A, Z )( x ) ) ? getPosition( CYPHER_LENGTH )( x ) : x
+
+const cypherThis = ( CYPHER_LENGTH ) => ( x, isSpace ) =>
+  getCharCode( isSpace ?  x : getCharCodeFromCypher( CYPHER_LENGTH )( x ) )  
+
+const toCypher = ( CYPHER_LENGTH ) => ( result, x, i ) => 
+  add ( cypherThis( CYPHER_LENGTH )( x ), isSpace( x )  )( result )
+
+const rot = ( CYPHER_LENGTH ) => ( str ) => 
+  str.toUpperCase()
+      .split( '' )
+      .map( toCharCode )
+      .reduce( toCypher( CYPHER_LENGTH ), '' )
+
+const rot13 = rot( 13 )
+
+console.log('rot13 LBH QVQ VG!', rot13( 'LBH QVQ VG!' ) )
+console.log('rot13 suissa', rot13( 'suissa' ) )
+
+```
