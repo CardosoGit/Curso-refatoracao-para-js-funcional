@@ -492,14 +492,88 @@ console.log( rot13( 'LBH QVQ VG!' ) )
 ![](http://geradormemes.com/media/created/zy5nts.jpg)
 
 
+<br>
+
+> Percebeu que inverti a lógica do `isLowerThenN`?
+
+<br>
+
+Pois é preferível utilizar a afirmação em vez da negação.
+
+
+<br>
+
+**Espereeeeee... ainda não acabou!**
+
+<br>
+
+Agora vou mostrar como criar uma função genérica que possa ser reusada.
+
+```js
+const getCharCode = String.fromCharCode
+const isSpace = ( x ) => ( x === 32 )
+const isLowerThenN = ( x ) => ( x <= 78 )
+const isInRange = ( min, max ) => ( x ) => 
+  ( ( x >= min ) &&  ( x <= max ) )
+
+const getCypherCharCode = ( x ) => 
+  ( isLowerThenN( x ) )
+    ? getCharCode( x + 13 )
+    : getCharCode( x - 13 )
+
+const rot13 = ( str ) => { // LBH QVQ VG!
+  const valoresUnicode = []
+
+  for ( let i in str ) {
+    valoresUnicode.push( str.charCodeAt( i ) )
+  }
+  
+  const str13 = valoresUnicode.map( ( x ) =>  
+    ( isSpace( x ) || !isInRange( 65, 90 )( x ) )
+      ? getCharCode( x )
+      : getCypherCharCode( x )
+  ).join( '' )
+  
+  return str13
+}
+
+console.log( rot13( 'LBH QVQ VG!' ) )
+```
+
+Com isso podemos reusar a função `isInRange` em outros códigos quando precisarmos testar se um valor se encontra em uma determinada faixa.
+
+Eu deixei uma parte muito ijmportante que irei abordar na próxima aula: **immutable data**.
+
+Iremos aprender a não modificar nossos valores e com isso corrigir esse pedaço de código:
+
+```js
+const valoresUnicode = []
+
+for ( let i in str ) {
+  valoresUnicode.push( str.charCodeAt( i ) )
+}
+```
+
+
+## λExercício
+
+O exercício dessa aula é **BEM SIMPLES**. Quero apenas que você envie de 3 a 5 códigos, o original e o refatorado, aplicando o nosso *codestyle* e as técnicas aprendidas até agora.
+
+Os códigos podem ou não serem seus, você que decide!
+
+
+## λAviso
+
+O meu código refatorado "final" foi esse:
+
 ```js
 
 const CYPHER_LIMIT = 78
 const A = 65
 const Z = 90
+const getCharCode = String.fromCharCode
 
 const add = ( c ) => ( s ) => s.concat( c )
-const getCharCode = String.fromCharCode
 const isSpace = ( x ) => ( x === 32 )
 
 const isInRange = ( min, max ) => ( x ) => 
@@ -532,3 +606,6 @@ console.log('rot13 LBH QVQ VG!', rot13( 'LBH QVQ VG!' ) )
 console.log('rot13 suissa', rot13( 'suissa' ) )
 
 ```
+
+
+> **Logo mais você também chegará nisso facilmente!**

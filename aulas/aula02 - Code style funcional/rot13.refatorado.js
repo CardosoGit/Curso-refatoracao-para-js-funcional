@@ -1,6 +1,13 @@
+const getCharCode = String.fromCharCode
 const isSpace = ( x ) => ( x === 32 )
 const isLowerThenN = ( x ) => ( x <= 78 )
-const getCharCode = String.fromCharCode
+const isInRange = ( min, max ) => ( x ) => 
+  ( ( x >= min ) &&  ( x <= max ) )
+
+const getCypherCharCode = ( x ) => 
+  ( isLowerThenN( x ) )
+    ? getCharCode( x + 13 )
+    : getCharCode( x - 13 )
 
 const rot13 = ( str ) => { // LBH QVQ VG!
   const valoresUnicode = []
@@ -10,12 +17,10 @@ const rot13 = ( str ) => { // LBH QVQ VG!
   }
   
   const str13 = valoresUnicode.map( ( x ) =>  
-    ( isSpace( x ) || !( x >= 65 && x <=90 ) ) 
+    ( isSpace( x ) || !isInRange( 65, 90 )( x ) )
       ? getCharCode( x )
-      : ( !isLowerThenN( x ) )
-        ? getCharCode( x - 13 )
-        : getCharCode( x + 13 )
-  ).join('')
+      : getCypherCharCode( x )
+  ).join( '' )
   
   return str13
 }
