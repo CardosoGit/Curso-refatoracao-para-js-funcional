@@ -1,6 +1,8 @@
 # λAula02.(Atualizando seus códigos para ES6)
 
+Nesse curso iremos seguir o [Standard](https://github.com/feross/standard), porém com algumas modificações para melhorar a legibilidade do código funcional.
 
+*ps: a explicação de cada regra se encontra na documentação linkada acima.*
 
 ## λCodeStyle 
 
@@ -370,9 +372,10 @@ Agora perceba que chamamos a função `String.fromCharCode` em diversos lugares?
 Podemos encapsula-la para facilitarmos a legibilidade:
 
 ```js
+const getCharCode = String.fromCharCode
+
 const isSpace = ( x ) => ( x === 32 )
 const isLowerThenN = ( x ) => ( x <= 78 )
-const getCharCode = String.fromCharCode
 
 const rot13 = ( str ) => { // LBH QVQ VG!
   const valoresUnicode = []
@@ -402,9 +405,10 @@ Agora quero que você perceba que temos 2 `return`s iguais:
 Logo podemos agrupar seus testes para que usemos o mesmo retorno: 
 
 ```js
+const getCharCode = String.fromCharCode
+
 const isSpace = ( x ) => ( x === 32 )
 const isLowerThenN = ( x ) => ( x <= 78 )
-const getCharCode = String.fromCharCode
 
 const rot13 = ( str ) => { // LBH QVQ VG!
   const valoresUnicode = []
@@ -429,9 +433,10 @@ Hora de aplicar a ténica do if ternário para deixarmos o `map` com apenas uma 
 
 
 ```js
+const getCharCode = String.fromCharCode
+
 const isSpace = ( x ) => ( x === 32 )
 const isLowerThenN = ( x ) => ( x <= 78 )
-const getCharCode = String.fromCharCode
 
 const rot13 = ( str ) => { // LBH QVQ VG!
   const valoresUnicode = []
@@ -466,9 +471,10 @@ console.log( rot13( 'LBH QVQ VG!' ) )
 
 
 ```js
+const getCharCode = String.fromCharCode
+
 const isSpace = ( x ) => ( x === 32 )
 const isLowerThenN = ( x ) => ( x <= 78 )
-const getCharCode = String.fromCharCode
 
 const getCypherCharCode = ( x ) => 
   ( isLowerThenN( x ) )
@@ -516,6 +522,7 @@ Agora vou mostrar como criar uma função genérica que possa ser reusada.
 
 ```js
 const getCharCode = String.fromCharCode
+
 const isSpace = ( x ) => ( x === 32 )
 const isLowerThenN = ( x ) => ( x <= 78 )
 const isInRange = ( min, max ) => ( x ) => 
