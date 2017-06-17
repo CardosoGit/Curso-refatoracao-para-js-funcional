@@ -554,7 +554,20 @@ console.log( rot13( 'LBH QVQ VG!' ) )
 
 Com isso podemos reusar a função `isInRange` em outros códigos quando precisarmos testar se um valor se encontra em uma determinada faixa.
 
-Eu deixei uma parte muito ijmportante que irei abordar na próxima aula: **immutable data**.
+Ela foi escrita como uma *closure* para que possamos reaproveita-la melhor, por exemplo:
+
+
+```js
+const isInRange = ( min, max ) => ( x ) => 
+  ( ( x >= min ) &&  ( x <= max ) )
+
+const filterKids = ( list ) => list.filter( isInRange( 5, 13 ) )
+
+const kids = filterKids( [ 1, 2, 6, 12, 18, 666] )
+// [ 6, 12 ]
+```
+
+Eu deixei uma parte muito importante que irei abordar na próxima aula: **immutable data**.
 
 Iremos aprender a não modificar nossos valores e com isso corrigir esse pedaço de código:
 
