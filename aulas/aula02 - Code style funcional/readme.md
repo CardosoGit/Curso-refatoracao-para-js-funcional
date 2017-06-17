@@ -286,6 +286,9 @@
 
 ## λRefatorandoooo
 
+
+Esses dias me deparei com um pedido de refatoração em algum grupo de JS do Telegram e o código original é [esse](https://gist.github.com/maugravena/0340828e9587352deb93ca4d004d7747):
+
 ```js
 function rot13(str) { // LBH QVQ VG!
   var valoresUnicode = []
@@ -307,6 +310,8 @@ function rot13(str) { // LBH QVQ VG!
   return str13
 }
 ```
+
+É um exemplo bem simples mas que rola uma baita refatorada nele.
 
 Vamos aplicar nosso codestyle nesse código:
 
@@ -384,7 +389,7 @@ const rot13 = ( str ) => { // LBH QVQ VG!
     } else {
       return getCharCode( x ) //Demais caracteres ñ aplica mudança
     }
-  }).join('')
+  }).join( '' )
   
   return str13
 }
@@ -412,7 +417,7 @@ const rot13 = ( str ) => { // LBH QVQ VG!
     if ( isSpace( x ) || !( x >= 65 && x <=90 ) ) return getCharCode( x )
     if ( !isLowerThenN( x ) ) return getCharCode( x - 13 ) //Maior que 'N'
     if ( isLowerThenN( x ) ) return getCharCode( x + 13 ) //Menor que 'N'
-  }).join('')
+  }).join( '' )
   
   return str13
 }
@@ -441,7 +446,7 @@ const rot13 = ( str ) => { // LBH QVQ VG!
       : ( !isLowerThenN( x ) )
         ? getCharCode( x - 13 )
         : getCharCode( x + 13 )
-  ).join('')
+  ).join( '' )
   
   return str13
 }
@@ -481,7 +486,7 @@ const rot13 = ( str ) => { // LBH QVQ VG!
     ( isSpace( x ) || !( x >= 65 && x <=90 ) ) 
       ? getCharCode( x )
       : getCypherCharCode( x )
-  ).join('')
+  ).join( '' )
   
   return str13
 }
