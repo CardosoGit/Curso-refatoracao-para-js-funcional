@@ -2,6 +2,7 @@
 
 - [x] Como solucionar um problema
 - [ ] Atualizando seus códigos para ES6
+- [ ] Imutabilidade é a lei!
 - [ ] Mapeando e transformando dados (map)
 - [ ] Filtrando e selecionando dados (filter)
 - [ ] Reduzindo e compondo dados (reduce)
