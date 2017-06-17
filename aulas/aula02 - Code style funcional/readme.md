@@ -346,7 +346,7 @@ function rot13 ( str ) { // LBH QVQ VG!
     valoresUnicode.push( str.charCodeAt( i ) )
   }
   
-  var str13 = valoresUnicode.map( ( x ) =>  {
+  const str13 = valoresUnicode.map( ( x ) =>  {
     if ( isSpace( x ) ) return String.fromCharCode( x ) //preserva o espaço
     if ( x >= 65 && x <=90 ) { // range A-Z  
       if ( !isLowerThenN( x ) ) return String.fromCharCode( x - 13 ) //Maior que 'N'
@@ -376,7 +376,7 @@ const rot13 = ( str ) => { // LBH QVQ VG!
     valoresUnicode.push( str.charCodeAt( i ) )
   }
   
-  var str13 = valoresUnicode.map( ( x ) =>  {
+  const str13 = valoresUnicode.map( ( x ) =>  {
     if ( isSpace( x ) ) return getCharCode( x ) //preserva o espaço
     if ( x >= 65 && x <=90 ) { // range A-Z  
       if ( !isLowerThenN( x ) ) return getCharCode( x - 13 ) //Maior que 'N'
@@ -395,6 +395,102 @@ Agora quero que você perceba que temos 2 `return`s iguais:
 `return getCharCode( x )`
 
 Logo podemos agrupar seus testes para que usemos o mesmo retorno: 
+
+```js
+const isSpace = ( x ) => ( x === 32 )
+const isLowerThenN = ( x ) => ( x <= 78 )
+const getCharCode = String.fromCharCode
+
+const rot13 = ( str ) => { // LBH QVQ VG!
+  const valoresUnicode = []
+
+  for ( let i in str ) {
+    valoresUnicode.push( str.charCodeAt( i ) )
+  }
+  
+  const str13 = valoresUnicode.map( ( x ) =>  {
+    if ( isSpace( x ) || !( x >= 65 && x <=90 ) ) return getCharCode( x )
+    if ( !isLowerThenN( x ) ) return getCharCode( x - 13 ) //Maior que 'N'
+    if ( isLowerThenN( x ) ) return getCharCode( x + 13 ) //Menor que 'N'
+  }).join('')
+  
+  return str13
+}
+
+console.log( rot13( 'LBH QVQ VG!' ) )
+```
+
+Hora de aplicar a ténica do if ternário para deixarmos o `map` com apenas uma linha:
+
+
+```js
+const isSpace = ( x ) => ( x === 32 )
+const isLowerThenN = ( x ) => ( x <= 78 )
+const getCharCode = String.fromCharCode
+
+const rot13 = ( str ) => { // LBH QVQ VG!
+  const valoresUnicode = []
+
+  for ( let i in str ) {
+    valoresUnicode.push( str.charCodeAt( i ) )
+  }
+  
+  const str13 = valoresUnicode.map( ( x ) =>  
+    ( isSpace( x ) || !( x >= 65 && x <=90 ) ) 
+      ? getCharCode( x )
+      : ( !isLowerThenN( x ) )
+        ? getCharCode( x - 13 )
+        : getCharCode( x + 13 )
+  ).join('')
+  
+  return str13
+}
+
+console.log( rot13( 'LBH QVQ VG!' ) )
+```
+ 
+<br>
+
+**Entretanto, IMHO, nós só devemos ficar com 1 nível de if ternário.**
+
+<br>
+
+> E agora? #comofas
+
+<br>
+
+
+```js
+const isSpace = ( x ) => ( x === 32 )
+const isLowerThenN = ( x ) => ( x <= 78 )
+const getCharCode = String.fromCharCode
+
+const getCypherCharCode = ( x ) => 
+  ( isLowerThenN( x ) )
+    ? getCharCode( x + 13 )
+    : getCharCode( x - 13 )
+
+const rot13 = ( str ) => { // LBH QVQ VG!
+  const valoresUnicode = []
+
+  for ( let i in str ) {
+    valoresUnicode.push( str.charCodeAt( i ) )
+  }
+  
+  const str13 = valoresUnicode.map( ( x ) =>  
+    ( isSpace( x ) || !( x >= 65 && x <=90 ) ) 
+      ? getCharCode( x )
+      : getCypherCharCode( x )
+  ).join('')
+  
+  return str13
+}
+
+console.log( rot13( 'LBH QVQ VG!' ) )
+```
+
+![](http://geradormemes.com/media/created/zy5nts.jpg)
+
 
 ```js
 
