@@ -569,7 +569,7 @@ Os códigos podem ou não serem seus, você que decide!
 
 ## λAviso
 
-O meu código refatorado "final" foi esse:
+O meu código refatorado "final" foi esse, fiz mais para treinar. :p
 
 ```js
 
@@ -594,7 +594,7 @@ const getCharCodeFromCypher = ( CYPHER_LENGTH ) => ( x ) =>
   ( isInRange( A, Z )( x ) ) ? getPosition( CYPHER_LENGTH )( x ) : x
 
 const cypherThis = ( CYPHER_LENGTH ) => ( x, isSpace ) =>
-  getCharCode( isSpace ?  x : getCharCodeFromCypher( CYPHER_LENGTH )( x ) )  
+  getCharCode( isSpace ?  x : getCharCodeFromCypher( CYPHER_LENGTH )( x ) )
 
 const toCypher = ( CYPHER_LENGTH ) => ( result, x, i ) => 
   add ( cypherThis( CYPHER_LENGTH )( x ), isSpace( x )  )( result )
