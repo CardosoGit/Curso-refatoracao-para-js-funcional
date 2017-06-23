@@ -13,4 +13,11 @@
 - jQuery? Aí vc ta de zoera!
 
 
-## Aviso
+## Vídeos
+
+
+### Como solucionar um problema
+
+- [Curso Refatoração para JS Funcional - aula 01 - parte 0](https://www.youtube.com/watch?v=Se5kADko16w)
+- [Curso Refatoração para JS Funcional - aula 01 - parte 1](https://www.youtube.com/watch?v=cLsGWNSDdpI)
+- [Curso Refatoração para JS Funcional - aula 01 - resposta de pergunta](https://www.youtube.com/watch?v=wuHb1AHJEzw)
