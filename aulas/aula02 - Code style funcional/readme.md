@@ -4,6 +4,8 @@ Nesse curso iremos seguir o [Standard](https://github.com/feross/standard), por�
 
 *ps: a explicação de cada regra se encontra na documentação linkada acima.*
 
+**Não usaremos `;` nesse curso, porém quando programamos para *Frontend* é recomendável usar para não ter problemas com minificação.**
+
 ## λCodeStyle 
 
 * **Use 2 espaços** para identação.
@@ -633,4 +635,5 @@ console.log('rot13 suissa', rot13( 'suissa' ) )
 ```
 
 
-> **Logo mais você também chegará nisso facilmente!**
+> **Logo mais você também chegará nisso facilmente,**<br> 
+> **não que seja o melhor apenas diferente hehehhehe!**
