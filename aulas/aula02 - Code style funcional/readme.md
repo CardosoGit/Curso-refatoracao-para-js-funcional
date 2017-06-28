@@ -215,7 +215,7 @@ Então vamos ao que interessa: as nossas regras.
   if ( options.quiet !== true ) console.log( 'false' )
   ```
 
-* **Se for usar operador ternário** em múltiplas linhas,  [#16]()<br>
+* **Se for usar operador ternário** em múltiplas linhas,  [#14]()<br>
 deixe o `?` e o `:` em suas próprias linhas.
 
   ```js
@@ -232,8 +232,8 @@ deixe o `?` e o `:` em suas próprias linhas.
     'localhost' :
     'www.api.com'
   ```
-  
-* **Sempre lide** com o parâmetro `err` . [#14]()
+
+* **Sempre lide** com o parâmetro `err` . [#15]()
 
   ```js
   // ✓ ok
@@ -249,7 +249,7 @@ deixe o `?` e o `:` em suas próprias linhas.
   } )
   ```
 
-* **Caso tenha apenas um `if/else` na *arrow function* utilize o ternário** . [#15]()
+* **Caso tenha apenas um `if/else` na *arrow function* utilize o ternário** . [#16]()
 
   ```js
   // ✓ ok
@@ -276,7 +276,7 @@ Utilizei uma *closure* na função `log` pois assim podermos utilizá-la<br>
 em qualquer outra função que receba um parâmetro de resposta, dessa forma<br>
 injetamos a mensagem antes do `console.log` executar.
 
-* **Se utilizar *arrow function* com *closure* quebre a linha na última função** . [#16]()
+* **Se utilizar *arrow function* com *closure* quebre a linha na última função** . [#17]()
 
 
   ```js
@@ -293,7 +293,8 @@ injetamos a mensagem antes do `console.log` executar.
   const log = ( msg ) => ( data ) => console.log( `${msg}: ${data}` )
 
   // ✗ evite
-  const log = ( msg ) => ( data ) => ( fim ) => console.log( `${msg}: ${data}. ${fim}` )
+  const log = ( msg ) => 
+    ( data ) => ( fim ) => console.log( `${msg}: ${data}. ${fim}` )
 
   // ✗ evite
   const log = ( msg ) => 
@@ -303,7 +304,7 @@ injetamos a mensagem antes do `console.log` executar.
   ```
 
 
-* **Sempre prefixe globais de browser** com `window.`. [#17]()<br>
+* **Sempre prefixe globais de browser** com `window.`. [#18]()<br>
   Exceções: `document`, `navigator` e `console`.
 
   ```js
@@ -322,7 +323,7 @@ injetamos a mensagem antes do `console.log` executar.
   como no Node.js e como utilizamos o `console` nas duas plataformas **EU** <br>
   acredito ser melhor e mais reusável um código apenas com `console`.
 
-* **Não é permitido múltiplas linhas em branco.** [#17]()
+* **Não é permitido múltiplas linhas em branco.** [#19]()
 
   ```js
   // ✓ ok
@@ -352,7 +353,7 @@ injetamos a mensagem antes do `console.log` executar.
   console.log( 'result', result )
   ```
 
-* **É permitido 1 linha em branco quando mudar de contexto.** [#18]()
+* **É permitido 1 linha em branco quando mudar de contexto.** [#20]()
 
   ```js
   // ✓ ok
@@ -395,7 +396,7 @@ injetamos a mensagem antes do `console.log` executar.
   console.log( 'resultSum', resultSum )
   console.log( 'resultMinus', resultMinus )
   ```
-* **Quando usar `console.log` sempre usar um texto para identifica-lo.** [#19]()
+* **Quando usar `console.log` sempre usar um texto para identifica-lo.** [#21]()
 
   ```js
   // ✓ ok
@@ -416,7 +417,7 @@ injetamos a mensagem antes do `console.log` executar.
 Isso irá facilitar muito a sua vida quando for utiliza-lo para debugar.
 
 
-* **Para declarações de const,**  [#20]() <br>
+* **Para declarações de const,**  [#22]() <br>
 escreva cada declaração na sua própria instrução.
 
   ```js
@@ -432,7 +433,7 @@ escreva cada declaração na sua própria instrução.
       verbose = true
   ```
 
-* **Coloque parẽnteses adicionais** em declarações em condições.  [#21]()<br> 
+* **Coloque parẽnteses adicionais** em declarações em condições.  [#23]()<br> 
 Isso torna mais claro que a expressão é uma declaração `=` e <br> 
 não um operador de equidade `===`.
 
@@ -448,7 +449,7 @@ não um operador de equidade `===`.
   }
   ```
 *
-## Ponto-e-vírgula  [#22]()
+## Ponto-e-vírgula  [#24]()
 
 * Não use. (veja: [1](http://blog.izs.me/post/2353458699/an-open-letter-to-javascript-leaders-regarding), [2](http://inimino.org/%7Einimino/blog/javascript_semicolons), [3](https://www.youtube.com/watch?v=gsfbh17Ax9I))
 

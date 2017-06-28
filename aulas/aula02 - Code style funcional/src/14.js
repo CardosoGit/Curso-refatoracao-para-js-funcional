@@ -1,15 +1,12 @@
-const throwError = ( err ) => {
-  throw err
-}
-
-const cb = ( err, data ) => 
-  ( err ) 
-    ? throwError( err )
-    : data
-
-const run = ( cb ) => cb( new Error( 'DEU MERDA!' ) )
+// ✓ ok
+const location = env.development ? 'localhost' : 'www.api.com'
 
 // ✓ ok
-console.log( run( cb ) )
+const location = env.development
+  ? 'localhost'
+  : 'www.api.com'
 
-// run( )
+// ✗ evite
+const location = env.development ?
+  'localhost' :
+  'www.api.com'

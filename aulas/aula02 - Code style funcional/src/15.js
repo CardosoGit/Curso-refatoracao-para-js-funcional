@@ -1,12 +1,11 @@
-const throwError = ( err ) => { throw err }
+// ✓ ok
+run( ( err, data ) => {
+  if ( err ) throw err
+  
+  return data
+} )
 
-const log = ( msg ) => ( data ) => 
-  console.log( `${msg}: ${data}` )
-
-const cb = ( err, data ) => 
-  ( err ) 
-    ? throwError( err )
-    : log( 'Sucesso' )( data )
-
-const run = ( cb ) => cb( new Error( 'DEU MERDA!' ) )
-console.log( run( cb ) )
+// ✗ evite
+run( ( err, data ) => {
+  console.log( 'done' )
+} )

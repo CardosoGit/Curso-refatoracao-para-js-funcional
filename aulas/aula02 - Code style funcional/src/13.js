@@ -1,15 +1,12 @@
-const cb = ( err, data ) => {
-  if ( err ) throw err
-  
-  return data
+const options = {
+  quiet: true
 }
 
-const run = ( cb ) => cb( new Error( 'DEU MERDA!' ) )
-
 // ✓ ok
-console.log( run( cb ) )
+if ( options.quiet )  console.log( 'true')
+if ( !options.quiet )  console.log( 'false')
 
-// // ✗ evite
-// run( ( err, data ) => {
-//   console.log( 'done' )
-// } )
+
+// ✗ evite
+// if ( options.quiet === true ) console.log( 'true' )
+// if ( options.quiet !== true ) console.log( 'false' )
