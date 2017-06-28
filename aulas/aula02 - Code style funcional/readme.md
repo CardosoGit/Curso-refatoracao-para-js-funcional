@@ -442,7 +442,7 @@ escreva cada declaração na sua própria instrução.
   window.alert( 'hi' );  // ✗ evite
   ```
 
-* **Nunca comece uma linha com `(`, `[`, ou `` ` ``.**  [#23]() <br>
+* **Nunca comece uma linha com `(`, `[`, ou `` ` ``.**  [#24]() <br>
 Esse é o único problema em omitir ponto-e-vírgula, o Standard <br> 
 te protege desse problema em potencial.
 
