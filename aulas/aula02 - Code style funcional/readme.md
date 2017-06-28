@@ -432,24 +432,8 @@ escreva cada declaração na sua própria instrução.
   const silent = true,
       verbose = true
   ```
-
-* **Coloque parênteses adicionais** em declarações de condições.  [#23]()<br> 
-Isso torna mais claro que a expressão é uma declaração `=` e <br> 
-não um operador de equidade `===`.
-
-  ```js
-  // ✓ ok
-  while ( ( m = text.match( expr ) ) ) {
-    // ...
-  }
-
-  // ✗ evite
-  while ( m = text.match( expr ) ) {
-    // ...
-  }
-  ```
-*
-## Ponto-e-vírgula  [#24]()
+  
+## Ponto-e-vírgula  [#23]()
 
 * Não use. (veja: [1](http://blog.izs.me/post/2353458699/an-open-letter-to-javascript-leaders-regarding), [2](http://inimino.org/%7Einimino/blog/javascript_semicolons), [3](https://www.youtube.com/watch?v=gsfbh17Ax9I))
 
