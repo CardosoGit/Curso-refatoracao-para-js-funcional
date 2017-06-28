@@ -433,7 +433,7 @@ escreva cada declaração na sua própria instrução.
       verbose = true
   ```
 
-* **Coloque parẽnteses adicionais** em declarações em condições.  [#23]()<br> 
+* **Coloque parênteses adicionais** em declarações de condições.  [#23]()<br> 
 Isso torna mais claro que a expressão é uma declaração `=` e <br> 
 não um operador de equidade `===`.
 

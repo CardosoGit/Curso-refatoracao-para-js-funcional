@@ -1,11 +1,18 @@
-// ✓ ok
-run( ( err, data ) => {
+
+const run = ( cb ) => cb( new Error( 'DEU MERDA!' ) )
+const cb = ( err, data ) => {
   if ( err ) throw err
   
   return data
-} )
+}
 
-// ✗ evite
-run( ( err, data ) => {
-  console.log( 'done' )
-} )
+
+// ✓ ok
+// run(  )
+
+console.log( 'run:', run( cb ) )
+
+// // ✗ evite
+// run( ( err, data ) => {
+//   console.log( 'done' )
+// } )

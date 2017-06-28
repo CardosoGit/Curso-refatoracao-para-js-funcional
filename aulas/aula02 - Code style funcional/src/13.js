@@ -1,5 +1,5 @@
 const options = {
-  quiet: true
+  quiet: false
 }
 
 // ✓ ok
