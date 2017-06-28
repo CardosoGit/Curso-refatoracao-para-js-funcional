@@ -202,7 +202,20 @@ Então vamos ao que interessa: as nossas regras.
     console.log( 'done' )
   ```
 
-* **Sempre lide** com o parâmetro `err` . [#13]()
+* **Para testes booleanos com `true/false` não utilize comparação**. [#13]()
+
+  ```js
+  // ✓ ok
+  if ( options.quiet )  console.log( 'true')
+  if ( !options.quiet )  console.log( 'false')
+  
+
+  // ✗ evite
+  if ( options.quiet === true ) console.log( 'true' )
+  if ( options.quiet !== true ) console.log( 'false' )
+  ```
+
+* **Sempre lide** com o parâmetro `err` . [#14]()
 
   ```js
   // ✓ ok
@@ -218,7 +231,7 @@ Então vamos ao que interessa: as nossas regras.
   } )
   ```
 
-* **Caso tenha apenas um `if/else` na *arrow function* utilize o ternário** . [#13]()
+* **Caso tenha apenas um `if/else` na *arrow function* utilize o ternário** . [#15]()
 
   ```js
   // ✓ ok
@@ -241,7 +254,7 @@ Então vamos ao que interessa: as nossas regras.
   } )
   ```
 
-* **Se for usar operador ternário** em múltiplas linhas,  [#14]()<br>
+* **Se for usar operador ternário** em múltiplas linhas,  [#16]()<br>
 deixe o `?` e o `:` em suas próprias linhas.
 
   ```js
@@ -259,7 +272,7 @@ deixe o `?` e o `:` em suas próprias linhas.
     'www.api.com'
   ```
 
-* **Sempre prefixe globais de browser** com `window.`. [#15]()<br>
+* **Sempre prefixe globais de browser** com `window.`. [#17]()<br>
   Exceções: `document`, `navigator` e `console`.
 
   ```js
@@ -278,7 +291,7 @@ deixe o `?` e o `:` em suas próprias linhas.
   como no Node.js e como utilizamos o `console` nas duas plataformas **EU** <br>
   acredito ser melhor e mais reusável um código apenas com `console`.
 
-* **Não é permitido múltiplas linhas em branco.** [#16]()
+* **Não é permitido múltiplas linhas em branco.** [#17]()
 
   ```js
   // ✓ ok
@@ -308,7 +321,7 @@ deixe o `?` e o `:` em suas próprias linhas.
   console.log( 'result', result )
   ```
 
-* **É permitido 1 linha em branco quando mudar de contexto.** [#17]()
+* **É permitido 1 linha em branco quando mudar de contexto.** [#18]()
 
   ```js
   // ✓ ok
@@ -351,7 +364,7 @@ deixe o `?` e o `:` em suas próprias linhas.
   console.log( 'resultSum', resultSum )
   console.log( 'resultMinus', resultMinus )
   ```
-* **Quando usar `console.log` sempre usar um texto para identifica-lo.** [#18]()
+* **Quando usar `console.log` sempre usar um texto para identifica-lo.** [#19]()
 
   ```js
   // ✓ ok
@@ -372,7 +385,7 @@ deixe o `?` e o `:` em suas próprias linhas.
 Isso irá facilitar muito a sua vida quando for utiliza-lo para debugar.
 
 
-* **Para declarações de const,**  [#19]() <br>
+* **Para declarações de const,**  [#20]() <br>
 escreva cada declaração na sua própria instrução.
 
   ```js
@@ -388,7 +401,7 @@ escreva cada declaração na sua própria instrução.
       verbose = true
   ```
 
-* **Coloque parẽnteses adicionais** em declarações em condições.  [#20]()<br> 
+* **Coloque parẽnteses adicionais** em declarações em condições.  [#21]()<br> 
 Isso torna mais claro que a expressão é uma declaração `=` e <br> 
 não um operador de equidade `===`.
 
@@ -404,7 +417,7 @@ não um operador de equidade `===`.
   }
   ```
 *
-## Ponto-e-vírgula  [#21]()
+## Ponto-e-vírgula  [#22]()
 
 * Não use. (veja: [1](http://blog.izs.me/post/2353458699/an-open-letter-to-javascript-leaders-regarding), [2](http://inimino.org/%7Einimino/blog/javascript_semicolons), [3](https://www.youtube.com/watch?v=gsfbh17Ax9I))
 
@@ -413,7 +426,7 @@ não um operador de equidade `===`.
   window.alert( 'hi' );  // ✗ evite
   ```
 
-* **Nunca comece uma linha com `(`, `[`, ou `` ` ``.**  [#22]() <br>
+* **Nunca comece uma linha com `(`, `[`, ou `` ` ``.**  [#23]() <br>
 Esse é o único problema em omitir ponto-e-vírgula, o Standard <br> 
 te protege desse problema em potencial.
 
