@@ -218,7 +218,7 @@ Então vamos ao que interessa: as nossas regras.
   ```
 
 * **Sempre prefixe globais de browser** com `window.`. [#14]()<br>
-  Exceções: `document` e `navigator`.
+  Exceções: `document`, `navigator` e `console`.
 
   ```js
   window.alert( 'hi' )   // ✓ ok
