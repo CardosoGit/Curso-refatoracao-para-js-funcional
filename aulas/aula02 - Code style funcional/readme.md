@@ -1,5 +1,10 @@
 # λAula02.(Atualizando seus códigos para ES6)
 
+![Hadouken](https://www.thinkful.com/learn/static/guides/intro-to-jquery/images/ryu_hadoken_pose.png)
+
+<br>
+<br>
+
 Nesse curso iremos seguir o [Standard](https://github.com/feross/standard), porém com algumas modificações<br> 
 para melhorar a legibilidade do código funcional.
 
@@ -233,7 +238,7 @@ Então vamos ao que interessa: as nossas regras.
   console.log( value )
   ```
 
-* **Se for usar operador ternário** em múltiplas linhas,<br>  [#16]()
+* **Se for usar operador ternário** em múltiplas linhas,  [#16]()<br>
 deixe o `?` e o `:` em suas próprias linhas.
 
   ```js
@@ -267,7 +272,7 @@ escreva cada declaração na sua própria instrução.
       verbose = true
   ```
 
-* **Coloque parẽnteses adicionais** em declarações em condições.  [#17]()<br> 
+* **Coloque parẽnteses adicionais** em declarações em condições.  [#18]()<br> 
 Isso torna mais claro que a expressão é uma declaração `=` e <br> 
 não um operador de equidade `===`.
 
@@ -283,7 +288,7 @@ não um operador de equidade `===`.
   }
   ```
 *
-## Ponto-e-vírgula  [#18]()
+## Ponto-e-vírgula  [#19]()
 
 * Não use. (veja: [1](http://blog.izs.me/post/2353458699/an-open-letter-to-javascript-leaders-regarding), [2](http://inimino.org/%7Einimino/blog/javascript_semicolons), [3](https://www.youtube.com/watch?v=gsfbh17Ax9I))
 
@@ -292,7 +297,7 @@ não um operador de equidade `===`.
   window.alert( 'hi' );  // ✗ evite
   ```
 
-* **Nunca comece uma linha com `(`, `[`, ou `` ` ``.**  [#17]() <br>
+* **Nunca comece uma linha com `(`, `[`, ou `` ` ``.**  [#20]() <br>
 Esse é o único problema em omitir ponto-e-vírgula, o Standard <br> 
 te protege desse problema em potencial.
 
