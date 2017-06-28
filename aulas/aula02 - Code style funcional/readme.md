@@ -218,11 +218,23 @@ Então vamos ao que interessa: as nossas regras.
   ```
 
 * **Sempre prefixe globais de browser** com `window.`. [#14]()<br>
-  Exceções: `document`, `console` e `navigator`.
+  Exceções: `document` e `navigator`.
 
   ```js
-  window.alert( 'hi')   // ✓ ok
+  window.alert( 'hi' )   // ✓ ok
+
+  alert( 'hi' )   // ✗ evite
+
+
+  document.querySelector( '.menu' )   // ✓ ok
+
+  window.document.querySelector( '.menu' )   // ✗ evite
   ```
+
+  Retirei o `console` dessa regra, pois se formos escrever um código<br>
+  que seja Isomórfico e Universal o mesmo deve rodar tanto no navegador<br>
+  como no Node.js e como utilizamos o `console` nas duas plataformas **EU** <br>
+  acredito ser melhor e mais reusável um código apenas com `console`.
 
 * **Não é permitido múltiplas linhas em branco.** [#15]()
 
@@ -231,14 +243,61 @@ Então vamos ao que interessa: as nossas regras.
   const value = 'hello world'
   console.log( value )
   
+
   // ✗ evite
   const value = 'hello world'
 
 
   console.log( value )
+
+
+  // ✓ ok
+  const sum = ( x, y ) => x + y
+
+  const result = sum( 3, 5, )
+  console.log( 'result', result )
+
   ```
 
-* **Se for usar operador ternário** em múltiplas linhas,  [#16]()<br>
+* **É permitido 1 linha em branco quando mudar de contexto.** [#16]()
+
+  ```js
+  // ✓ ok
+  const sum = ( x, y ) => x + y
+
+  const result = sum( 3, 5, )
+  console.log( 'result', result )
+
+
+  // ✗ evite
+  const sum = ( x, y ) => x + y
+
+  const result = sum( 3, 5, )
+  console.log( 'result', result )
+
+  ```
+* **Quando usar `console.log` sempre usar um texto para identifica-lo.** [#17]()
+
+  ```js
+  // ✓ ok
+  const sum = ( x, y ) => x + y
+
+  const result = sum( 3, 5, )
+  console.log( 'result', result )
+
+
+  // ✗ evite
+  const sum = ( x, y ) => x + y
+
+  const result = sum( 3, 5, )
+  console.log( result )
+
+  ```
+
+Isso irá facilitar muito a sua vida quando for utiliza-lo para debugar.
+
+
+* **Se for usar operador ternário** em múltiplas linhas,  [#18]()<br>
 deixe o `?` e o `:` em suas próprias linhas.
 
   ```js
@@ -256,7 +315,7 @@ deixe o `?` e o `:` em suas próprias linhas.
     'www.api.com'
   ```
 
-* **Para declarações de const,**  [#17]() <br>
+* **Para declarações de const,**  [#19]() <br>
 escreva cada declaração na sua própria instrução.
 
   ```js
@@ -272,7 +331,7 @@ escreva cada declaração na sua própria instrução.
       verbose = true
   ```
 
-* **Coloque parẽnteses adicionais** em declarações em condições.  [#18]()<br> 
+* **Coloque parẽnteses adicionais** em declarações em condições.  [#20]()<br> 
 Isso torna mais claro que a expressão é uma declaração `=` e <br> 
 não um operador de equidade `===`.
 
@@ -288,7 +347,7 @@ não um operador de equidade `===`.
   }
   ```
 *
-## Ponto-e-vírgula  [#19]()
+## Ponto-e-vírgula  [#21]()
 
 * Não use. (veja: [1](http://blog.izs.me/post/2353458699/an-open-letter-to-javascript-leaders-regarding), [2](http://inimino.org/%7Einimino/blog/javascript_semicolons), [3](https://www.youtube.com/watch?v=gsfbh17Ax9I))
 
@@ -297,7 +356,7 @@ não um operador de equidade `===`.
   window.alert( 'hi' );  // ✗ evite
   ```
 
-* **Nunca comece uma linha com `(`, `[`, ou `` ` ``.**  [#20]() <br>
+* **Nunca comece uma linha com `(`, `[`, ou `` ` ``.**  [#22]() <br>
 Esse é o único problema em omitir ponto-e-vírgula, o Standard <br> 
 te protege desse problema em potencial.
 
