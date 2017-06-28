@@ -158,7 +158,7 @@ Então vamos ao que interessa: as nossas regras.
   const list = [1,2,3,4]
   ```
 
-* **Mantenha os else** na mesma linha das suas chaves.
+* **Mantenha os else** na mesma linha das suas chaves. [#11]()
 
   ```js
   // ✓ ok
@@ -177,7 +177,11 @@ Então vamos ao que interessa: as nossas regras.
   }
   ```
 
-* **Para ifs com mais de uma linha,** use chaves.
+  Isso é bom para quando você precisa retirar apenas o else<br>
+  e quer continuar com o code interno dele, você poderá<br>
+  comentar apenas a linha do `else`.
+
+* **Para ifs com mais de uma linha,** use chaves. [#12]()
 
   ```js
   // ✓ ok
@@ -193,7 +197,7 @@ Então vamos ao que interessa: as nossas regras.
     console.log( 'done' )
   ```
 
-* **Sempre lide** com o parâmetro `err` .
+* **Sempre lide** com o parâmetro `err` . [#13]()
 
   ```js
   // ✓ ok
@@ -208,14 +212,14 @@ Então vamos ao que interessa: as nossas regras.
   } )
   ```
 
-* **Sempre prefixe globais de browser** com `window.`.<br>
+* **Sempre prefixe globais de browser** com `window.`. [#14]()<br>
   Exceções: `document`, `console` e `navigator`.
 
   ```js
   window.alert( 'hi')   // ✓ ok
   ```
 
-* **Não é permitido múltiplas linhas em branco.**
+* **Não é permitido múltiplas linhas em branco.** [#15]()
 
   ```js
   // ✓ ok
@@ -229,7 +233,8 @@ Então vamos ao que interessa: as nossas regras.
   console.log( value )
   ```
 
-* **Se for usar operador ternário** em múltiplas linhas, deixe `?` e `:` em suas próprias linhas.
+* **Se for usar operador ternário** em múltiplas linhas,<br>  [#16]()
+deixe o `?` e o `:` em suas próprias linhas.
 
   ```js
   // ✓ ok
@@ -246,7 +251,8 @@ Então vamos ao que interessa: as nossas regras.
     'www.api.com'
   ```
 
-* **Para declarações de const,** escreva cada declaração na sua própria instrução.
+* **Para declarações de const,**  [#17]() <br>
+escreva cada declaração na sua própria instrução.
 
   ```js
   // ✓ ok
@@ -261,8 +267,9 @@ Então vamos ao que interessa: as nossas regras.
       verbose = true
   ```
 
-* **Coloque parẽnteses adicionais** em declarações em condições. Isso torna<br>  
-mais claro que a expressão é uma declaração `=` e não um operador de equidade `===`
+* **Coloque parẽnteses adicionais** em declarações em condições.  [#17]()<br> 
+Isso torna mais claro que a expressão é uma declaração `=` e <br> 
+não um operador de equidade `===`.
 
   ```js
   // ✓ ok
@@ -276,7 +283,7 @@ mais claro que a expressão é uma declaração `=` e não um operador de equida
   }
   ```
 *
-## Ponto-e-vírgula
+## Ponto-e-vírgula  [#18]()
 
 * Não use. (veja: [1](http://blog.izs.me/post/2353458699/an-open-letter-to-javascript-leaders-regarding), [2](http://inimino.org/%7Einimino/blog/javascript_semicolons), [3](https://www.youtube.com/watch?v=gsfbh17Ax9I))
 
@@ -285,7 +292,9 @@ mais claro que a expressão é uma declaração `=` e não um operador de equida
   window.alert( 'hi' );  // ✗ evite
   ```
 
-* Nunca comece uma linha com `(`, `[`, ou `` ` ``. Esse é o único problema em omitir ponto-e-vírgula, e standard te protege desse problema em potencial.
+* **Nunca comece uma linha com `(`, `[`, ou `` ` ``.**  [#17]() <br>
+Esse é o único problema em omitir ponto-e-vírgula, o Standard <br> 
+te protege desse problema em potencial.
 
   ```js
   // ✓ ok
@@ -315,9 +324,11 @@ mais claro que a expressão é uma declaração `=` e não um operador de equida
   `hello`.indexOf( 'o' )
   ```
 
-  Nota: Se você frequentemente escreve código assim, você pode estar querendo ser o inteligentão. Cuidado.
+  Nota: Se você frequentemente escreve código assim, você pode <br> 
+  estar querendo ser o inteligentão. Cuidado!
 
-  Atalhos inteligentes são desencorajados, em favor de expressões mais limpas e legíveis, sempre que possível.
+  Atalhos inteligentes são desencorajados, em favor de expressões <br> 
+  mais limpas e legíveis, sempre que possível.
 
 
   Ao invés disso:
@@ -337,7 +348,8 @@ mais claro que a expressão é uma declaração `=` e não um operador de equida
 ## λRefatorandoooo
 
 
-Esses dias me deparei com um pedido de refatoração em algum grupo de JS do Telegram e o código original é [esse](https://gist.github.com/maugravena/0340828e9587352deb93ca4d004d7747):
+Esses dias me deparei com um pedido de refatoração em algum grupo <br> 
+de JS do Telegram e o código original é [esse](https://gist.github.com/maugravena/0340828e9587352deb93ca4d004d7747):
 
 ```js
 function rot13(str) { // LBH QVQ VG!
@@ -360,6 +372,8 @@ function rot13(str) { // LBH QVQ VG!
   return str13
 }
 ```
+
+<br>
 
 É um exemplo bem simples mas que rola uma baita refatorada nele.
 
@@ -386,6 +400,8 @@ function rot13 ( str ) { // LBH QVQ VG!
   return str13
 }
 ```
+
+<br>
 
 Depois dessa ajeitadinha bora encapsular os testes lógicos em funções:
 
@@ -414,6 +430,8 @@ function rot13 ( str ) { // LBH QVQ VG!
   return str13
 }
 ```
+
+<br>
 
 Agora perceba que chamamos a função `String.fromCharCode` em diversos lugares?
 
@@ -446,9 +464,13 @@ const rot13 = ( str ) => { // LBH QVQ VG!
 }
 ```
 
+<br>
+
 Agora quero que você perceba que temos 2 `return`s iguais:
 
-`return getCharCode( x )`
+- `return getCharCode( x )`
+
+<br>
 
 Logo podemos agrupar seus testes para que usemos o mesmo retorno: 
 
@@ -476,6 +498,8 @@ const rot13 = ( str ) => { // LBH QVQ VG!
 
 console.log( rot13( 'LBH QVQ VG!' ) )
 ```
+
+<br>
 
 Hora de aplicar a ténica do if ternário para deixarmos o `map` com apenas uma linha:
 
@@ -600,9 +624,13 @@ const rot13 = ( str ) => { // LBH QVQ VG!
 console.log( rot13( 'LBH QVQ VG!' ) )
 ```
 
-Com isso podemos reusar a função `isInRange` em outros códigos quando precisarmos testar se um valor se encontra em uma determinada faixa.
+<br>
 
-Ela foi escrita como uma *closure* para que possamos reaproveita-la melhor, por exemplo:
+Com isso podemos reusar a função `isInRange` em outros códigos<br> 
+quando precisarmos testar se um valor se encontra em uma determinada faixa.
+
+Ela foi escrita como uma *closure* para que possamos reaproveita-la<br> 
+melhor, por exemplo:
 
 
 ```js
@@ -615,9 +643,13 @@ const kids = filterKids( [ 1, 2, 6, 12, 18, 666] )
 // [ 6, 12 ]
 ```
 
-Eu deixei uma parte muito importante que irei abordar na próxima aula: **immutable data**.
+<br>
 
-Iremos aprender a não modificar nossos valores e com isso corrigir esse pedaço de código:
+Eu deixei uma parte muito importante que irei abordar na<br> 
+próxima aula: **immutable data**.
+
+Iremos aprender a não modificar nossos valores e com isso<br> 
+corrigir esse pedaço de código:
 
 ```js
 const valoresUnicode = []
@@ -627,17 +659,21 @@ for ( let i in str ) {
 }
 ```
 
+<br>
+
 
 ## λExercício
 
-O exercício dessa aula é **BEM SIMPLES**. Quero apenas que você envie de 3 a 5 códigos, o original e o refatorado, aplicando o nosso *codestyle* e as técnicas aprendidas até agora.
+O exercício dessa aula é **BEM SIMPLES**. Quero apenas que você<br> 
+envie de 3 a 5 códigos, o original e o refatorado, aplicando o nosso<br> 
+*codestyle* e as técnicas aprendidas até agora.
 
 Os códigos podem ou não serem seus, você que decide!
 
 
 ## λAviso
 
-O meu código refatorado "final" foi esse, fiz mais para treinar. :p
+O meu código refatorado "final" foi esse, fiz mais para testar algumas coisas. :p
 
 ```js
 
