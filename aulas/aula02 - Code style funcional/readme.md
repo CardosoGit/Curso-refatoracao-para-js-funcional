@@ -215,6 +215,24 @@ Então vamos ao que interessa: as nossas regras.
   if ( options.quiet !== true ) console.log( 'false' )
   ```
 
+* **Se for usar operador ternário** em múltiplas linhas,  [#16]()<br>
+deixe o `?` e o `:` em suas próprias linhas.
+
+  ```js
+  // ✓ ok
+  const location = env.development ? 'localhost' : 'www.api.com'
+
+  // ✓ ok
+  const location = env.development
+    ? 'localhost'
+    : 'www.api.com'
+
+  // ✗ evite
+  const location = env.development ?
+    'localhost' :
+    'www.api.com'
+  ```
+  
 * **Sempre lide** com o parâmetro `err` . [#14]()
 
   ```js
@@ -235,14 +253,14 @@ Então vamos ao que interessa: as nossas regras.
 
   ```js
   // ✓ ok
-  const throwError = ( err ) => {
-    throw err
-  }
+  const throwError = ( err ) => { throw err }
+  const log = ( msg ) => ( data ) => 
+    console.log( `${msg}: ${data}` )
 
   const cb = ( err, data ) => 
     ( err ) 
       ? throwError( err )
-      : data
+      : log( 'Sucesso' )( data )
 
   const run = ( cb ) => cb( new Error( 'DEU MERDA!' ) )
   console.log( run( cb ) )
@@ -254,23 +272,36 @@ Então vamos ao que interessa: as nossas regras.
   } )
   ```
 
-* **Se for usar operador ternário** em múltiplas linhas,  [#16]()<br>
-deixe o `?` e o `:` em suas próprias linhas.
+Utilizei uma *closure* na função `log` pois assim podermos utilizá-la<br>
+em qualquer outra função que receba um parâmetro de resposta, dessa forma<br>
+injetamos a mensagem antes do `console.log` executar.
+
+* **Se utilizar *arrow function* com *closure* quebre a linha na última função** . [#16]()
+
 
   ```js
   // ✓ ok
-  const location = env.development ? 'localhost' : 'www.api.com'
+  const log = ( msg ) => ( data ) => 
+    console.log( `${msg}: ${data}` )
 
   // ✓ ok
-  const location = env.development
-    ? 'localhost'
-    : 'www.api.com'
+  const log = ( msg ) => ( data ) => ( fim ) =>
+    console.log( `${msg}: ${data}. ${fim}` )
+
+  
+  // ✗ evite
+  const log = ( msg ) => ( data ) => console.log( `${msg}: ${data}` )
 
   // ✗ evite
-  const location = env.development ?
-    'localhost' :
-    'www.api.com'
+  const log = ( msg ) => ( data ) => ( fim ) => console.log( `${msg}: ${data}. ${fim}` )
+
+  // ✗ evite
+  const log = ( msg ) => 
+    ( data ) => 
+      ( fim ) => 
+        console.log( `${msg}: ${data}. ${fim}` )
   ```
+
 
 * **Sempre prefixe globais de browser** com `window.`. [#17]()<br>
   Exceções: `document`, `navigator` e `console`.
