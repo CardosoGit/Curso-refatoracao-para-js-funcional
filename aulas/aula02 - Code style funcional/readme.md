@@ -1,35 +1,98 @@
 # λAula02.(Atualizando seus códigos para ES6)
 
-Nesse curso iremos seguir o [Standard](https://github.com/feross/standard), porém com algumas modificações para melhorar a legibilidade do código funcional.
+Nesse curso iremos seguir o [Standard](https://github.com/feross/standard), porém com algumas modificações<br> 
+para melhorar a legibilidade do código funcional.
 
 *ps: a explicação de cada regra se encontra na documentação linkada acima.*
 
-**Não usaremos `;` nesse curso, porém quando programamos para *Frontend* é recomendável usar para não ter problemas com minificação.**
+<br> 
+
+**Não usaremos `;` nesse curso, porém quando programamos para *Frontend* é recomendável usar para não ter problemas com a minificação.**
+
+<br> 
 
 ## λCodeStyle 
+
+<br> 
+
+![Hadouken Code](https://brunolm.files.wordpress.com/2017/01/hadouken-code.jpg)
+
+<br> 
+
+> **O que é um *Code Style?**
+
+<br> 
+
+É o estilo do nosso código, ou seja, como o escrevemos e sim<br>
+é deveras importante para nosso curso.
+
+Como vimos no início, esse *Code Style* é baseado no *Standard*, que tende<br>
+a virar um padrão futuramente, assim espero.
+
+Porém com algumas pequenas mudanças para deixar o formato de como<br>
+escreveremos de uma forma mais "limpa" e "bonita", não falei<br>
+legibilidade pois já havia falado anteriormente.
+
+<br> 
+
+Então vamos ao que interessa: as nossas regras.
+
+### λRegras
 
 * **Use 2 espaços** para identação.
 
   ```js
-  const hello = ( name ) => {
+  const hello = (name) => {   // ✓ ok
     console.log( 'oi', name )
     console.log( 'tchau', name )
+  }
+
+  const hello = (name) => {   // ✗ evite
+      console.log('oi', name)
+      console.log('tchau', name)
   }
   ```
 
 * **Use aspas simples para strings**.
 
   ```js
-  console.log( 'Salveeee galera do Funcional!!!' )
+  console.log( 'Salve galera do JS Funcional!!!' )   // ✓ ok
+
+  console.log( "Salve galera do JS Funcional!!!" )   // ✗ evite
   ```
 
-* **Sem constiáveis não-utilizadas.**
+* **Use *[template string](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/template_strings)* em *Strings* com concatenação**.
 
   ```js
-  const myFunction () => {
-    const result = something()   // ✗ evite
+  const hello = ( name ) => {   // ✓ ok
+    console.log( `oi ${name}!` )
+    console.log( `tchau ${name}!` )
+  }
+
+  const hello = (name) => {   // ✗ evite
+      console.log('oi' + name)
+      console.log('tchau' + name)
   }
   ```
+
+
+* **Sem variáveis/constantes não-utilizadas.**
+
+  ```js
+  const myFunction = () => {
+    return something() // ✓ ok
+  }
+
+  const myFunction = () => {
+    const result = something()   // ✗ evite
+    return something()
+  }
+  ```
+
+> Se existe a possibilidade de retornar direto a chamada<br>
+> de uma função, faça-o.
+
+  <br>
 
 * **Adicione um espaço após as keywords.**
 
