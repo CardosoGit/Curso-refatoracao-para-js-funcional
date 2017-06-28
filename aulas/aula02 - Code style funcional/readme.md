@@ -206,14 +206,14 @@ Então vamos ao que interessa: as nossas regras.
 
   ```js
   // ✓ ok
-  run( ( err, data ) {
+  run( ( err, data ) => {
     if ( err ) throw err
     
     return data
   } )
   
   // ✗ evite
-  run( ( err, data ) {
+  run( ( err, data ) => {
     console.log( 'done' )
   } )
   ```
@@ -365,7 +365,7 @@ te protege desse problema em potencial.
   // ✓ ok
   ;( () => {
     window.alert( 'ok' )
-  }() )
+  } () )
 
   // ✗ evite
   ( () => {
