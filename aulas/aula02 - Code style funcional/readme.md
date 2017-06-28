@@ -7,7 +7,7 @@ para melhorar a legibilidade do código funcional.
 
 <br> 
 
-**Não usaremos `;` nesse curso, porém quando programamos para *Frontend* é recomendável usar para não ter problemas com a minificação.**
+**Não usaremos `;` nesse curso, porém quando programamos para *Frontend* é** <br>  **recomendável usar para não ter problemas com a minificação.**
 
 <br> 
 
@@ -39,7 +39,7 @@ Então vamos ao que interessa: as nossas regras.
 
 ### λRegras
 
-* **Use 2 espaços** para identação.
+* **Use 2 espaços** para identação. [#01]()
 
   ```js
   const hello = (name) => {   // ✓ ok
@@ -53,7 +53,7 @@ Então vamos ao que interessa: as nossas regras.
   }
   ```
 
-* **Use aspas simples para strings**.
+* **Use aspas simples para strings**. [#02]()
 
   ```js
   console.log( 'Salve galera do JS Funcional!!!' )   // ✓ ok
@@ -61,7 +61,7 @@ Então vamos ao que interessa: as nossas regras.
   console.log( "Salve galera do JS Funcional!!!" )   // ✗ evite
   ```
 
-* **Use *[template string](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/template_strings)* em *Strings* com concatenação**.
+* **Use *[template string](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/template_strings)* em *Strings* com concatenação**. [#03]()
 
   ```js
   const hello = ( name ) => {   // ✓ ok
@@ -76,7 +76,7 @@ Então vamos ao que interessa: as nossas regras.
   ```
 
 
-* **Sem variáveis/constantes não-utilizadas.**
+* **Sem variáveis/constantes não-utilizadas.** [#04]()
 
   ```js
   const myFunction = () => {
@@ -94,14 +94,14 @@ Então vamos ao que interessa: as nossas regras.
 
   <br>
 
-* **Adicione um espaço após as keywords.**
+* **Adicione um espaço após as keywords.** [#05]()
 
   ```js
   if ( condition ) { ... }   // ✓ ok
   if(condition) { ... }    // ✗ evite
   ```
 
-* **Adicione um espaço antes do parêntese de declaração de funções.**
+* **Adicione um espaço antes do parêntese de declaração de funções.** [#06]()
 
   ```js
   function name ( arg ) { ... }   // ✓ ok
@@ -111,57 +111,49 @@ Então vamos ao que interessa: as nossas regras.
   run(() => { ... } )       // ✗ evite
   ```
 
-* **Sempre use** `===` ao invés de  `==`.<br>
+* **Sempre use** `===` ao invés de  `==`. [#07]() <br>
   Exceção: `obj == null` é permitido pra checar se `null || undefined`.
 
   ```js
-  if ( name === 'John')   // ✓ ok
-  if ( name == 'John')    // ✗ evite
+  if ( name === 'John' )   // ✓ ok
+  if ( name == 'John' )    // ✗ evite
+  
+  if ( name !== 'John' )   // ✓ ok
+  if ( name != 'John' )    // ✗ evite
   ```
 
-  ```js
-  if ( name !== 'John')   // ✓ ok
-  if ( name != 'John')    // ✗ evite
-  ```
-
-* **Operadores infix** devem ser espaçados.
+* **Operadores infix** devem ser espaçados. [#08]()
 
   ```js
   // ✓ ok
   const a = 2
   const b = 5
   const soma = ( a, b ) => a + b
-  ```
-
-  ```js
+  
   // ✗ evite
   const a=2
   const b=5
   const soma = ( a, b ) => a+b
   ```
 
-* **Vírgulas devem ter um espaço** depois delas.
+* **Vírgulas devem ter um espaço** depois delas. [#09]()
 
   ```js
   // ✓ ok
   const list = [1, 2, 3, 4]
   const greet ( name, options ) => { ... }
-  ```
-
-  ```js
+  
   // ✗ evite
   const list = [1,2,3,4]
   const greet ( name,options ) => { ... }
   ```
 
-* **Adicione um espaço no início e no final dos colchetes.**
+* **Adicione um espaço no início e no final dos colchetes.** [#10]()
 
   ```js
   // ✓ ok
   const list = [ 1, 2, 3, 4 ]
-  ```
-
-  ```js
+  
   // ✗ evite
   const list = [1,2,3,4]
   ```
@@ -175,9 +167,7 @@ Então vamos ao que interessa: as nossas regras.
   } else {
     // ...
   }
-  ```
-
-  ```js
+  
   // ✗ evite
   if ( condition ) {
     // ...
@@ -192,16 +182,12 @@ Então vamos ao que interessa: as nossas regras.
   ```js
   // ✓ ok
   if ( options.quiet !== true)  console.log( 'done')
-  ```
 
-  ```js
   // ✓ ok
   if ( options.quiet !== true ) {
     console.log( 'done')
   }
-  ```
-
-  ```js
+  
   // ✗ evite
   if ( options.quiet !== true )
     console.log( 'done' )
@@ -215,9 +201,7 @@ Então vamos ao que interessa: as nossas regras.
     if ( err ) throw err
     window.alert( 'done' )
   } )
-  ```
-
-  ```js
+  
   // ✗ evite
   run( ( err ) {
     window.alert( 'done' )
@@ -237,9 +221,7 @@ Então vamos ao que interessa: as nossas regras.
   // ✓ ok
   const value = 'hello world'
   console.log( value )
-  ```
-
-  ```js
+  
   // ✗ evite
   const value = 'hello world'
 
@@ -279,7 +261,8 @@ Então vamos ao que interessa: as nossas regras.
       verbose = true
   ```
 
-* **Coloque parẽnteses adicionais** em declarações em condições. Isso torna mais claro que a expressão é uma declaração ( `=`) e não um typo de equidade ( `===`)
+* **Coloque parẽnteses adicionais** em declarações em condições. Isso torna<br>  
+mais claro que a expressão é uma declaração `=` e não um operador de equidade `===`
 
   ```js
   // ✓ ok
