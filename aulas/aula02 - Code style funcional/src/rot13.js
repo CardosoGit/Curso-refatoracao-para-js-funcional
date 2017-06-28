@@ -17,3 +17,5 @@ function rot13 ( str ) { // LBH QVQ VG!
   
   return str13
 }
+
+console.log( rot13( 'LBH QVQ VG!' ) )
