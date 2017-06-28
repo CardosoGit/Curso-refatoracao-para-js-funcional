@@ -206,14 +206,15 @@ Então vamos ao que interessa: as nossas regras.
 
   ```js
   // ✓ ok
-  run( ( err ) {
+  run( ( err, data ) {
     if ( err ) throw err
-    window.alert( 'done' )
+    
+    return data
   } )
   
   // ✗ evite
-  run( ( err ) {
-    window.alert( 'done' )
+  run( ( err, data ) {
+    console.log( 'done' )
   } )
   ```
 
