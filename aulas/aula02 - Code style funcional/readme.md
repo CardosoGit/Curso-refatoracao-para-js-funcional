@@ -222,17 +222,17 @@ Então vamos ao que interessa: as nossas regras.
 
   ```js
   // ✓ ok
- const throwError = ( err ) => {
-  throw err
-}
+  const throwError = ( err ) => {
+    throw err
+  }
 
-const cb = ( err, data ) => 
-  ( err ) 
-    ? throwError( err )
-    : data
+  const cb = ( err, data ) => 
+    ( err ) 
+      ? throwError( err )
+      : data
 
-const run = ( cb ) => cb( new Error( 'DEU MERDA!' ) )
-console.log( run( cb ) )
+  const run = ( cb ) => cb( new Error( 'DEU MERDA!' ) )
+  console.log( run( cb ) )
   
   // ✗ evite
   run( ( err, data ) => {
@@ -241,7 +241,25 @@ console.log( run( cb ) )
   } )
   ```
 
-* **Sempre prefixe globais de browser** com `window.`. [#14]()<br>
+* **Se for usar operador ternário** em múltiplas linhas,  [#14]()<br>
+deixe o `?` e o `:` em suas próprias linhas.
+
+  ```js
+  // ✓ ok
+  const location = env.development ? 'localhost' : 'www.api.com'
+
+  // ✓ ok
+  const location = env.development
+    ? 'localhost'
+    : 'www.api.com'
+
+  // ✗ evite
+  const location = env.development ?
+    'localhost' :
+    'www.api.com'
+  ```
+
+* **Sempre prefixe globais de browser** com `window.`. [#15]()<br>
   Exceções: `document`, `navigator` e `console`.
 
   ```js
@@ -260,7 +278,7 @@ console.log( run( cb ) )
   como no Node.js e como utilizamos o `console` nas duas plataformas **EU** <br>
   acredito ser melhor e mais reusável um código apenas com `console`.
 
-* **Não é permitido múltiplas linhas em branco.** [#15]()
+* **Não é permitido múltiplas linhas em branco.** [#16]()
 
   ```js
   // ✓ ok
@@ -273,6 +291,7 @@ console.log( run( cb ) )
 
 
   console.log( value )
+
 
 
   // ✓ ok
@@ -281,9 +300,15 @@ console.log( run( cb ) )
   const result = sum( 3, 5 )
   console.log( 'result', result )
 
+  // ✓ evite
+  const sum = ( x, y ) => x + y
+
+
+  const result = sum( 3, 5 )
+  console.log( 'result', result )
   ```
 
-* **É permitido 1 linha em branco quando mudar de contexto.** [#16]()
+* **É permitido 1 linha em branco quando mudar de contexto.** [#17]()
 
   ```js
   // ✓ ok
@@ -293,26 +318,40 @@ console.log( run( cb ) )
   const resultSum = sum( 3, 5, )
   console.log( 'resultSum', resultSum )
 
-  const resultMinus = sum( 5, 3 )
+  const resultMinus = minus( 5, 3 )
   console.log( 'resultMinus', resultMinus )
+
+
+  // ✗ evite
+  const sum = ( x, y ) => x + y
+  const minus = ( x, y ) => x - y
+  const resultSum = sum( 3, 5, )
+  console.log( 'resultSum', resultSum )
+  const resultMinus = minus( 5, 3 )
+  console.log( 'resultMinus', resultMinus )
+
+
 
   // ✓ ok
   const sum = ( x, y ) => x + y
   const minus = ( x, y ) => x - y
 
   const resultSum = sum( 3, 5, )
-  const resultMinus = sum( 5, 3 )
-  
+  const resultMinus = minus( 5, 3 )
+
   console.log( 'resultSum', resultSum )
   console.log( 'resultMinus', resultMinus )
 
 
   // ✗ evite
   const sum = ( x, y ) => x + y
-  const result = sum( 3, 5, )
-  console.log( 'result', result )
+  const minus = ( x, y ) => x - y
+  const resultSum = sum( 3, 5, )
+  const resultMinus = minus( 5, 3 )
+  console.log( 'resultSum', resultSum )
+  console.log( 'resultMinus', resultMinus )
   ```
-* **Quando usar `console.log` sempre usar um texto para identifica-lo.** [#17]()
+* **Quando usar `console.log` sempre usar um texto para identifica-lo.** [#18]()
 
   ```js
   // ✓ ok
@@ -332,24 +371,6 @@ console.log( run( cb ) )
 
 Isso irá facilitar muito a sua vida quando for utiliza-lo para debugar.
 
-
-* **Se for usar operador ternário** em múltiplas linhas,  [#18]()<br>
-deixe o `?` e o `:` em suas próprias linhas.
-
-  ```js
-  // ✓ ok
-  const location = env.development ? 'localhost' : 'www.api.com'
-
-  // ✓ ok
-  const location = env.development
-    ? 'localhost'
-    : 'www.api.com'
-
-  // ✗ evite
-  const location = env.development ?
-    'localhost' :
-    'www.api.com'
-  ```
 
 * **Para declarações de const,**  [#19]() <br>
 escreva cada declaração na sua própria instrução.
