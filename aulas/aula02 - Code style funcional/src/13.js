@@ -1,19 +1,15 @@
-// ✓ ok
-
 const cb = ( err, data ) => {
-
   if ( err ) throw err
+  
+  return data
+}
 
-  console.log( `done: ${data}` )
-} 
+const run = ( cb ) => cb( new Error( 'DEU MERDA!' ) )
 
-// const run = ( cbSemErro ) => cbSemErro( null, 'Suissa' )
-const run = ( cbComErro ) => 
-  cbComErro( new Error( 'DEU MERDA!' ) )
-
-run( cb )
+// ✓ ok
+console.log( run( cb ) )
 
 // // ✗ evite
-// run( ( err ) {
-//   window.alert( 'done' )
+// run( ( err, data ) => {
+//   console.log( 'done' )
 // } )

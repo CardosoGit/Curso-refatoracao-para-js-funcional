@@ -218,6 +218,29 @@ Então vamos ao que interessa: as nossas regras.
   } )
   ```
 
+* **Caso tenha apenas um `if/else` na *arrow function* utilize o ternário** . [#13]()
+
+  ```js
+  // ✓ ok
+ const throwError = ( err ) => {
+  throw err
+}
+
+const cb = ( err, data ) => 
+  ( err ) 
+    ? throwError( err )
+    : data
+
+const run = ( cb ) => cb( new Error( 'DEU MERDA!' ) )
+console.log( run( cb ) )
+  
+  // ✗ evite
+  run( ( err, data ) => {
+    if ( err ) throw err
+    else return data
+  } )
+  ```
+
 * **Sempre prefixe globais de browser** com `window.`. [#14]()<br>
   Exceções: `document`, `navigator` e `console`.
 
@@ -255,7 +278,7 @@ Então vamos ao que interessa: as nossas regras.
   // ✓ ok
   const sum = ( x, y ) => x + y
 
-  const result = sum( 3, 5, )
+  const result = sum( 3, 5 )
   console.log( 'result', result )
 
   ```
@@ -265,17 +288,29 @@ Então vamos ao que interessa: as nossas regras.
   ```js
   // ✓ ok
   const sum = ( x, y ) => x + y
+  const minus = ( x, y ) => x - y
 
-  const result = sum( 3, 5, )
-  console.log( 'result', result )
+  const resultSum = sum( 3, 5, )
+  console.log( 'resultSum', resultSum )
+
+  const resultMinus = sum( 5, 3 )
+  console.log( 'resultMinus', resultMinus )
+
+  // ✓ ok
+  const sum = ( x, y ) => x + y
+  const minus = ( x, y ) => x - y
+
+  const resultSum = sum( 3, 5, )
+  const resultMinus = sum( 5, 3 )
+  
+  console.log( 'resultSum', resultSum )
+  console.log( 'resultMinus', resultMinus )
 
 
   // ✗ evite
   const sum = ( x, y ) => x + y
-
   const result = sum( 3, 5, )
   console.log( 'result', result )
-
   ```
 * **Quando usar `console.log` sempre usar um texto para identifica-lo.** [#17]()
 
