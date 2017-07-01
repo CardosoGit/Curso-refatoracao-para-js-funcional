@@ -111,6 +111,12 @@ Além do que não precisamos de nenhum teste lógico para sair da iteração!
 
 ## Immutable Data
 
+> **Você já imaginou como se programa sem mudar o valor de nenhuma variável?**
+
+Pois é! Quando eu conheci esse conceito foi a primeira coisa que me perguntei:
+
+> Mas como que programa sem mudar os valores?
+
 
 ### AINDA VOU ESCREVER!!!
 
