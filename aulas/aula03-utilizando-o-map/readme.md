@@ -109,6 +109,11 @@ console.log('resultado: ', resultado)
 
 Além do que não precisamos de nenhum teste lógico para sair da iteração!
 
+## Immutable Data
+
+
+### AINDA VOU ESCREVER!!!
+
 Agora vamos usar o exemplo da aula passada pois deixei uma parte do<br>
 código para explicar e refatorar nessa aula:
 
