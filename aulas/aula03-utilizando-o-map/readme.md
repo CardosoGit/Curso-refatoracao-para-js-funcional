@@ -196,21 +196,10 @@ Devemos fazer da seguinte forma:
 - o resultado do `map`
 - retorna ou usa esse resultado
 
-Traduzindo para JavaScript fica assim:
-
 <br>
 
-```js
 
-const valoresUnicode = []
-
-for ( let i in str ) {
-  valoresUnicode.push( str.charCodeAt( i ) )
-}
-
-```
-
-
+## λRefatoração - 0
 
 ```js
 
@@ -228,7 +217,7 @@ const getCypherCharCode = ( x ) =>
 
 const rot13 = ( str ) => { // LBH QVQ VG!
   const valoresUnicode = str.split( '' )
-                            .map( ( letter ) => letter.charCodeAt( 0 ) )
+                            .map( ( c ) => c.charCodeAt( 0 ) )
 
   const str13 = valoresUnicode.map( ( x ) =>  
     ( isSpace( x ) || !isInRange( 65, 90 )( x ) )
@@ -243,21 +232,109 @@ console.log( rot13( 'LBH QVQ VG!' ) )
 
 ```
 
+<br>
+
+Como o `map` iterou em cada caracter, pois chamamos ele após o `split`,<br>
+o valor de `c` é o caracter iterado por isso executamos `c.charCodeAt( 0 )`<br>
+já que só existe o índice `0` em um caracter.
+
+Se quisermos ainda podemos fazer assim:
 
 <br>
 
 ```js
 
-const arr = [1,2,3]
-const x = arr.map( v => v * 2 );
+const getCharCode = String.fromCharCode
 
-console.log(arr) //[1,2,3]
-console.log(x) //[2,4,6]
+const isSpace = ( x ) => ( x === 32 )
+const isLowerThenN = ( x ) => ( x <= 78 )
+const isInRange = ( min, max ) => ( x ) => 
+  ( ( x >= min ) &&  ( x <= max ) )
+
+const getCypherCharCode = ( x ) => 
+  ( isLowerThenN( x ) )
+    ? getCharCode( x + 13 )
+    : getCharCode( x - 13 )
+
+const rot13 = ( str ) => { // LBH QVQ VG!
+
+  const str13 = str.split( '' )
+                    .map( ( c ) => c.charCodeAt( 0 ) )
+                    .map( ( x ) => ( isSpace( x ) || !isInRange( 65, 90 )( x ) )
+                                      ? getCharCode( x )
+                                      : getCypherCharCode( x ) )
+                    .join( '' )
+  
+  return str13
+}
+
+console.log( rot13( 'LBH QVQ VG!' ) )
 
 ```
 
+<br>
+
+> Percebeu que encadeamos as funções `split`, `map` e `join`?
+
+Isso acontece pois o `split` e o `map` retornam um *Array* como resultado<br>
+e o `join` recebe um *Array* e converte em uma *String*.
+
+Para finalizar vamos deixar assim:
+
+<br>
+
 ```js
 
+const getCharCode = String.fromCharCode
+
+const isSpace = ( x ) => ( x === 32 )
+const isLowerThenN = ( x ) => ( x <= 78 )
+const isInRange = ( min, max ) => ( x ) => 
+  ( ( x >= min ) &&  ( x <= max ) )
+
+const getCypherCharCode = ( x ) => 
+  ( isLowerThenN( x ) )
+    ? getCharCode( x + 13 )
+    : getCharCode( x - 13 )
+
+const toCharCode = ( c ) => c.charCodeAt( 0 )
+
+const toCypher = ( x ) => 
+  ( isSpace( x ) || !isInRange( 65, 90 )( x ) )
+    ? getCharCode( x )
+    : getCypherCharCode( x )
+
+const rot13 = ( str ) => 
+  str.toUpperCase()
+      .split( '' )
+      .map( toCharCode )
+      .map( toCypher )
+      .join( '' )
+
+console.log( rot13( 'LBH QVQ VG!' ) )
+console.log( rot13( 'LBH QVQ VG!'.toLowerCase() ) )
+
+```
+
+<br>
+
+Pronto conseguimos colocar todas as funções em uma linha e adicionei o<br>
+`toUpperCase` para forçar que a *String* esteja toda em maiúscula pois<br>
+esse código funciona apenas com maiúsculas!
+
+<br>
+
+## λRefatoração - 1
+
+Agora vamos pegar um pedaço de um código enviado por um aluno, retirei apenas<br>
+uma função, pois tinham MUITAS, e modifiquei um pouco para apenas listar os<br>
+nomes dos arquivos em vez de deleta-los, esse é o código:
+
+<br>
+
+```js
+
+// issues/71#issuecomment-302889780
 var getFilesNames = function (dir) {
     var path = require("path");
     var fs = require('fs');
@@ -276,3 +353,199 @@ var getFilesNames = function (dir) {
 console.log('getFilesNames', getFilesNames('.'))
 
 ```
+
+<br>
+
+Como sabemos que a função retorna `listOfFiles` podemos retornar diretamente esse resultado<br>
+que agora será gerado pelo `map`, para funcionar precisamos mudar o `list[i]` porque ele será<br>
+o elemento que está sendo iterado pelo `map`.
+
+Vamos ao que interessa:
+
+<br>
+
+```js
+
+const path = require( 'path' )
+const fs = require( 'fs' )
+
+const getFilesNames = ( dir ) => {
+  const list = fs.readdirSync( dir )
+
+  return list.map( ( file, i ) => {
+    const filename = path.join( dir, file )
+    const stat = fs.statSync( filename )
+    if ( !stat.isDirectory() && !( filename == '.' || filename == '..' ) ) {
+      return filename
+    }       
+  } )
+}
+
+console.log( 'getFilesNames', getFilesNames( '.' ) )
+
+```
+
+Como `list` é o resultado da função `fs.readdirSync(dir)` podemos substituir ele<br>
+pela própria execução dessa função, assim:
+
+```js
+const path = require( 'path' )
+const fs = require( 'fs' )
+
+const getFilesNames = ( dir ) => 
+  fs.readdirSync( dir )
+    .map( ( file, i ) => {
+      const filename = path.join( dir, file )
+      const stat = fs.statSync( filename )
+      if ( !stat.isDirectory() && !( filename == '.' || filename == '..' ) ) {
+        return filename
+      }       
+    } )
+
+
+console.log( 'getFilesNames', getFilesNames( '.' ) )
+
+```
+
+Dessa forma conseguimos deixar nossa função principal em uma linha, mas ainda<br>
+temos mais coisas para fazer!
+
+Obviamente você sabe que quando temos uma função maior que uma linha como *callback* <br>
+devemos separar ela para uma função externa e apenas passar ela no parâmetro.
+
+
+```js
+
+const path = require( 'path' )
+const fs = require( 'fs' )
+
+const toFileName = ( dir ) => ( file, i ) => {
+  const filename = path.join( dir, file )
+  const stat = fs.statSync( filename )
+  if ( !stat.isDirectory() && 
+      !( filename == '.' || filename == '..' ) ) return filename  
+} 
+
+const getFilesNames = ( dir ) => 
+  fs.readdirSync( dir )
+    .map( toFileName( dir ) )
+
+
+console.log( 'getFilesNames', getFilesNames( '.' ) )
+
+```
+
+Eu precisei criar a função `toFileName` como uma *closure* porque o valor de<br>
+`dir` não existe dentro do `map`, por isso devemos injeta-lo.
+
+
+```js
+
+const path = require( 'path' )
+const fs = require( 'fs' )
+
+const toFileName = ( dir ) => ( file, i ) => {
+  const filename = path.join( dir, file )
+  if ( !fs.statSync( filename ).isDirectory() && 
+      !( filename == '.' || filename == '..' ) ) return filename  
+} 
+
+const getFilesNames = ( dir ) => 
+  fs.readdirSync( dir )
+    .map( toFileName( dir ) )
+
+console.log( 'getFilesNames', getFilesNames( '.' ) )
+
+```
+
+Como só usamos o valor de `stat` apenas uma vez podemos também subistituir ela<br>
+pela execução da função `fs.statSync`, não fizemos isso com o `filename` porque<br>
+ele é utilizado mais de uma vez.
+
+Agora podemos separar mais um pouco as funções dessa forma:
+
+```js
+
+const path = require( 'path' )
+const fs = require( 'fs' )
+
+const getFileName = ( dir, file ) => path.join( dir, file )
+const isDirectory = ( filename ) => fs.statSync( filename ).isDirectory()
+const isDotOrTwoDots = ( filename ) => ( filename == '.' || filename == '..' )
+
+const toFileName = ( dir ) => ( file, i ) => {
+  const filename = getFileName( dir, file )
+  if ( !isDirectory( filename ) && 
+      !isDotOrTwoDots( filename ) ) return filename  
+} 
+
+const getFilesNames = ( dir ) => 
+  fs.readdirSync( dir )
+    .map( toFileName( dir ) )
+
+console.log( 'getFilesNames', getFilesNames( '.' ) )
+
+```
+
+Ainda podemos melhorar encapsulando o teste do `if` em apenas uma função e<br>
+retornar diretamente o valor do elemento que está sendo iterado, pois o mesmo<br>
+é exatamente o nome do arquivo que queremos.
+
+```js
+
+const path = require( 'path' )
+const fs = require( 'fs' )
+
+const getFileName = ( dir, file ) => path.join( dir, file )
+const isDirectory = ( name ) => fs.statSync( name ).isDirectory()
+const isDotOrTwoDots = ( name ) => ( name == '.' || name == '..' )
+const isFile = ( name ) => 
+  ( !isDirectory( name ) && !isDotOrTwoDots( name ) )
+
+const toFileName = ( dir ) => ( name ) => {
+  if ( isFile( getFileName( dir, name ) ) ) return name 
+} 
+
+const getFilesNames = ( dir ) => 
+  fs.readdirSync( dir )
+    .map( toFileName( dir ) )
+
+console.log( 'getFilesNames', getFilesNames( '.' ) )
+
+
+```
+
+Mas se mesmo assim você ainda quiser retirar aquele `if` para deixar a função<br>
+em uma linha você pode substituir por um *if* ternário, porém como ele te obriga<br>
+a retornar o `else` teremos que usar de malandragem retornando `false` para depois<br>
+filtra-lo na função `getFilesNames` dessa forma:
+
+```js
+
+const path = require( 'path' )
+const fs = require( 'fs' )
+
+const getFileName = ( dir, file ) => path.join( dir, file )
+const isDirectory = ( name ) => fs.statSync( name ).isDirectory()
+const isDotOrTwoDots = ( name ) => ( name == '.' || name == '..' )
+const isFile = ( name ) => 
+  ( !isDirectory( name ) && !isDotOrTwoDots( name ) )//|| name
+    ? name
+    : false
+
+const toFileName = ( dir ) => ( name ) => 
+  ( isFile( getFileName( dir, name ) ) )
+
+const getFilesNames = ( dir ) => 
+  fs.readdirSync( dir )
+    .map( toFileName( dir ) )
+    .filter( e => !!e )
+
+console.log( 'getFilesNames .', getFilesNames( '.' ) )
+console.log( 'getFilesNames ..', getFilesNames( '..' ) )
+console.log( 'getFilesNames ../..', getFilesNames( '../..' ) )
+
+```
+
+Esse último código foi mais para demonstração pois nesse caso você precisa fazer<br>
+uma filtragem a mais que o código antigo.
