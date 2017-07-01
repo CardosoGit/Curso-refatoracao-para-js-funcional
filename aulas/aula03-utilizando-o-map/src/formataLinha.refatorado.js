@@ -50,7 +50,7 @@ const formataLinha = ( str ) => {
   }
 }
 
-const str = "Valor pago: # 1.30\n"
+const str = "Valor pago: # 1.30\nValor pago: # 6.66"
 
 console.log(str); // Valor pago: # 1.30
 console.log(formataLinha(str)); // Valor pago:                1.30

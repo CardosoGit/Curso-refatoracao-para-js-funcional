@@ -396,8 +396,12 @@ console.log( 'getFilesNames', getFilesNames( '.' ) )
 
 ```
 
+<br>
+
 Como `list` é o resultado da função `fs.readdirSync(dir)` podemos substituir ele<br>
 pela própria execução dessa função, assim:
+
+<br>
 
 ```js
 const path = require( 'path' )
@@ -418,11 +422,19 @@ console.log( 'getFilesNames', getFilesNames( '.' ) )
 
 ```
 
+
+<br>
+
+
 Dessa forma conseguimos deixar nossa função principal em uma linha, mas ainda<br>
 temos mais coisas para fazer!
 
 Obviamente você sabe que quando temos uma função maior que uma linha como *callback* <br>
 devemos separar ela para uma função externa e apenas passar ela no parâmetro.
+
+
+
+<br>
 
 
 ```js
@@ -446,8 +458,16 @@ console.log( 'getFilesNames', getFilesNames( '.' ) )
 
 ```
 
+
+<br>
+
+
 Eu precisei criar a função `toFileName` como uma *closure* porque o valor de<br>
 `dir` não existe dentro do `map`, por isso devemos injeta-lo.
+
+
+<br>
+
 
 
 ```js
@@ -469,11 +489,19 @@ console.log( 'getFilesNames', getFilesNames( '.' ) )
 
 ```
 
+
+<br>
+
+
 Como só usamos o valor de `stat` apenas uma vez podemos também subistituir ela<br>
 pela execução da função `fs.statSync`, não fizemos isso com o `filename` porque<br>
 ele é utilizado mais de uma vez.
 
 Agora podemos separar mais um pouco as funções dessa forma:
+
+
+<br>
+
 
 ```js
 
@@ -498,9 +526,17 @@ console.log( 'getFilesNames', getFilesNames( '.' ) )
 
 ```
 
+
+<br>
+
+
 Ainda podemos melhorar encapsulando o teste do `if` em apenas uma função e<br>
 retornar diretamente o valor do elemento que está sendo iterado, pois o mesmo<br>
 é exatamente o nome do arquivo que queremos.
+
+
+<br>
+
 
 ```js
 
@@ -526,10 +562,18 @@ console.log( 'getFilesNames', getFilesNames( '.' ) )
 
 ```
 
+
+<br>
+
+
 Mas se mesmo assim você ainda quiser retirar aquele `if` para deixar a função<br>
 em uma linha você pode substituir por um *if* ternário, porém como ele te obriga<br>
 a retornar o `else` teremos que usar de malandragem retornando `false` para depois<br>
 filtra-lo na função `getFilesNames` dessa forma:
+
+
+<br>
+
 
 ```js
 
@@ -558,5 +602,124 @@ console.log( 'getFilesNames ../..', getFilesNames( '../..' ) )
 
 ```
 
+
+<br>
+
+
 Esse último código foi mais para demonstração pois nesse caso você precisa fazer<br>
-uma filtragem a mais que o código antigo.
+uma filtragem a mais que o código antigo e essa aula ainda não é de *filter*.
+
+
+<br>
+<hr>
+<br>
+
+
+## Exercícios
+
+1) Refatore o seguinte código usando `map`:
+
+
+<br>
+
+
+```js
+
+const workers = [ 1000, 2500 , 10000 ]
+
+const withdraw = ( list, percent ) => {
+
+  let counter = 0
+  let newList = []
+
+  while ( counter < list.length) {
+    const percentValue = list[ counter ] * ( percent / 100 )
+    const newSalary = list[ counter ] - percentValue
+
+    newList[ counter ] = newSalary 
+    counter++
+  }
+
+  return newList
+}
+
+console.log( 'New Salaries: ', withdraw( workers, 10 ) )
+
+```
+
+<br>
+<br>
+
+2) Refatore o seguinte código usando `map`, `split` e `join` para que<br>
+o resultado seja uma *String* formatada corretamente:
+
+
+<br>
+
+
+```js
+
+// https://github.com/suissa/Curso-refatoracao-para-js-funcional/issues/35
+const formataLinha = ( str ) => {
+  //var str = "Valor pago: # 1.30\n";
+  var tam = str.length;
+  var tamanho = parseInt(tam);
+  var t = 0;
+  var b = '';
+  if (tamanho < 32) {
+    t = 32 - tamanho;
+    str = str.split('#');
+    for (i = 0; i <= t; i++)
+        b += " ";
+    // console.log(str[0] + b + str[1] + "\n");
+    return(str[0] + b + str[1]);
+  } else if ((tamanho > 32) && (tamanho <= 64)) {
+    t = 64 - tamanho;
+    str = str.split('#');
+    for (i = 0; i <= t; i++)
+        b += " ";
+    console.log(str[0] + b + str[1]);
+    return(str[0] + b + str[1]);
+  } else if ((tamanho > 64) && (tamanho <= 96)) {
+    t = 64 - tamanho;
+    str = str.split('#');
+    for (i = 0; i <= t; i++)
+        b += " ";
+    console.log(str[0] + b + str[1]);
+    return(str[0] + b + str[1]);
+  } else if ((tamanho > 96) && (tamanho <= 128)) {
+    t = 64 - tamanho;
+    str = str.split('#');
+    for (i = 0; i <= t; i++)
+        b += " ";
+    console.log(str[0] + b + str[1]);
+    return(str[0] + b + str[1]);
+  } else if ((tamanho > 128) && (tamanho <= 160)) {
+    t = 64 - tamanho;
+    str = str.split('#');
+    for (i = 0; i <= t; i++)
+        b += " ";
+    // console.log(str[0] + b + str[1]);
+    return(str[0] + b + str[1]);
+  } else if ((tamanho > 160) && (tamanho <= 192)) {
+    t = 64 - tamanho;
+    str = str.split('#');
+    for (i = 0; i <= t; i++)
+        b += " ";
+    // console.log(str[0] + b + str[1]);
+    return(str[0] + b + str[1]);
+  }
+}
+
+const str = "Valor pago: # 1.30\n"
+
+console.log(str); // Valor pago: # 1.30
+console.log(formataLinha(str)); // Valor pago:                1.30
+
+const strMulti = "Valor pago: # 1.30\nValor pago: # 3.33\nValor pago: # 6.66"
+
+// Crie aqui uma função que utilize a formataLinha
+// porém quebrando a String para passar uma por vez
+// analise qual caracter você irá quebrar e explique o porquê
+
+```
