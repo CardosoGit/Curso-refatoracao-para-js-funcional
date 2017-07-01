@@ -11,11 +11,12 @@ const getCypherCharCode = ( x ) =>
     : getCharCode( x - 13 )
 
 const rot13 = ( str ) => { // LBH QVQ VG!
-  const valoresUnicode = []
+  const valoresUnicode = str.split( '' )
+                            .map( ( l ) => l.charCodeAt( 0 ) )
 
-  for ( let i in str ) {
-    valoresUnicode.push( str.charCodeAt( i ) )
-  }
+  // for ( let i in str ) {
+  //   valoresUnicode.push( str.charCodeAt( i ) )
+  // }
   
   const str13 = valoresUnicode.map( ( x ) =>  
     ( isSpace( x ) || !isInRange( 65, 90 )( x ) )

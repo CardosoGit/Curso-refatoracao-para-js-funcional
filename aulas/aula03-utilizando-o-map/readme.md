@@ -63,8 +63,53 @@ diretamente após a execução de outra.
 
 <br>
 
+Imagine comigo que precisamos além dos valores ao quadrado que a saída<br>
+esteja na ordem invertida, olha como ficaria o código anterior:
 
-Vamos iniciar com o exemplo da aula passada pois deixei uma parte do<br>
+<br>
+
+```js
+
+const numbers = [ 1, 2, 3, 4, 5 ]
+let square = []
+
+for( let i = 0; i < numbers.length; i++ ) {
+  square[ i ] = numbers[ i ] * numbers[ i ]
+  //square.push( numbers[ i ] * numbers[ i ] )
+}
+
+console.log('square: ', square)
+// square:  [ 1, 4, 9, 16, 25 ]
+
+const resultado = square.reverse()
+console.log('resultado: ', resultado)
+// resultado:  [ 25, 16, 9, 4, 1 ]
+
+```
+
+<br>
+
+Agora olhe como que fazemos com o `map`:
+
+<br>
+
+```js
+const numbers = [ 1, 2, 3, 4, 5 ]
+
+const resultado = numbers.map( ( n ) => n * n ).reverse()
+
+console.log('resultado: ', resultado)
+// resultado:  [ 25, 16, 9, 4, 1 ]
+
+```
+
+<br>
+
+> Muito mais simples né?
+
+Além do que não precisamos de nenhum teste lógico para sair da iteração!
+
+Agora vamos usar o exemplo da aula passada pois deixei uma parte do<br>
 código para explicar e refatorar nessa aula:
 
 
@@ -118,6 +163,20 @@ for ( let i in str ) {
 
 <br>
 
+Antes você precisa saber o que a função `charCodeAt` faz.
+
+<br>
+
+> "O método charCodeAt() retorna um integer entre 0 e 65535 representando<br> 
+> a unidade de código UTF-16 em seu dado índice".
+
+*fonte: [charCodeAt - MDN](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt)*
+
+<br>
+
+Esse código itera letra por letra da `str` e em cada iteração ele<br>
+adiciona o valor UTF-16 dessa letra no *Array* `valoresUnicode`.  
+
 Percebeu que criamos o *Array* `valoresUnicode` como vazio e<br>
 somente dentro do `for` estamos adicionando valores para ele?
 
@@ -151,7 +210,10 @@ for ( let i in str ) {
 
 ```
 
+
+
 ```js
+
 const getCharCode = String.fromCharCode
 
 const isSpace = ( x ) => ( x === 32 )
@@ -165,12 +227,9 @@ const getCypherCharCode = ( x ) =>
     : getCharCode( x - 13 )
 
 const rot13 = ( str ) => { // LBH QVQ VG!
-  const valoresUnicode = []
+  const valoresUnicode = str.split( '' )
+                            .map( ( letter ) => letter.charCodeAt( 0 ) )
 
-  for ( let i in str ) {
-    valoresUnicode.push( str.charCodeAt( i ) )
-  }
-  
   const str13 = valoresUnicode.map( ( x ) =>  
     ( isSpace( x ) || !isInRange( 65, 90 )( x ) )
       ? getCharCode( x )
@@ -181,6 +240,7 @@ const rot13 = ( str ) => { // LBH QVQ VG!
 }
 
 console.log( rot13( 'LBH QVQ VG!' ) )
+
 ```
 
 

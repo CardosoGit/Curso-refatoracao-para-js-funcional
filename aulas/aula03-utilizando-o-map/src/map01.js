@@ -1,16 +1,15 @@
-var getFilesNames = function (dir) {
-    var path = require("path");
-    var fs = require('fs');
-    var list = fs.readdirSync(dir);
-    var listOfFiles = [];
-    for (var i = 0; i < list.length; i++) {
-        var filename = path.join(dir, list[i]);
-        var stat = fs.statSync(filename);
-        if (!stat.isDirectory() && !(filename == "." || filename == "..") ) {
-          listOfFiles.push(filename);
-        } 
-    }
-    return listOfFiles;
+const numbers = [ 1, 2, 3, 4, 5 ]
+let square = []
+
+for( let i = 0; i < numbers.length; i++ ) {
+  square[ i ] = numbers[ i ] * numbers[ i ]
+  //square.push( numbers[ i ] * numbers[ i ] )
 }
 
-console.log('getFilesNames', getFilesNames('.'))
+console.log('square: ', square)
+// square:  [ 1, 4, 9, 16, 25 ]
+
+const resultado = square.reverse()
+
+console.log('resultado: ', resultado)
+// resultado:  [ 25, 16, 9, 4, 1 ]
