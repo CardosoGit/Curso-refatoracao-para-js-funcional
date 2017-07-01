@@ -1,4 +1,5 @@
 const getCharCode = String.fromCharCode
+
 const isSpace = ( x ) => ( x === 32 )
 const isLowerThenN = ( x ) => ( x <= 78 )
 const isInRange = ( min, max ) => ( x ) => 
@@ -8,12 +9,6 @@ const getCypherCharCode = ( x ) =>
   ( isLowerThenN( x ) )
     ? getCharCode( x + 13 )
     : getCharCode( x - 13 )
-
-// const getCypherCharCode = ( x ) => 
-//   getCharCode( isLowerThenN( x ) 
-//                 ? ( x + 13 )
-//                 : ( x - 13 )
-              // )
 
 const rot13 = ( str ) => { // LBH QVQ VG!
   const valoresUnicode = []
