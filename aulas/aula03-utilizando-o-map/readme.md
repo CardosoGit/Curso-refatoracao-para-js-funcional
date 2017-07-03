@@ -4,7 +4,7 @@
 
 Todos os programadores que já fizeram faculdade e/ou não trabalham<br>
 com Programação Funcional está mais que acostumado a utilizar suas<br>
-variáveis para guardar mudar estados.
+variáveis para guardar e mudar estados.
 
 Por exemplo:
 
@@ -614,6 +614,9 @@ uma filtragem a mais que o código antigo e essa aula ainda não é de *filter*.
 <hr>
 <br>
 
+## Aviso
+
+Caso você queira se aprofundar mais sobre o `map` criei (um mini ebook sobre ele)[https://github.com/suissa/Ebooks/blob/master/JS%20Funcional/Map/README.md]
 
 ## Exercícios
 
