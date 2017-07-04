@@ -17,7 +17,7 @@ const inSameDigits = ( cpf ) => ( num ) =>
 const isIn = ( list ) => ( value ) => 
   list.findIndex( inSameDigits( value ) ) >= 0
 
-const testSameDigits = ( list ) => ( cpf ) =>
+const testIfHasSameDigits = ( list ) => ( cpf ) =>
   ( isIn( list )( cpf ) )
 
 const getResultOfSum1 = ( sum1 ) =>
@@ -46,7 +46,7 @@ const validate = ( cpf ) => {
   sum1 = getResultOfSum1( sum1 )
   sum2 = getResultOfSum2( sum1, sum2 )
   
-  return (  !( testSameDigits( generateArray( 10 ) )( cpf ) ) &&
+  return (  !( testIfHasSameDigits( generateArray( 10 ) )( cpf ) ) &&
             !( getGeneratedDigit( sum1, sum2 ) !== getDigit( cpf ) ) )
 }
 

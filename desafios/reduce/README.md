@@ -489,6 +489,25 @@ const isIn = ( list ) => ( value ) =>
 const testSameDigits = ( list ) => ( cpf ) =>
   ( isIn( list )( cpf ) )
 
+const getResultOfSum1 = ( sum1 ) =>
+  ( isNotEqual( mod11( times10( sum1 ) ), 10 ) )
+    ? ( mod11( times10( sum1 ) ) )
+    : 0 
+
+const getResultOfSum2 = ( sum1, sum2 ) =>
+  ( mod11( times10( sum2 + ( times( 2 )( sum1 ) ) ) ) )
+
+const toSums = ( total ) => ( [ sum1, sum2 ] , n, i ) =>
+  [ sum2 + generateSum( n )( total ), 
+    sum1 + generateSum( n )( --total ) 
+  ]
+
+const getSums = ( cpf, vlr = 11 ) => 
+  cpf.split( '' )
+      .slice( 0, 9 )
+      .reduce( toSums( vlr ), [ 0, 0 ] )
+      .reverse()
+
 const validate = ( cpf ) => {
   const CPF_LENGTH = 11
   let [ sum1, sum2 ] = getSums( cpf, CPF_LENGTH )
@@ -499,6 +518,16 @@ const validate = ( cpf ) => {
   return (  !( testSameDigits( generateArray( 10 ) )( cpf ) ) &&
             !( getGeneratedDigit( sum1, sum2 ) != getDigit( cpf ) ) )
 }
+
+```
+
+Viu que chamei as funções `getResultOfSum1` e `getResultOfSum2` que são o<br>
+encapsulamento do seguinte código que ficava fora do `for`:
+
+```js
+
+  soma1 = (((soma1*10)%11)==10 ? 0:((soma1*10)%11)); 
+  soma2 = (((soma2+(2*soma1))*10)%11); 
 
 ```
 
