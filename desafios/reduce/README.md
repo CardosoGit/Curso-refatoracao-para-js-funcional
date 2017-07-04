@@ -60,7 +60,7 @@ Lista do que fazer:
   - geração de CPFs iguais
 
 
-Por exemplo esse if:
+Por exemplo esse `if`:
 
 ```js
 
@@ -72,6 +72,9 @@ if(cpf == "11111111111" || cpf == "22222222222" || cpf ==
 }
 
 ```
+
+Percebam que ele **SEMPRE** testa o `cpf` com uma sequência de dígitos<br>
+iguais, que vão do `0` ao `9`, com tamanho 11
 
 
 ```js
