@@ -144,6 +144,12 @@ const sameDigits = gerenateArray( 10 )
 if ( testSameDigits( sameDigits )( cpf ) ) return false
 
 ```
+<br>
+
+**Com isso criamos o primeiro teste que deve retornar `false` sem precisar** <br>
+**fazer os cálculos com os dígitos pois se forem iguais não é válido!**
+
+<br>
 
 Agora é hora de encapsular outras lógicas para funções separadas:
 
@@ -154,14 +160,18 @@ var digitoDigitado = eval(cpf.charAt(9)+cpf.charAt(10));
 
 ```
 
+**Primeiramente que nem precisamos desse `eval` maldito!** Pois devemos retornar<br>
+apenas os últimos 2 dígitos do CPF.
+
 ```js
 
 const getDigit = ( cpf ) => cpf.charAt( 9 ) + cpf.charAt( 10 )
-const generateSum = ( i ) => ( vlr ) => i * vlr 
+
+// const digitoDigitado = getDigit( cpf ) 
 
 ```
 
-Perceba essa sequência:
+Agora erceba essa sequência:
 
 ```js
 
@@ -177,7 +187,7 @@ Podemos facilmente separar essa lógica para isso:
 const generateSum = ( i ) => ( vlr ) => i * vlr 
 
 // Usamos assim dentro da iteração que já veremos
-const some = generateSum( cpf.charAt( i ) )
+const sum = generateSum( n )
 
 sum1 += some( total - 1 )
 sum2 += some( total )
@@ -260,7 +270,7 @@ const generateSum = times
 
 const toSums = ( total ) => ( [ sum1, sum2 ] , n, i ) => {
 
-  const some = generateSum( n.charAt( 0 ) )
+  const some = generateSum( n )
   
   sum1 += some( total - 1 )
   sum2 += some( total )
@@ -300,6 +310,40 @@ por se um *Array*, podemos usar dessa forma pois estamos utilizando <br>
 atribuindo nomes que utilizaremos dentro da nossa função. Isso só funciona<br>
 porque o *Array* que recebemos possui apenas dois elementos.
 
+Logo na primeira linha desse *callback* temos a geração da função específica<br>
+da criação da soma baseada na `generateSum` que irá basicamente multiplicar<br>
+dois valores passados um por vez:
+
+```js
+
+// const generateSum = times
+
+const sum = generateSum( n )
+
+```
+
+Nessa primeira execução criamos a função:
+
+```js
+
+// const times = ( a ) => ( b ) => b * a 
+
+const sum = ( b ) => b * n // o n veio da primeira execução
+
+sum1 += sum( ( i + 11 ) - ( i - 1 ) )
+sum2 += sum( total )
+total--
+
+return [ sum1, sum2 ] 
+
+```
+
+Para que possamos reusar a mesma para calcular `sum1` e `sum2` reusando<br>
+o mesmo cálculo pois as duas usam o mesmo valor, porém só muda o segundo valor.
+
+Com isso conseguimos sempre pegar o valor anterior de `sum1` e `sum2` com<br>
+
+
 #### Explicando ainda
 
 Código final:
@@ -337,7 +381,7 @@ const getResultOfSum2 = ( sum1, sum2 ) =>
 
 const toSums = ( total ) => ( [ sum1, sum2 ] , n, i ) => {
 
-  const some = generateSum( n.charAt( 0 ) )
+  const some = generateSum( n )
   
   sum1 += some( total - 1 )
   sum2 += some( total )

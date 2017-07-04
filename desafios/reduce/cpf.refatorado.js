@@ -1,4 +1,4 @@
-const times = ( i ) => ( vlr ) => i * vlr 
+const times = ( a ) => ( b ) => b * a 
 const mod11 = ( num ) => num % 11 
 const times10 = ( num ) => times( 10 )( num )
 const isEqual = ( a ) => ( b ) => b === a
@@ -29,10 +29,10 @@ const getResultOfSum2 = ( sum1, sum2 ) =>
 
 const toSums = ( total ) => ( [ sum1, sum2 ] , n, i ) => {
 
-  const some = generateSum( n.charAt( 0 ) )
-  
-  sum1 += some( total - 1 )
-  sum2 += some( total )
+  const sum = generateSum( n )
+
+  sum1 += sum( total - 1 )
+  sum2 += sum( total )
   total--
 
   return [ sum1, sum2 ] 
@@ -44,8 +44,9 @@ const getSums = ( cpf, vlr = 11 ) =>
       .reduce( toSums( vlr ), [ 0, 0 ] )
 
 const validate = ( cpf ) => {
+  const CPF_LENGTH = 11
   const sameDigits = gerenateArray( 10 )
-  let [ sum1, sum2 ] = getSums( cpf, 11 )
+  let [ sum1, sum2 ] = getSums( cpf, CPF_LENGTH )
   
   sum1 = getResultOfSum1( sum1 )
   sum2 = getResultOfSum2( sum1, sum2 )
