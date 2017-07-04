@@ -386,10 +386,45 @@ const toSums = ( total ) => ( [ sum1, sum2 ] , n, i ) =>
     sum1 + generateSum( n )( --total ) 
   ].reverse() 
 
+const getSums = ( cpf, vlr = 11 ) => 
+  cpf.split( '' )
+      .slice( 0, 9 )
+      .reduce( toSums( vlr ), [ 0, 0 ] )
+
 ```
+
+Depois de ter conversado com meu aluno [matheustp](https://gist.github.com/matheustp/d0f4a30e97195202d797eb14c4a762ff) ele mostrou o uso<br>
+do `reverse` apenas após o resultado do `reduce` e essa forma é **MUITO MELHOR** <br>
+pois assim ele será executado apenas uma vez e não em todas iterações!
+
+<br>
+
+> Obrigado Matheus!!!
+
+<br>
+
+Deixando nossa função assim:
+
+```js
+
+const toSums = ( total ) => ( [ sum1, sum2 ] , n, i ) =>
+  [ sum2 + generateSum( n )( total ), 
+    sum1 + generateSum( n )( --total ) 
+  ]
+
+const getSums = ( cpf, vlr = 11 ) => 
+  cpf.split( '' )
+      .slice( 0, 9 )
+      .reduce( toSums( vlr ), [ 0, 0 ] )
+      .reverse()
+
+```
+
+<br>
 
 > **Você sabe a diferença entre essas duas formas de decrementar???**
 
+<br>
 
 Quando utilizamos o `total--` o valor usado de total será sem decrementar e<br>
 no próximo uso ele terá o valor subtraído de `1`. Já usando o `--total` primeiro<br>
