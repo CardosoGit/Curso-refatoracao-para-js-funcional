@@ -45,13 +45,12 @@ const getSums = ( cpf, vlr = 11 ) =>
 
 const validate = ( cpf ) => {
   const CPF_LENGTH = 11
-  const sameDigits = gerenateArray( 10 )
   let [ sum1, sum2 ] = getSums( cpf, CPF_LENGTH )
   
   sum1 = getResultOfSum1( sum1 )
   sum2 = getResultOfSum2( sum1, sum2 )
 
-  return (  !( testSameDigits( sameDigits )( cpf ) ) &&
+  return (  !( testSameDigits( gerenateArray( 10 ) )( cpf ) ) &&
             !( getGeneratedDigit( sum1, sum2 ) != getDigit( cpf ) ) )
 }
 

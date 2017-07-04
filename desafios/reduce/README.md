@@ -139,9 +139,7 @@ Deixando nosso teste assim:
 
 ```js
 
-const sameDigits = gerenateArray( 10 )
-
-if ( testSameDigits( sameDigits )( cpf ) ) return false
+if ( testSameDigits( gerenateArray( 10 ) )( cpf ) ) return false
 
 ```
 <br>
