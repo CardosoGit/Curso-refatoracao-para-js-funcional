@@ -122,7 +122,7 @@ const resultCPF = getSumOfMultiplication( cpf, 10 )
 Agora chegamos na parte principal dessa etapa.
 
 
-Verificamos se resultado da soma de `getSumOfMultiplication` é dividido por 11.
+Verificamos se resultado de `getSumOfMultiplication` é dividido por 11.
 
 Se for `0` ou `1`, o dígito J é `0`. <br>
 Se for 2, 3, 4, 5, 6, 7, 8, 9 ou 10, o dígito J é `11 - RESTO`.
