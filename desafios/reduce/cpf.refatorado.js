@@ -25,10 +25,11 @@ const getResultOfSum1 = ( sum1 ) =>
     : 0 
 
 const getResultOfSum2 = ( sum1, sum2 ) =>
-  ( mod11( times10( sum2 + ( 2 * sum1 ) ) ) )
+  ( mod11( times10( sum2 + ( times( 2 )( sum1 ) ) ) ) )
 
-const toSums = ( cpf, total ) => ( [ sum1, sum2 ] , n, i ) => {
-  const some = generateSum( cpf.charAt( i ) )
+const toSums = ( total ) => ( [ sum1, sum2 ] , n, i ) => {
+
+  const some = generateSum( n.charAt( 0 ) )
   
   sum1 += some( total - 1 )
   sum2 += some( total )
@@ -37,10 +38,10 @@ const toSums = ( cpf, total ) => ( [ sum1, sum2 ] , n, i ) => {
   return [ sum1, sum2 ] 
 }
 
-const getSums = ( cpf, vlr ) => 
+const getSums = ( cpf, vlr = 11 ) => 
   cpf.split( '' )
       .slice( 0, 9 )
-      .reduce( toSums( cpf, vlr ), [ 0, 0 ] )
+      .reduce( toSums( vlr ), [ 0, 0 ] )
 
 const validate = ( cpf ) => {
   const sameDigits = gerenateArray( 10 )

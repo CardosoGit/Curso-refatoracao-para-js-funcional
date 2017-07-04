@@ -217,25 +217,15 @@ const getGeneratedDigit = ( sum1, sum2 ) => times10( sum1 ) + sum2
 // ANTIGO
 // soma1 = (((soma1*10)%11)==10 ? 0:((soma1*10)%11)); 
 
-// NOVO
-// soma1 = ( mod11( times10( soma1 ) ) === 10 )
-//            ? 0
-//            : mod11( times10( soma1 ) );
+// NOVO - inverti a lógica
+// soma1 = ( mod11( times10( soma1 ) ) !== 10 )
+//            ? mod11( times10( soma1 ) );
+//            : 0
 
 ```
 
 
 Agora chegamos na parte mais complexa da refatoração: o `for`.
-
-Então lhe pergunto:
-
-<br>
-
-> **Você utilizaria o `map` ou `reduce`?**
-
-<br>
-
-Nesse caso iremos utilizar o `reduce` e você já verá o porquê:
 
 ```js
 
@@ -251,12 +241,24 @@ soma2 = (((soma2+(2*soma1))*10)%11);
 
 ```
 
+
+Então lhe pergunto:
+
+<br>
+
+> **Você utilizaria o `map` ou `reduce`?**
+
+<br>
+
+Nesse caso iremos utilizar o `reduce` e você já verá o porquê:
+
+
 ```js
 
 const times = ( i ) => ( vlr ) => i * vlr 
 const generateSum = times
 const toSums = ( cpf, total ) => ( [ sum1, sum2 ] , n, i ) => {
-  const some = generateSum( cpf.charAt( i ) )
+  const some = generateSum( n.charAt( 0 ) )
   
   sum1 += some( total - 1 )
   sum2 += some( total )
@@ -265,14 +267,22 @@ const toSums = ( cpf, total ) => ( [ sum1, sum2 ] , n, i ) => {
   return [ sum1, sum2 ] 
 }
 
-const getSums = ( cpf, vlr ) => 
+const getSums = ( cpf, vlr = 11 ) => 
   cpf.split( '' )
       .slice( 0, 9 )
       .reduce( toSums( cpf, vlr ), [ 0, 0 ] )
 
 ```
 
+Percebeu que iniciei o `reduce` com `[ 0, 0 ]` pois esses `0`s são<br>
+os valores iniciais de `soma1` e `soma2`, com isso não precisamos inicializar<br>
+essas variáveis com `let/var` para depois irmos modificando esses valores.
 
+Tendo em vista que o `for` foi feito apenas para iterar do nove posições, devemos<br>
+quebrar o CPF que é uma *String* com `split( '' )` e logo após selecionamos apenas<br>
+as 9 primeiras posições com `slice( 0, 9 )` para depois chamarmos o `reduce`.
+
+Como os valores de `cpf`, como **
 
 #### Explicando ainda
 
@@ -280,21 +290,26 @@ Código final:
 
 ```js
 
+const times = ( i ) => ( vlr ) => i * vlr 
 const mod11 = ( num ) => num % 11 
-const times10 = ( num ) => num * 10
+const times10 = ( num ) => times( 10 )( num )
 const isEqual = ( a ) => ( b ) => b === a
 const isNotEqual = ( a ) => ( b ) => !( isEqual( a )( b ) )
-const generateSum = ( i ) => ( vlr ) => i * vlr 
 const getDigit = ( cpf ) => cpf.charAt( 9 ) + cpf.charAt( 10 )
-const getGeneratedDigit = ( sum1, sum2 ) => ( sum1 * 10 ) + sum2
+const getGeneratedDigit = ( sum1, sum2 ) => times10( sum1 ) + sum2
 const generateStringSequence = ( tam ) => ( num ) => `${num}`.repeat( tam )
 const gerenateArray = ( length ) => Array.from( { length }, ( v, k ) => k )
+
+const generateSum = times
 
 const inSameDigits =  ( cpf ) => ( num ) => 
   isEqual( cpf )( generateSequenceSize11( num ) )
 
+const isIn = ( list ) => ( value ) => 
+  list.findIndex( inSameDigits( value ) ) >= 0
+
 const testSameDigits = ( list ) => ( cpf ) =>
-  ( list.findIndex( inSameDigits( cpf ) ) >= 0 )
+  ( isIn( list )( cpf ) )
 
 const getResultOfSum1 = ( sum1 ) =>
   ( isNotEqual( mod11( times10( sum1 ) ), 10 ) )
@@ -302,10 +317,11 @@ const getResultOfSum1 = ( sum1 ) =>
     : 0 
 
 const getResultOfSum2 = ( sum1, sum2 ) =>
-  ( mod11( times10( sum2 + ( 2 * sum1 ) ) ) )
+  ( mod11( times10( sum2 + ( times( 2 )( sum1 ) ) ) ) )
 
-const toSums = ( cpf, total ) => ( [ sum1, sum2 ] , n, i ) => {
-  const some = generateSum( cpf.charAt( i ) )
+const toSums = ( total ) => ( [ sum1, sum2 ] , n, i ) => {
+
+  const some = generateSum( n.charAt( 0 ) )
   
   sum1 += some( total - 1 )
   sum2 += some( total )
@@ -314,10 +330,10 @@ const toSums = ( cpf, total ) => ( [ sum1, sum2 ] , n, i ) => {
   return [ sum1, sum2 ] 
 }
 
-const getSums = ( cpf, vlr ) => 
+const getSums = ( cpf, vlr = 11 ) => 
   cpf.split( '' )
       .slice( 0, 9 )
-      .reduce( toSums( cpf, vlr ), [ 0, 0 ] )
+      .reduce( toSums( vlr ), [ 0, 0 ] )
 
 const validate = ( cpf ) => {
   const sameDigits = gerenateArray( 10 )
