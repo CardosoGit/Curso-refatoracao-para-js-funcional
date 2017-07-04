@@ -370,12 +370,33 @@ const toSums = ( total ) => ( [ sum1, sum2 ] , n, i ) =>
 
 ```
 
-Então perceba que usamos a técnica de decrementar o `total` no `sum2` para que<br>
+Então perceba que usamos a técnica de [decrementar](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Decrement_(--)) o `total` no `sum2` para que<br>
 no `sum1` ele esteja com o valor correto E precisei colocar eles em ordem inversa<br>
 para que o valor do `total` esteja correto sem precisarmos de outra linha para isso.
 
 Depois claramente precisei retornar utilizando [`reverse`]() para que a ordem<br>
 dos valores das somas fossem corretas.
+
+Como também podemos escrever assim:
+
+```js
+
+const toSums = ( total ) => ( [ sum1, sum2 ] , n, i ) =>
+  [ sum2 + generateSum( n )( total ), 
+    sum1 + generateSum( n )( --total ) 
+  ].reverse() 
+
+```
+
+> **Você sabe a diferença entre essas duas formas de decrementar???**
+
+
+Quando utilizamos o `total--` o valor usado de total será sem decrementar e<br>
+no próximo uso ele terá o valor subtraído de `1`. Já usando o `--total` primeiro<br>
+decrementa-se o valor para depois usá-lo.
+
+
+
 
 #### Explicando ainda
 

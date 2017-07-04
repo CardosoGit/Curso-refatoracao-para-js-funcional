@@ -29,8 +29,8 @@ const getResultOfSum2 = ( sum1, sum2 ) =>
   ( mod11( times10( sum2 + ( times( 2 )( sum1 ) ) ) ) )
 
 const toSums = ( total ) => ( [ sum1, sum2 ] , n, i ) =>
-  [ sum2 + generateSum( n )( total-- ), 
-    sum1 + generateSum( n )( total ) 
+  [ sum2 + generateSum( n )( total ), 
+    sum1 + generateSum( n )( --total ) 
   ].reverse() 
 
 const getSums = ( cpf, vlr = 11 ) => 
