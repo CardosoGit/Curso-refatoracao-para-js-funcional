@@ -464,3 +464,63 @@ na função, do meu aluno, que usei de base.
 Quis mostrar as duas refatorações para você ver como é diferente você iniciar<br>
 uma solução do zero, baseando-se nas definições intríscecas ao problema, pois<br>
 começando sem ver nenhum código você vai construindo pedaço por pedaço.
+
+Só para lembramos do código que peguei de base é esse:
+
+```js
+
+module.exports = (value)=>{ 
+  console.log(value)
+  var cpf = value; 
+  //exp = /.|-/g 
+  //cpf = cpf.toString().replace( exp, "" ); 
+  var digitoDigitado = eval(cpf.charAt(9)+cpf.charAt(10)); 
+  var soma1=0, soma2=0; 
+  var vlr =11; 
+  for(i=0;i<9;i++){ 
+    soma1+=eval(cpf.charAt(i)*(vlr-1)); 
+    soma2+=eval(cpf.charAt(i)*vlr); 
+    vlr--; 
+  }    
+  soma1 = (((soma1*10)%11)==10 ? 0:((soma1*10)%11)); 
+  soma2 = (((soma2+(2*soma1))*10)%11); 
+
+  if(cpf == "11111111111" || cpf == "22222222222" || cpf == 
+    "33333333333" || cpf == "44444444444" || cpf == "55555555555" || cpf == 
+    "66666666666" || cpf == "77777777777" || cpf == "88888888888" || cpf == 
+    "99999999999" || cpf == "00000000000" ){ 
+    var digitoGerado = null; 
+}else{ 
+  var digitoGerado = (soma1*10) + soma2; 
+} 
+
+if(digitoGerado != digitoDigitado){ 
+ return false;
+} 
+return true;
+}
+
+```
+
+<br>
+
+Perceba que ele não possui nenhuma função semântica que nos diz o que cada<br>
+parte desse código faz, **além do que ele faz umas multiplicações por `10` que**<br>
+**nem deveriam existir!**
+
+## Aviso
+
+Agora que você já sabe disso sempre que for refatorar o seu ou o código de alguém<br>
+**SEMPRE** pesquise antes sobre os conceitos/definições que compõe o problema, <br>
+porque desse jeito você poderá refatorar da melhor forma possível.
+
+Lembrando que podemos refatorar com os seguintes objetivos:
+
+- melhorar a semântica/legibilidade
+- melhorar a reusabilidade
+- melhorar a modularização
+- melhorar a performance
+- melhorar a lógica
+
+> **Mas cuidado, normalmente quando o objetivo é performance o código pode ficar** <br>
+> **mais ilegível, menos reusável e menos modular.**

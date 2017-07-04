@@ -5,6 +5,7 @@ const mergeDigits = ( num1, num2 ) => `${num1}${num2}`
 const getTwoLastDigits = ( cpf ) => `${cpf[ 9 ]}${cpf[ 10 ]}`
 const getCpfToCheckInArray = ( cpf ) => cpf.substr( 0, 9 ).split( '' )
 const generateArray = ( length ) => Array.from( { length }, ( v, k ) => k )
+
 const isIn = ( list ) => ( value ) => 
   list.findIndex( v => value === v ) >= 0
 
