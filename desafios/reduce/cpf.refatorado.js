@@ -36,14 +36,6 @@ const getResultOfSum2 = ( sum1, sum2 ) => // 11 - mod11( sum2 + times2( sum1 ) )
     ? 0 
     : 11 - mod11( sum2 + times2( sum1 ) )
 
-// const getResultOfSum1 = ( sum1 ) =>
-//   ( isNotEqual( mod11( times10( sum1 ) ), 10 ) )
-//     ? ( mod11( times10( sum1 ) ) )
-//     : 0 
-
-// const getResultOfSum2 = ( sum1, sum2 ) =>
-//   ( mod11( times10( sum2 + ( times( 2 )( sum1 ) ) ) ) )
-
 const toSums = ( total ) => ( [ sum2, sum1 ] , n ) =>
   [ sum2 + generateSum( n )( total ), 
     sum1 + generateSum( n )( --total ) 
@@ -61,9 +53,7 @@ const validate = ( cpf ) => {
   
   sum1 = getResultOfSum1( sum1 )
   sum2 = getResultOfSum2( sum1, sum2 )
-  console.log('sum1', sum1)
-  console.log('sum2', sum2 )
-  console.log('getGeneratedDigit', getGeneratedDigit( sum1, sum2 ) )
+  
   return (  
     NOT( testIfHasSameDigits( generateArray( 10 ) )( cpf ) ) &&
     NOT( getGeneratedDigit( sum1, sum2 ) !== getDigit( cpf ) ) 
