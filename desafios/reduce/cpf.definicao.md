@@ -63,8 +63,8 @@ const getCpfToCheck = ( cpf ) =>
     : cpf.substr( 0, 9 ).split( '' )
 ```
 
-Dessa forma podemos passar o cpf tanto como *String* como um *Array* de números, <br>
-logo mais nos decidiremos qual iremos usar por padrão. Porém perceba que **SEMPRE** <br>
+Dessa forma podemos passar o CPF tanto como *String* como um *Array* de números, <br>
+logo mais decidiremos qual usar como padrão. Porém perceba que **SEMPRE** <br>
 quero retornar um *Array*.
 
 Isso porque precisamos multiplicar cada valor por um peso.
