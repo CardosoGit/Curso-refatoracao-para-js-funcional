@@ -389,7 +389,7 @@ const validate = ( cpfFull ) => {
 
 <br>
 
-Agora sim temos nosso código final assim:
+Agora sim temos nosso código final, melhorado mais um pouco, assim:
 
 <br>
 
@@ -405,13 +405,11 @@ const generateArray = ( length ) => Array.from( { length }, ( v, k ) => k )
 const isIn = ( list ) => ( value ) => 
   list.findIndex( v => value === v ) >= 0
 
+const isSameDigitsCPF = ( cpfFull ) => 
+  isIn( generateArray( 10 ).map( generateStringSequence( 11 ) ) )( cpfFull )
+
 const generateStringSequence = ( times ) => ( char ) => 
   ( `${char}`.repeat( times ) )
-
-const getDigit = ( num ) => 
-  ( num > 1 )
-    ? 11 - num
-    : 0
 
 const toSumOfMultiplication = ( total ) => ( result, num, i ) => 
   result + ( num * total-- )
@@ -419,12 +417,15 @@ const toSumOfMultiplication = ( total ) => ( result, num, i ) =>
 const getSumOfMultiplication = ( list, total ) => 
   list.reduce( toSumOfMultiplication( total ), 0 )
 
+const getValidationDigit = ( total ) => ( cpf ) =>
+  getDigit( mod11( getSumOfMultiplication( cpf, total ) ) )
 
-const isSameDigitsCPF = ( cpfFull ) => 
-  isIn( generateArray( 10 ).map( generateStringSequence( 11 ) ) )( cpfFull )
+const getDigit = ( num ) => 
+  ( num > 1 )
+    ? 11 - num
+    : 0
 
 const isValidCPF = ( cpfFull ) => {
-
   const cpf = getCpfToCheckInArray( cpfFull )
   const firstDigit = getValidationDigit( 10 )( cpf )
   const secondDigit = getValidationDigit( 11 )( cpf.concat( firstDigit ) )
@@ -433,12 +434,10 @@ const isValidCPF = ( cpfFull ) => {
                 ( mergeDigits( firstDigit, secondDigit ) )
 }
 
-const getValidationDigit = ( total ) => ( cpf ) =>
-  getDigit( mod11( getSumOfMultiplication( cpf, total ) ) )
 
 const validate = ( cpfFull ) => 
-  NOT( isSameDigitsCPF( cpfFull ) ) && 
-       isValidCPF( cpfFull )
+  NOT( isSameDigitsCPF( cpfFull ) ) && isValidCPF( cpfFull )
+
 
 const CPFS = [ 
   '04998264931', '03506838326','04864713901',
@@ -448,3 +447,11 @@ const CPFS = [
 CPFS.forEach( ( cpf ) => console.log( `${cpf}: ${validate( cpf )}` ) )
 
 ```
+
+Assim deixamos a função principal `validate` executando apenas os dois<br>
+testes que são necessários, escondendo sua complexidade em outras funções.
+
+Perceba que se no primeiro teste `isSameDigitsCPF` ele retornar verdadeiro<br>
+a função `NOT` irá inverter esse valor para falso, fazendo com que o `if` <br>
+ternário não precise executar o próximo teste, fazendo com que a função `validate` <br>
+retorne `false`, pois o CPF é inválido, sem que precisemos calcular mais nada
