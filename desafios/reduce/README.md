@@ -185,6 +185,46 @@ total--
 
 ```
 
+Outra parte interessante para refatorarmos é encapsular o cálculo<br>
+de multiplicação pois podemos reusar e muito ele, dessa forma:
+
+```js
+
+const times = ( i ) => ( vlr ) => i * vlr 
+const times10 = ( num ) => times( 10 )( num )
+const getGeneratedDigit = ( sum1, sum2 ) => times10( sum1 ) + sum2
+
+// ANTIGO
+// soma1 = (((soma1*10)%11)==10 ? 0:((soma1*10)%11)); 
+
+// NOVO
+// soma1 = ( ( ( times10( soma1 ) % 11 ) === 10 )
+//            ? 0
+//            :( times10( soma1 ) % 11 ) );
+
+```
+
+E já para aproveitar podemos encapsular o ` % 11` que também aparece<br>
+mais de uma vez, deixando assim:
+
+```js
+
+const mod11 = ( num ) => num % 11 
+const times = ( i ) => ( vlr ) => i * vlr 
+const times10 = ( num ) => times( 10 )( num )
+const getGeneratedDigit = ( sum1, sum2 ) => times10( sum1 ) + sum2
+
+// ANTIGO
+// soma1 = (((soma1*10)%11)==10 ? 0:((soma1*10)%11)); 
+
+// NOVO
+// soma1 = ( mod11( times10( soma1 ) ) === 10 )
+//            ? 0
+//            : mod11( times10( soma1 ) );
+
+```
+
+
 Agora chegamos na parte mais complexa da refatoração: o `for`.
 
 Então lhe pergunto:
@@ -199,10 +239,39 @@ Nesse caso iremos utilizar o `reduce` e você já verá o porquê:
 
 ```js
 
-soma1+=eval(cpf.charAt(i)*(vlr-1)); 
-soma2+=eval(cpf.charAt(i)*vlr);  
+var soma1=0, soma2=0; 
+var vlr =11; 
+for(i=0;i<9;i++){ 
+  soma1+=eval(cpf.charAt(i)*(vlr-1)); 
+  soma2+=eval(cpf.charAt(i)*vlr); 
+  vlr--; 
+}    
+soma1 = (((soma1*10)%11)==10 ? 0:((soma1*10)%11)); 
+soma2 = (((soma2+(2*soma1))*10)%11); 
 
 ```
+
+```js
+
+const times = ( i ) => ( vlr ) => i * vlr 
+const generateSum = times
+const toSums = ( cpf, total ) => ( [ sum1, sum2 ] , n, i ) => {
+  const some = generateSum( cpf.charAt( i ) )
+  
+  sum1 += some( total - 1 )
+  sum2 += some( total )
+  total--
+
+  return [ sum1, sum2 ] 
+}
+
+const getSums = ( cpf, vlr ) => 
+  cpf.split( '' )
+      .slice( 0, 9 )
+      .reduce( toSums( cpf, vlr ), [ 0, 0 ] )
+
+```
+
 
 
 #### Explicando ainda
@@ -211,7 +280,6 @@ Código final:
 
 ```js
 
-const getLength = ( a ) => a.length
 const mod11 = ( num ) => num % 11 
 const times10 = ( num ) => num * 10
 const isEqual = ( a ) => ( b ) => b === a
@@ -222,11 +290,11 @@ const getGeneratedDigit = ( sum1, sum2 ) => ( sum1 * 10 ) + sum2
 const generateStringSequence = ( tam ) => ( num ) => `${num}`.repeat( tam )
 const gerenateArray = ( length ) => Array.from( { length }, ( v, k ) => k )
 
-const onlyAllowedCPFs =  ( cpf ) => ( num ) => 
+const inSameDigits =  ( cpf ) => ( num ) => 
   isEqual( cpf )( generateSequenceSize11( num ) )
 
 const testSameDigits = ( list ) => ( cpf ) =>
-  getLength( list.filter( onlyAllowedCPFs( cpf ) ) )
+  ( list.findIndex( inSameDigits( cpf ) ) >= 0 )
 
 const getResultOfSum1 = ( sum1 ) =>
   ( isNotEqual( mod11( times10( sum1 ) ), 10 ) )

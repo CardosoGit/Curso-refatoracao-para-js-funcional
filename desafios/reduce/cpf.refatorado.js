@@ -1,20 +1,23 @@
-
-const getLength = ( a ) => a.length
+const times = ( i ) => ( vlr ) => i * vlr 
 const mod11 = ( num ) => num % 11 
-const times10 = ( num ) => num * 10
+const times10 = ( num ) => times( 10 )( num )
 const isEqual = ( a ) => ( b ) => b === a
 const isNotEqual = ( a ) => ( b ) => !( isEqual( a )( b ) )
-const generateSum = ( i ) => ( vlr ) => i * vlr 
 const getDigit = ( cpf ) => cpf.charAt( 9 ) + cpf.charAt( 10 )
-const getGeneratedDigit = ( sum1, sum2 ) => ( sum1 * 10 ) + sum2
+const getGeneratedDigit = ( sum1, sum2 ) => times10( sum1 ) + sum2
 const generateStringSequence = ( tam ) => ( num ) => `${num}`.repeat( tam )
 const gerenateArray = ( length ) => Array.from( { length }, ( v, k ) => k )
 
-const onlyAllowedCPFs =  ( cpf ) => ( num ) => 
+const generateSum = times
+
+const inSameDigits =  ( cpf ) => ( num ) => 
   isEqual( cpf )( generateSequenceSize11( num ) )
 
+const isIn = ( list ) => ( value ) => 
+  list.findIndex( inSameDigits( value ) ) >= 0
+
 const testSameDigits = ( list ) => ( cpf ) =>
-  getLength( list.filter( onlyAllowedCPFs( cpf ) ) )
+  ( isIn( list )( cpf ) )
 
 const getResultOfSum1 = ( sum1 ) =>
   ( isNotEqual( mod11( times10( sum1 ) ), 10 ) )
