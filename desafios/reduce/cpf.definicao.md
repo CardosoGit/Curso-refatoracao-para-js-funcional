@@ -465,11 +465,11 @@ retorná `false`, pois o CPF é inválido, sem que precisemos calcular mais nada
 
 Passei a madrugada toda refatorando uma função de validar CPF que não estava<br>
 completamente correta e só percebi isso após ter finalizado a refatoração. Por isso<br>
-fui ler qual era o algoritmo oficial para isso e percebi o que estava errado<br>
-na função, do meu aluno, que usei de base.
+fui ler qual era o algoritmo oficial e só então percebi o que estava errado<br>
+na função, do meu aluno, que usei como base.
 
-Quis mostrar as duas refatorações para você ver como é diferente você iniciar<br>
-uma solução do zero, baseando-se nas definições intríscecas ao problema, pois<br>
+Quis mostrar as duas refatorações para você ver como é diferente iniciar<br>
+uma solução do zero baseando-se nas definições intríscecas ao problema, pois<br>
 começando sem ver nenhum código você vai construindo pedaço por pedaço.
 
 Só para lembramos do código que peguei de base é esse:
