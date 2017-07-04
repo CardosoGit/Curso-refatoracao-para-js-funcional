@@ -472,7 +472,7 @@ Quis mostrar as duas refatorações para você ver como é diferente iniciar<br>
 uma solução do zero baseando-se nas definições intríscecas ao problema, pois<br>
 começando sem ver nenhum código você vai construindo pedaço por pedaço.
 
-Só para lembramos do código que peguei de base é esse:
+Só para lembramos, o código que peguei de base é esse:
 
 ```js
 
