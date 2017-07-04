@@ -467,6 +467,18 @@ const validate = ( cpf ) => {
 
 ```
 
+Porém depois que percebi que a comparação final utiliza `!=` e não `!==` <br>
+como deveria ser, então para isso precisamos forçar o retorno, das funções<br>
+que geram esses valores, para *String* dessa forma:
+
+```js
+
+const getDigit = ( cpf ) => `${cpf.charAt( 9 )}${cpf.charAt( 10 )}` 
+const getGeneratedDigit = ( sum1, sum2 ) => times10( sum1 ) + sum2 + ''
+
+```
+
+
 #### Explicando ainda
 
 Código final:
