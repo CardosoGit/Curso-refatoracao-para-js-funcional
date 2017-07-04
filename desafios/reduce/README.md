@@ -145,6 +145,65 @@ if ( testSameDigits( sameDigits )( cpf ) ) return false
 
 ```
 
+Agora é hora de encapsular outras lógicas para funções separadas:
+
+
+```js
+
+var digitoDigitado = eval(cpf.charAt(9)+cpf.charAt(10)); 
+
+```
+
+```js
+
+const getDigit = ( cpf ) => cpf.charAt( 9 ) + cpf.charAt( 10 )
+const generateSum = ( i ) => ( vlr ) => i * vlr 
+
+```
+
+Perceba essa sequência:
+
+```js
+
+soma1+=eval(cpf.charAt(i)*(vlr-1)); 
+soma2+=eval(cpf.charAt(i)*vlr);  
+
+```
+
+Podemos facilmente separar essa lógica para isso:
+
+```js
+
+const generateSum = ( i ) => ( vlr ) => i * vlr 
+
+// Usamos assim dentro da iteração que já veremos
+const some = generateSum( cpf.charAt( i ) )
+
+sum1 += some( total - 1 )
+sum2 += some( total )
+total--
+
+```
+
+Agora chegamos na parte mais complexa da refatoração: o `for`.
+
+Então lhe pergunto:
+
+<br>
+
+> **Você utilizaria o `map` ou `reduce`?**
+
+<br>
+
+Nesse caso iremos utilizar o `reduce` e você já verá o porquê:
+
+```js
+
+soma1+=eval(cpf.charAt(i)*(vlr-1)); 
+soma2+=eval(cpf.charAt(i)*vlr);  
+
+```
+
 
 #### Explicando ainda
 
