@@ -117,8 +117,72 @@ Pois é! Quando eu conheci esse conceito foi a primeira coisa que me perguntei:
 
 > Mas como que programa sem mudar os valores?
 
+Simples! Você cria novos valores baseado nos antigos.
 
-### AINDA VOU ESCREVER!!!
+Entenda que as únicas estruturas mutáveis do JavaScript são os *Array*s e *Object*s.
+
+```js
+
+const person = {
+  name: 'John',
+  age: 28
+}
+const newPerson = person
+newPerson.age = 666
+console.log( newPerson === person ) // true
+console.log( person ) // { name: 'John', age: 666 }
+
+```
+
+
+```js
+
+const person = {
+  name: 'John',
+  age: 28
+}
+const newPerson = Object.assign( {}, person, {
+  age: 30
+} )
+console.log( newPerson === person ) // false
+console.log( person ) // { name: 'John', age: 28 }
+console.log( newPerson ) // { name: 'John', age: 30 }
+
+```
+
+Vamos pensar então como podemos adicionar um elemento em um *Array* sem o `push`.
+
+Conseguimos o mesmo resultado com técnicas diferentes, podemos tanto usar o `concat`<br>
+como o [spread operator]() para isso.
+
+Com spread operator:
+
+```js
+
+const users = [ 'Obi-Wan', 'Vader' ]
+const newUsers = [ ...users, 'Luke' ]
+console.log(users === newUsers) // false
+console.log(users) // [ 'Obi-Wan', 'Vader' ]
+console.log(newUsers) // [ 'Obi-Wan', 'Vader', 'Luke' ]
+
+```
+
+Com concat:
+
+
+```js
+
+const users = [ 'Obi-Wan', 'Vader' ]
+const newUsers = users.concat( 'Luke' )
+console.log(users === newUsers) // false
+console.log(users) // [ 'Obi-Wan', 'Vader' ]
+console.log(newUsers) // [ 'Obi-Wan', 'Vader', 'Luke' ]
+
+```
+
+> E se quisermos retirar um elemento?
+
+Mais simples ainda, usamos o [filter]() que é assunto para a próxima aula!
 
 Agora vamos usar o exemplo da aula passada pois deixei uma parte do<br>
 código para explicar e refatorar nessa aula:

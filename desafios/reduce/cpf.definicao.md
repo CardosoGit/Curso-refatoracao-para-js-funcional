@@ -344,7 +344,6 @@ const generateArray = ( length ) => Array.from( { length }, ( v, k ) => k )
 
 const sequenceFrom0To9 = generateArray( 10 )
 const generateSequenceSize11 = generateStringSequence( 11 )
-const CPFS_WITH_SAME_DIGIT = 
 
 const isIn = ( list ) => ( value ) => 
   list.findIndex( v => value === v ) >= 0

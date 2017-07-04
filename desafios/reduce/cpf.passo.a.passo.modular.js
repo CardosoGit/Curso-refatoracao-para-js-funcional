@@ -1,19 +1,16 @@
-const mod11 = ( num ) => num % 11 
-const NOT = ( x ) => !x
-const isEqual = ( a ) => ( b ) => b === a 
-const mergeDigits = ( num1, num2 ) => `${num1}${num2}`
+const mod11 = require( '../../lib/mod' )( 11 )
+const NOT = require( '../../lib/not' )
+const isEqual = require( '../../lib/isEqual' ) 
+const isIn = require( '../../lib/isIn' ) 
+const mergeDigits = require( '../../lib/mergeToString' ) 
+const generateArray = require( '../../lib/generate.Array' )
+const generateStringSequence = require( '../../lib/generate.String.sequence' )
+
 const getTwoLastDigits = ( cpf ) => `${cpf[ 9 ]}${cpf[ 10 ]}`
 const getCpfToCheckInArray = ( cpf ) => cpf.substr( 0, 9 ).split( '' )
-const generateArray = ( length ) => Array.from( { length }, ( v, k ) => k )
-
-const isIn = ( list ) => ( value ) => 
-  list.findIndex( v => value === v ) >= 0
 
 const isSameDigitsCPF = ( cpfFull ) => 
   isIn( generateArray( 10 ).map( generateStringSequence( 11 ) ) )( cpfFull )
-
-const generateStringSequence = ( times ) => ( char ) => 
-  ( `${char}`.repeat( times ) )
 
 const toSumOfMultiplication = ( total ) => ( result, num, i ) => 
   result + ( num * total-- )
