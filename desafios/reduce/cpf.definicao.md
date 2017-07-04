@@ -54,7 +54,7 @@ Como vimos acima a validação do CPF se dá por meio do cálculo dos seus dois 
 digitos, chamados verificadores, e eles só são válidos quando cada um é resultado<br>
 das contas explicadas anteriormente.
 
-Sabendo disso já podemos definir algumas funções que teremos:
+Sabendo disso já podemos definir algumas funções que precisamos:
 
 ```js
 const getCpfToCheck = ( cpf ) => 
