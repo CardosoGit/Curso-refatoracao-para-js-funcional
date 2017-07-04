@@ -257,7 +257,9 @@ Nesse caso iremos utilizar o `reduce` e você já verá o porquê:
 
 const times = ( i ) => ( vlr ) => i * vlr 
 const generateSum = times
-const toSums = ( cpf, total ) => ( [ sum1, sum2 ] , n, i ) => {
+
+const toSums = ( total ) => ( [ sum1, sum2 ] , n, i ) => {
+
   const some = generateSum( n.charAt( 0 ) )
   
   sum1 += some( total - 1 )
@@ -270,7 +272,7 @@ const toSums = ( cpf, total ) => ( [ sum1, sum2 ] , n, i ) => {
 const getSums = ( cpf, vlr = 11 ) => 
   cpf.split( '' )
       .slice( 0, 9 )
-      .reduce( toSums( cpf, vlr ), [ 0, 0 ] )
+      .reduce( toSums( vlr ), [ 0, 0 ] )
 
 ```
 
@@ -282,7 +284,21 @@ Tendo em vista que o `for` foi feito apenas para iterar do nove posições, deve
 quebrar o CPF que é uma *String* com `split( '' )` e logo após selecionamos apenas<br>
 as 9 primeiras posições com `slice( 0, 9 )` para depois chamarmos o `reduce`.
 
-Como os valores de `cpf`, como **
+Como o valor de `vlr` não existe dentro do `reduce` precisei passar como *closure*.
+
+Analise a assinatura dos parâmetros do callback do `reduce`:
+
+```js
+
+( [ sum1, sum2 ] , n, i )
+
+```
+
+Provavelmente o primeiro parâmetro `[ sum1, sum2 ]` chamou-lhe a atenção<br>
+por se um *Array*, podemos usar dessa forma pois estamos utilizando <br>
+[destructuring assignment](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Operators/Atribuicao_via_desestruturacao) para receber o *Array* de resultado do `reduce` já<br>
+atribuindo nomes que utilizaremos dentro da nossa função. Isso só funciona<br>
+porque o *Array* que recebemos possui apenas dois elementos.
 
 #### Explicando ainda
 
