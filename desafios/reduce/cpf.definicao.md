@@ -458,10 +458,10 @@ CPFS.forEach( ( cpf ) => console.log( `${cpf}: ${validate( cpf )}` ) )
 Assim deixamos a função principal `validate` executando apenas os dois<br>
 testes que são necessários, escondendo sua complexidade em outras funções.
 
-Perceba que se no primeiro teste `isSameDigitsCPF` ele retornar verdadeiro<br>
-a função `NOT` irá inverter esse valor para falso, fazendo com que o `if` <br>
-ternário não precise executar o próximo teste, fazendo com que a função `validate` <br>
-retorne `false`, pois o CPF é inválido, sem que precisemos calcular mais nada.
+Perceba que se no primeiro teste `isSameDigitsCPF` ele retornar verdadeiro,<br>
+a função `NOT` irá inverter esse valor para falso fazendo com que o `if` <br>
+ternário não precise executar o próximo teste, com isso a função `validate` <br>
+retorná `false`, pois o CPF é inválido, sem que precisemos calcular mais nada.
 
 Passei a madrugada toda refatorando uma função de validar CPF que não estava<br>
 completamente correta e só percebi isso após ter finalizado a refatoração. Por isso<br>
