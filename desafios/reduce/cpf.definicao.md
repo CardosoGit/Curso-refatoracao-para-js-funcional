@@ -454,4 +454,13 @@ testes que são necessários, escondendo sua complexidade em outras funções.
 Perceba que se no primeiro teste `isSameDigitsCPF` ele retornar verdadeiro<br>
 a função `NOT` irá inverter esse valor para falso, fazendo com que o `if` <br>
 ternário não precise executar o próximo teste, fazendo com que a função `validate` <br>
-retorne `false`, pois o CPF é inválido, sem que precisemos calcular mais nada
+retorne `false`, pois o CPF é inválido, sem que precisemos calcular mais nada.
+
+Passei a madrugada toda refatorando uma função de validar CPF que não estava<br>
+completamente correta e só percebi isso após ter finalizado a refatoração. Por isso<br>
+fui ler qual era o algoritmo oficial para isso e percebi o que estava errado<br>
+na função, do meu aluno, que usei de base.
+
+Quis mostrar as duas refatorações para você ver como é diferente você iniciar<br>
+uma solução do zero, baseando-se nas definições intríscecas ao problema, pois<br>
+começando sem ver nenhum código você vai construindo pedaço por pedaço.
