@@ -1,5 +1,7 @@
 # CPF
 
+[http://www.somatematica.com.br/faq/cpf.php](http://www.somatematica.com.br/faq/cpf.php)
+
 O número de um CPF tem 9 algarismos e mais dois dígitos verificadores,<br> 
 que são indicados após uma barra. Logo, um CPF tem 11 algarismos.<br>
 
@@ -23,7 +25,8 @@ O resultado da soma, 10A + 9B + 8C + 7D + 6E + 5F + 4G + 3H + 2I, é dividido po
  
 Analisamos então o RESTO dessa divisão:
 
-Se for 0 ou 1, o dígito J é [0] (zero). Se for 2, 3, 4, 5, 6, 7, 8, 9 ou 10, o dígito J é [11 - RESTO]
+Se for 0 ou 1, o dígito J é [0] (zero). <br>
+Se for 2, 3, 4, 5, 6, 7, 8, 9 ou 10, o dígito J é [11 - RESTO]
  
 
 ## Segundo Dígito
@@ -38,8 +41,12 @@ O resultado da soma, 11A + 10B + 9C + 8D + 7E + 6F + 5G + 4H + 3I + 2J, é divid
  
 Verificamos então o RESTO dessa divisão:
  
-Se for 0 ou 1, o dígito K é [0] (zero). Se for 2, 3, 4, 5, 6, 7, 8, 9 ou 10, o dígito K é [11 - RESTO].
+Se for 0 ou 1, o dígito K é [0] (zero). <br>
+Se for 2, 3, 4, 5, 6, 7, 8, 9 ou 10, o dígito K é [11 - RESTO].
  
+<br>
+<hr>
+<br>
 
 ## Iniciando
 
