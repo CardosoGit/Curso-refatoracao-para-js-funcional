@@ -370,6 +370,13 @@ const toSums = ( total ) => ( [ sum1, sum2 ] , n, i ) =>
 
 ```
 
+Então perceba que usamos a técnica de decrementar o `total` no `sum2` para que<br>
+no `sum1` ele esteja com o valor correto E precisei colocar eles em ordem inversa<br>
+para que o valor do `total` esteja correto sem precisarmos de outra linha para isso.
+
+Depois claramente precisei retornar utilizando [`reverse`]() para que a ordem<br>
+dos valores das somas fossem corretas.
+
 #### Explicando ainda
 
 Código final:
