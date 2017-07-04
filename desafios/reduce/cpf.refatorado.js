@@ -9,6 +9,7 @@ const generateStringSequence = ( tam ) => ( num ) => `${num}`.repeat( tam )
 const gerenateArray = ( length ) => Array.from( { length }, ( v, k ) => k )
 
 const generateSum = times
+const generateSequenceSize11 = generateStringSequence( 11 )
 
 const inSameDigits =  ( cpf ) => ( num ) => 
   isEqual( cpf )( generateSequenceSize11( num ) )
@@ -27,15 +28,10 @@ const getResultOfSum1 = ( sum1 ) =>
 const getResultOfSum2 = ( sum1, sum2 ) =>
   ( mod11( times10( sum2 + ( times( 2 )( sum1 ) ) ) ) )
 
-const toSums = ( total ) => ( [ sum1, sum2 ] , n, i ) => {
-
-  const sum = generateSum( n )
-
-  sum2 += sum( total-- )
-  sum1 += sum( total )
-
-  return [ sum1, sum2 ] 
-}
+const toSums = ( total ) => ( [ sum1, sum2 ] , n, i ) =>
+  [ sum2 + generateSum( n )( total-- ), 
+    sum1 + generateSum( n )( total ) 
+  ].reverse() 
 
 const getSums = ( cpf, vlr = 11 ) => 
   cpf.split( '' )
@@ -52,8 +48,6 @@ const validate = ( cpf ) => {
   return (  !( testSameDigits( gerenateArray( 10 ) )( cpf ) ) &&
             !( getGeneratedDigit( sum1, sum2 ) != getDigit( cpf ) ) )
 }
-
-const generateSequenceSize11 = generateStringSequence( 11 )
 
 const CPFS = [ 
   '04998264931', '03506838326', 

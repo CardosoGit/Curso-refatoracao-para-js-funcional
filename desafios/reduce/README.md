@@ -353,11 +353,22 @@ Levando isso em consideração podemos mudar a ordem dessa execução para isso:
 sum2 += sum( total-- )
 sum1 += sum( total )
 
+return [ sum1, sum2 ] 
+
 ```
 
 **Pois dessa forma decrementamos o `total` depois de usá-lo para o `sum2`!** 
 
+Mas podemos refatorar mais ainda deixando essa função com apenas uma linha:
 
+```js
+
+const toSums = ( total ) => ( [ sum1, sum2 ] , n, i ) =>
+  [ sum2 + generateSum( n )( total-- ), 
+    sum1 + generateSum( n )( total ) 
+  ].reverse() 
+
+```
 
 #### Explicando ainda
 
