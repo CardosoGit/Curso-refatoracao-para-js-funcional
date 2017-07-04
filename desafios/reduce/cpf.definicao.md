@@ -423,22 +423,22 @@ const getSumOfMultiplication = ( list, total ) =>
 const isSameDigitsCPF = ( cpfFull ) => 
   isIn( generateArray( 10 ).map( generateStringSequence( 11 ) ) )( cpfFull )
 
-const isValidCPF = ( cpfFull ) => ( firstDigit, secondDigit ) =>
-  isEqual( getTwoLastDigits( cpfFull ) )
-         ( mergeDigits( firstDigit, secondDigit ) )
+const isValidCPF = ( cpfFull ) => {
 
-const getValidationDigit = ( total ) => ( cpf ) =>
-  getDigit( mod11( getSumOfMultiplication( cpf, total ) ) )
-
-const validate = ( cpfFull ) => {
-  
   const cpf = getCpfToCheckInArray( cpfFull )
   const firstDigit = getValidationDigit( 10 )( cpf )
   const secondDigit = getValidationDigit( 11 )( cpf.concat( firstDigit ) )
 
-  return  NOT( isSameDigitsCPF( cpfFull ) ) && 
-          isValidCPF( cpfFull )( firstDigit, secondDigit )
+  return isEqual( getTwoLastDigits( cpfFull ) )
+                ( mergeDigits( firstDigit, secondDigit ) )
 }
+
+const getValidationDigit = ( total ) => ( cpf ) =>
+  getDigit( mod11( getSumOfMultiplication( cpf, total ) ) )
+
+const validate = ( cpfFull ) => 
+  NOT( isSameDigitsCPF( cpfFull ) ) && 
+       isValidCPF( cpfFull )
 
 const CPFS = [ 
   '04998264931', '03506838326','04864713901',
