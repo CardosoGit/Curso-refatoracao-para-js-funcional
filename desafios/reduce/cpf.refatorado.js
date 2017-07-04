@@ -3,15 +3,15 @@ const mod11 = ( num ) => num % 11
 const times10 = ( num ) => times( 10 )( num )
 const isEqual = ( a ) => ( b ) => b === a
 const isNotEqual = ( a ) => ( b ) => !( isEqual( a )( b ) )
-const getDigit = ( cpf ) => cpf.charAt( 9 ) + cpf.charAt( 10 )
-const getGeneratedDigit = ( sum1, sum2 ) => times10( sum1 ) + sum2
+const getDigit = ( cpf ) => `${cpf.charAt( 9 )}${cpf.charAt( 10 )}` 
+const getGeneratedDigit = ( sum1, sum2 ) => times10( sum1 ) + sum2 + ''
 const generateStringSequence = ( tam ) => ( num ) => `${num}`.repeat( tam )
-const gerenateArray = ( length ) => Array.from( { length }, ( v, k ) => k )
+const generateArray = ( length ) => Array.from( { length }, ( v, k ) => k )
 
 const generateSum = times
 const generateSequenceSize11 = generateStringSequence( 11 )
 
-const inSameDigits =  ( cpf ) => ( num ) => 
+const inSameDigits = ( cpf ) => ( num ) => 
   isEqual( cpf )( generateSequenceSize11( num ) )
 
 const isIn = ( list ) => ( value ) => 
@@ -44,9 +44,9 @@ const validate = ( cpf ) => {
   
   sum1 = getResultOfSum1( sum1 )
   sum2 = getResultOfSum2( sum1, sum2 )
-
-  return (  !( testSameDigits( gerenateArray( 10 ) )( cpf ) ) &&
-            !( getGeneratedDigit( sum1, sum2 ) != getDigit( cpf ) ) )
+  
+  return (  !( testSameDigits( generateArray( 10 ) )( cpf ) ) &&
+            !( getGeneratedDigit( sum1, sum2 ) !== getDigit( cpf ) ) )
 }
 
 const CPFS = [ 

@@ -103,8 +103,8 @@ obviamente faremos uma função para isso:
 const generateStringSequence = ( tam ) => ( num ) => `${num}`.repeat( tam )
 const generateSequenceSize11 = generateStringSequence( 11 )
 
-const gerenateArray = ( length ) => Array.from( { length }, ( v, k ) => k )
-const sameDigits = gerenateArray( 10 )
+const generateArray = ( length ) => Array.from( { length }, ( v, k ) => k )
+const sameDigits = generateArray( 10 )
 
 ```
 
@@ -139,7 +139,7 @@ Deixando nosso teste assim:
 
 ```js
 
-if ( testSameDigits( gerenateArray( 10 ) )( cpf ) ) return false
+if ( testSameDigits( generateArray( 10 ) )( cpf ) ) return false
 
 ```
 <br>
@@ -395,8 +395,77 @@ Quando utilizamos o `total--` o valor usado de total será sem decrementar e<br>
 no próximo uso ele terá o valor subtraído de `1`. Já usando o `--total` primeiro<br>
 decrementa-se o valor para depois usá-lo.
 
+Vamos então organizar os testes lógicos que temos dentro do código antigo:
 
+```js
 
+if(cpf == "11111111111" || cpf == "22222222222" || cpf == 
+  "33333333333" || cpf == "44444444444" || cpf == "55555555555" || cpf == 
+  "66666666666" || cpf == "77777777777" || cpf == "88888888888" || cpf == 
+  "99999999999" || cpf == "00000000000" ){ 
+  var digitoGerado = null; 
+}else{ 
+  var digitoGerado = (soma1*10) + soma2; 
+} 
+
+if(digitoGerado != digitoDigitado){ 
+ return false;
+} 
+return true;
+
+```
+
+Podemos reescrevê-lo agrupando seus `if`s e utilizando nossas funções<br>
+que criamos anteriormente:
+
+```js
+
+if (cpf == "11111111111" || cpf == "22222222222" || cpf == 
+  "33333333333" || cpf == "44444444444" || cpf == "55555555555" || cpf == 
+  "66666666666" || cpf == "77777777777" || cpf == "88888888888" || cpf == 
+  "99999999999" || cpf == "00000000000" ){ 
+  return false
+} 
+if ( ( times10( soma1 ) + soma2 ) !== getDigit( cpf ) ){ 
+  return false
+} 
+return true
+
+```
+
+Para depois deixarmos assim:
+
+```js
+
+const times = ( a ) => ( b ) => b * a 
+const times10 = ( num ) => times( 10 )( num )
+const mod11 = ( num ) => num % 11 
+const getGeneratedDigit = ( sum1, sum2 ) => times10( sum1 ) + sum2
+const getDigit = ( cpf ) => cpf.charAt( 9 ) + cpf.charAt( 10 )
+const generateStringSequence = ( tam ) => ( num ) => `${num}`.repeat( tam )
+const generateSequenceSize11 = generateStringSequence( 11 )
+
+const inSameDigits = ( cpf ) => ( num ) => 
+  isEqual( cpf )( generateSequenceSize11( num ) )
+
+const isIn = ( list ) => ( value ) => 
+  list.findIndex( inSameDigits( value ) ) >= 0
+
+const testSameDigits = ( list ) => ( cpf ) =>
+  ( isIn( list )( cpf ) )
+
+const validate = ( cpf ) => {
+  const CPF_LENGTH = 11
+  let [ sum1, sum2 ] = getSums( cpf, CPF_LENGTH )
+  
+  sum1 = getResultOfSum1( sum1 )
+  sum2 = getResultOfSum2( sum1, sum2 )
+  
+  return (  !( testSameDigits( generateArray( 10 ) )( cpf ) ) &&
+            !( getGeneratedDigit( sum1, sum2 ) != getDigit( cpf ) ) )
+}
+
+```
 
 #### Explicando ainda
 
@@ -412,7 +481,7 @@ const isNotEqual = ( a ) => ( b ) => !( isEqual( a )( b ) )
 const getDigit = ( cpf ) => cpf.charAt( 9 ) + cpf.charAt( 10 )
 const getGeneratedDigit = ( sum1, sum2 ) => times10( sum1 ) + sum2
 const generateStringSequence = ( tam ) => ( num ) => `${num}`.repeat( tam )
-const gerenateArray = ( length ) => Array.from( { length }, ( v, k ) => k )
+const generateArray = ( length ) => Array.from( { length }, ( v, k ) => k )
 
 const generateSum = times
 
@@ -455,7 +524,7 @@ const validate = ( cpf ) => {
   sum1 = getResultOfSum1( sum1 )
   sum2 = getResultOfSum2( sum1, sum2 )
 
-  return (  !( testSameDigits( gerenateArray( 10 ) )( cpf ) ) &&
+  return (  !( testSameDigits( generateArray( 10 ) )( cpf ) ) &&
             !( getGeneratedDigit( sum1, sum2 ) != getDigit( cpf ) ) )
 }
 
