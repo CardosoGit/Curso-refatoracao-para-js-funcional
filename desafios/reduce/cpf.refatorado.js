@@ -31,9 +31,8 @@ const toSums = ( total ) => ( [ sum1, sum2 ] , n, i ) => {
 
   const sum = generateSum( n )
 
-  sum1 += sum( total - 1 )
-  sum2 += sum( total )
-  total--
+  sum2 += sum( total-- )
+  sum1 += sum( total )
 
   return [ sum1, sum2 ] 
 }

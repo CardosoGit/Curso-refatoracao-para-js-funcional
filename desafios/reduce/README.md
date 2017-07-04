@@ -328,7 +328,7 @@ Nessa primeira execução criamos a função:
 
 const sum = ( b ) => b * n // o n veio da primeira execução
 
-sum1 += sum( ( i + 11 ) - ( i - 1 ) )
+sum1 += sum( total - 1 )
 sum2 += sum( total )
 total--
 
@@ -339,7 +339,24 @@ return [ sum1, sum2 ]
 Para que possamos reusar a mesma para calcular `sum1` e `sum2` reusando<br>
 o mesmo cálculo pois as duas usam o mesmo valor, porém só muda o segundo valor.
 
-Com isso conseguimos sempre pegar o valor anterior de `sum1` e `sum2` com<br>
+Com isso conseguimos sempre pegar o valor anterior de `sum1` e `sum2` no<br>
+primeiro parâmetro, modificar seu valor e retornar `[ sum1, sum2 ]`.
+
+Entretanto perceba o seguinte: passamos o valor de `total - 1` e `total`<br>
+e logo após decrementamos o `total`, correto???
+
+Levando isso em consideração podemos mudar a ordem dessa execução para isso:
+
+
+```js
+
+sum2 += sum( total-- )
+sum1 += sum( total )
+
+```
+
+**Pois dessa forma decrementamos o `total` depois de usá-lo para o `sum2`!** 
+
 
 
 #### Explicando ainda
@@ -348,7 +365,7 @@ Código final:
 
 ```js
 
-const times = ( i ) => ( vlr ) => i * vlr 
+const times = ( a ) => ( b ) => b * a 
 const mod11 = ( num ) => num % 11 
 const times10 = ( num ) => times( 10 )( num )
 const isEqual = ( a ) => ( b ) => b === a
@@ -379,11 +396,10 @@ const getResultOfSum2 = ( sum1, sum2 ) =>
 
 const toSums = ( total ) => ( [ sum1, sum2 ] , n, i ) => {
 
-  const some = generateSum( n )
-  
-  sum1 += some( total - 1 )
-  sum2 += some( total )
-  total--
+  const sum = generateSum( n )
+
+  sum2 += sum( total-- )
+  sum1 += sum( total )
 
   return [ sum1, sum2 ] 
 }
@@ -394,13 +410,13 @@ const getSums = ( cpf, vlr = 11 ) =>
       .reduce( toSums( vlr ), [ 0, 0 ] )
 
 const validate = ( cpf ) => {
-  const sameDigits = gerenateArray( 10 )
-  let [ sum1, sum2 ] = getSums( cpf, 11 )
+  const CPF_LENGTH = 11
+  let [ sum1, sum2 ] = getSums( cpf, CPF_LENGTH )
   
   sum1 = getResultOfSum1( sum1 )
   sum2 = getResultOfSum2( sum1, sum2 )
 
-  return (  !( testSameDigits( sameDigits )( cpf ) ) &&
+  return (  !( testSameDigits( gerenateArray( 10 ) )( cpf ) ) &&
             !( getGeneratedDigit( sum1, sum2 ) != getDigit( cpf ) ) )
 }
 
