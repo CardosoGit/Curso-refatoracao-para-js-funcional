@@ -101,8 +101,8 @@ const resultCPF = cpf.reduce( toSumOfMultiplication( total ), 0 )
 
 ```
 
-E como já sabemos que teremos que fazer isso para os dois últimos dígitos<br>
-já podemos encapsular essa lógica em uam função que irá receber também o `total`:
+E como já sabemos que iremos fazer isso para os dois últimos dígitos,<br>
+podemos encapsular essa lógica em uma função que irá receber também o `total`:
 
 
 ```js
@@ -124,8 +124,8 @@ Agora chegamos na parte principal dessa etapa.
 
 Verificamos se resultado da soma de `getSumOfMultiplication` é dividido por 11.
 
-Se for `0` ou `1`, o dígito J é `0`. Se for 2, 3, 4, 5, 6, 7, 8, 9 ou 10,<br> 
-o dígito J é `11 - RESTO`.
+Se for `0` ou `1`, o dígito J é `0`. <br>
+Se for 2, 3, 4, 5, 6, 7, 8, 9 ou 10, o dígito J é `11 - RESTO`.
 
 Como sabemos que iremos testar em duas partes diferentes o resto da divisão<br> 
 por 11, podemos criar uma função para isso:
