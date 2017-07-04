@@ -38,9 +38,10 @@ const isValidCPF = ( cpfFull ) => {
                 ( mergeDigits( firstDigit, secondDigit ) )
 }
 
-
 const validate = ( cpfFull ) => 
   NOT( isSameDigitsCPF( cpfFull ) ) && isValidCPF( cpfFull )
+
+
 
 
 const CPFS = [ 
