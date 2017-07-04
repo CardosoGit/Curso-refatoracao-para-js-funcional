@@ -74,7 +74,54 @@ if(cpf == "11111111111" || cpf == "22222222222" || cpf ==
 ```
 
 Percebam que ele **SEMPRE** testa o `cpf` com uma sequência de dígitos<br>
-iguais, que vão do `0` ao `9`, com tamanho 11
+iguais, que vão do `0` ao `9`, com tamanho 11. Logo a primeira coisa a se<br>
+fazer é criar uma função que gere essa sequência:
+
+```js
+
+const generateStringSequence = ( tam ) => ( num ) => `${num}`.repeat( tam )
+
+```
+
+Criei dessa forma para que possamos usa-la assim:
+
+
+```js
+
+const generateStringSequence = ( tam ) => ( num ) => `${num}`.repeat( tam )
+const generateSequenceSize11 = generateStringSequence( 11 )
+
+```
+
+Agora basta eu fazer um *Array* com os valores de `0` ao `9` e<br>
+obviamente faremos uma função para isso:
+
+
+
+```js
+
+const generateStringSequence = ( tam ) => ( num ) => `${num}`.repeat( tam )
+const generateSequenceSize11 = generateStringSequence( 11 )
+
+const gerenateArray = ( length ) => Array.from( { length }, ( v, k ) => k )
+const sameDigits = gerenateArray( 10 )
+
+```
+
+Com isso podemos encapsular aquele teste assim:
+
+```js
+
+const getLength = ( a ) => a.length
+
+const onlyAllowedCPFs =  ( cpf ) => ( num ) => 
+  isEqual( cpf )( generateSequenceSize11( num ) )
+
+const testSameDigits = ( list ) => ( cpf ) =>
+  getLength( list.filter( onlyAllowedCPFs( cpf ) ) )
+
+```
+
 
 
 ```js
@@ -88,7 +135,7 @@ const generateSum = ( i ) => ( vlr ) => i * vlr
 const getDigit = ( cpf ) => cpf.charAt( 9 ) + cpf.charAt( 10 )
 const getGeneratedDigit = ( sum1, sum2 ) => ( sum1 * 10 ) + sum2
 const generateStringSequence = ( tam ) => ( num ) => `${num}`.repeat( tam )
-
+const gerenateArray = ( length ) => Array.from( { length }, ( v, k ) => k )
 
 const onlyAllowedCPFs =  ( cpf ) => ( num ) => 
   isEqual( cpf )( generateSequenceSize11( num ) )
@@ -120,7 +167,7 @@ const getSums = ( cpf, vlr ) =>
       .reduce( toSums( cpf, vlr ), [ 0, 0 ] )
 
 const validate = ( cpf ) => {
-  const sameDigits = Array.from( { length: 10 }, ( v, k ) => k )
+  const sameDigits = gerenateArray( 10 )
   let [ sum1, sum2 ] = getSums( cpf, 11 )
   
   sum1 = getResultOfSum1( sum1 )

@@ -1,3 +1,4 @@
+
 const getLength = ( a ) => a.length
 const mod11 = ( num ) => num % 11 
 const times10 = ( num ) => num * 10
@@ -7,7 +8,7 @@ const generateSum = ( i ) => ( vlr ) => i * vlr
 const getDigit = ( cpf ) => cpf.charAt( 9 ) + cpf.charAt( 10 )
 const getGeneratedDigit = ( sum1, sum2 ) => ( sum1 * 10 ) + sum2
 const generateStringSequence = ( tam ) => ( num ) => `${num}`.repeat( tam )
-
+const gerenateArray = ( length ) => Array.from( { length }, ( v, k ) => k )
 
 const onlyAllowedCPFs =  ( cpf ) => ( num ) => 
   isEqual( cpf )( generateSequenceSize11( num ) )
@@ -39,7 +40,7 @@ const getSums = ( cpf, vlr ) =>
       .reduce( toSums( cpf, vlr ), [ 0, 0 ] )
 
 const validate = ( cpf ) => {
-  const sameDigits = Array.from( { length: 10 }, ( v, k ) => k )
+  const sameDigits = gerenateArray( 10 )
   let [ sum1, sum2 ] = getSums( cpf, 11 )
   
   sum1 = getResultOfSum1( sum1 )
@@ -59,8 +60,3 @@ const CPFS = [
 CPFS.forEach( ( cpf ) => console.log( `${cpf}: ${validate( cpf )}` ) )
 
 module.exports = validate
-
-/**
- * 
- * 
- */
