@@ -705,7 +705,7 @@ Perceba que o valor de `r` tem a mesma lógica nas duas partes onde é chamado:
 
 ```
 
-Para encapsularmos essa função é bem simples! Perceba que a única variável é o `t`.
+Para encapsularmos essa função é bem simples! Perceba que a única variável é o `t`.<br>
 Logo podemos criar a seguinte função:
 
 ```js
@@ -1269,7 +1269,7 @@ module.exports = validateCnpj;
 
 ```
 
-Obviamente você já sabe que mesmo encapsulando o `for` ainda temos efeitos colaterais.
+Obviamente você já sabe que mesmo encapsulando o `for` ainda temos efeitos colaterais.<br>
 Depois iremos melhorar essa parte, por hora que que você atenha-se a essa parte:
 
 ```js
