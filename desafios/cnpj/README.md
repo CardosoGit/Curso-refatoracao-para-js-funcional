@@ -679,11 +679,23 @@ module.exports = validateCnpj;
 
 ```
 
+<br>
+
+
 > **Notou que deixei comentado o código que substituimos né?**
+
+<br>
+
 
 Com isso inferimos que mesma função será usada em qualquer parte necessária.
 
+<br>
+<br>
+<br>
+
 **Ainda temos mais linhas iguais nesse código, então *bora* refatorar!** 
+
+<br>
 
 Perceba que o valor de `r` tem a mesma lógica nas duas partes onde é chamado:
 
