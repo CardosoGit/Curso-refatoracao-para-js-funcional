@@ -1601,12 +1601,13 @@ const validateCnpj = ( cnpj, id = 0 ) => {
   const numCnpj = unmasker( cnpj )
 
   let s = ( numCnpj.length - 2 )
+
   const DV = numCnpj.substr( s )
+  const validateCNPJ = validate( numCnpj )
 
   let d1 = getDigit( numCnpj, s )
   let d2 = getDigit( numCnpj, ++s )
 
-  const validateCNPJ = validate( numCnpj )
 
   return ( numCnpj.length !== 14 || isSameDigits( numCnpj ) )
             ? false
@@ -1614,5 +1615,215 @@ const validateCnpj = ( cnpj, id = 0 ) => {
 }
 
 module.exports = validateCnpj
+
+```
+
+<br>
+
+Notou que 
+
+<br>
+
+
+Quero que você analise essas linhas comigo:
+
+```js
+
+let d1 = getDigit( numCnpj, s )
+let d2 = getDigit( numCnpj, ++s )
+
+
+return ( numCnpj.length !== 14 || isSameDigits( numCnpj ) )
+          ? false
+          :validateCNPJ( [ d1, d2 ], DV )
+
+```
+
+<br>
+
+> **Percebeu que sumi com essa linha: `s += 1` ?**
+
+<br>
+
+Pois eu passei essa mesma lógica para cá: `let d2 = getDigit( numCnpj, ++s )`. <br>
+
+Como utilizei o operador de incrementação no formato prefix, `++s`, ele basicamente<br>
+diz para incrementar em `1` o valor de `s` antes de utilizá-lo na próxima vez.
+
+<br>
+
+> **Você lembra da transparência referencial que pedi como exercício na primeira aula?**
+
+<br>
+
+Caso você tenha feito o exercício entenderá facilmente o que farei em seguida:
+
+```js
+
+return ( numCnpj.length !== 14 || isSameDigits( numCnpj ) )
+          ? false
+          : validateCNPJ( [ getDigit( numCnpj, s ), getDigit( numCnpj, ++s ) ], DV )
+
+```
+
+<br>
+
+Agora para melhorar nosso `if` ternário podemos inverter a lógica assim:
+
+```js
+
+return !( numCnpj.length !== 14 || isSameDigits( numCnpj ) )
+          ? validateThisCNPJUsing( [ getDigit( numCnpj, s ), getDigit( numCnpj, ++s ) ], DV )
+          : false
+
+```
+
+<br>
+
+
+Sabendo disso, precisamos refatorar a seguinte função:
+
+```js
+
+const validate = ( numCnpj ) => ( digits = [], DV = [] ) =>
+  ( digits.length === 2 )
+    ? isInvalidDigit( digits[ 0 ], DV[ 0 ] ) || 
+      isInvalidDigit( digits[ 1 ], DV[ 1 ])
+      ? false
+      : true
+    : false
+
+```
+
+<br>
+
+
+Para isso, inicialmente iremos inverter a lógica da função `isInvalidDigit`:
+
+
+```js
+
+// const isInvalidDigit = ( d1, d2 ) => String( d1 ) !== String( d2 )
+const isValidDigit = ( d1, d2 ) => String( d1 ) === String( d2 )
+
+```
+
+<br>
+
+
+Com isso podemos refatorar o código anterior para:
+
+```js
+
+const validate = ( numCnpj ) => ( digits = [], DV = [] ) =>
+  ( digits.length === 2 )
+    ? ( isValidDigit( digits[ 0 ], DV[ 0 ] ) && 
+        isValidDigit( digits[ 1 ], DV[ 1 ]) )
+    : false
+
+```
+
+<br>
+
+
+E ainda podemos melhorar assim:
+
+```js
+
+const validate = ( numCnpj ) => ( digits = [], DV = [] ) =>
+  ( digits.length === 2 ) && 
+  ( isValidDigit( digits[ 0 ], DV[ 0 ] ) && 
+    isValidDigit( digits[ 1 ], DV[ 1 ]) )
+
+```
+
+Levando conosco essa mesma técnica iremos refatorar a seguinte parte:
+
+```js
+
+return !( numCnpj.length !== 14 || isSameDigits( numCnpj ) )
+          ? validateThisCNPJUsing( [ getDigit( numCnpj, s ), getDigit( numCnpj, ++s ) ], DV )
+          : false
+
+```
+
+Para isso:
+
+```js
+
+return !( numCnpj.length !== 14 || isSameDigits( numCnpj ) ) &&
+        validateThisCNPJUsing( [ getDigit( numCnpj, s ), getDigit( numCnpj, ++s ) ], DV )
+
+```
+
+<br>
+
+> **O queeeee!!! Você acha que nosso código não está rodando???**
+
+<br>
+
+Então (SEMPRE) olhe os testes!!!
+
+```sh
+
+» npm run test
+
+> consulta-cnpj@1.0.0 test /Users/swiss/www/Projetos/CNPJ/consultaCnpj
+> mocha "tests/*.test.js"
+
+
+
+  ConsultaCNPJ API
+    #buildPromise(new Error('Falha geral!'))
+      ✓ should return an Error
+    #buildPromise({type: 'error'})
+      ✓ should return an Error
+    #buildPromise({type: 'Error'})
+      ✓ should return an Error
+    #buildPromise({type: 'ERROR'})
+      ✓ should return an Error
+    #buildPromise(null)
+      ✓ should return an Error
+    #buildPromise(undefined)
+      ✓ should return an Error
+    #buildPromise('')
+      ✓ should return an Error
+    #buildPromise(null)
+      ✓ should return an Error
+    #validateRequest(mockedFailRequest, message)
+      ✓ should return an error
+    #validateRequest(mockedSuccessRequest)
+      ✓ should return an object
+    #generateImageBase64(mockedFailBody)
+      ✓ should return an Error
+    #getBodyAndEncode(response)
+      ✓ should return a string
+    #unmask("12.123.123/1234-12")
+      ✓ should return the unmasked CNPJ (only numbers)
+    #validate(#unmask("12.123.123/1234-12"))
+      ✓ should return false
+    #validate(#unmask("00.000.000/0000-00"))
+      ✓ should return false
+    #validate("123")
+      ✓ should return false
+    #validate(#unmask("21.876.883/0001-79"))
+      ✓ should return false
+    #validate(unmask(21.876.883/0001-78))
+      ✓ should return true
+    #getParams()
+      ✓ should return an object (167ms)
+    #getBasicInfos(null, 'sessionId', 'solvedCaptcha')
+      ✓ should return an Error
+    #getBasicInfos('cnpj', null, 'solvedCaptcha')
+      ✓ should return an Error
+    #getBasicInfos('cnpj', 'sessionId', null)
+      ✓ should return an Error
+    #getBasicInfos('00.000.000/0000-00', 'sessionId', 'solvedCaptcha')
+      ✓ should return an Error
+    #getBasicInfos(21.876.883/0001-78, 'sessionId', 'solvedCaptcha')
+      ✓ should return an Error (312ms)
+
+
+  24 passing (545ms)
 
 ```
