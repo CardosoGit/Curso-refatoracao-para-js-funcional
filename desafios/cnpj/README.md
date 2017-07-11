@@ -1827,3 +1827,44 @@ Então (SEMPRE) olhe os testes!!!
   24 passing (545ms)
 
 ```
+
+<br>
+
+Depois disso tudo quero que você perceba uma coisa: não podemos trocar `DV` por<br>
+`numCnpj.substr( s )` pois esse valor depende de `s` e ele é incrementado quando<br>
+chamamos `getDigit( numCnpj, ++s )`.
+
+Logo para conseguirmos refatorar essa parte teremos que modificar a função `validate` <br>
+para que o primeiro parâmetro seja o `DV`, logo mais você entenderá o porquê.
+
+```js
+
+const validate = ( numCnpj ) => ( DV, digits = [] ) =>
+  ( digits.length === 2 ) && 
+  ( isValidDigit( digits[ 0 ], DV[ 0 ] ) && 
+    isValidDigit( digits[ 1 ], DV[ 1 ]) )
+
+```
+
+<br>
+
+Agora sim podemos utilizar a função `validate` ela na função `validateCnpj` trocando<br>
+a constante `DV` por `numCnpj.substr( s )`, pois **seu valor é SEMPRE esse!**
+
+```js
+
+const validateCnpj = ( cnpj, id = 0 ) => {
+
+  const numCnpj = unmasker( cnpj )
+  const validateThisCNPJUsing = validate( numCnpj )
+  let s = ( numCnpj.length - 2 )
+
+  return !( numCnpj.length !== 14 || isSameDigits( numCnpj ) ) &&
+          validateThisCNPJUsing(  numCnpj.substr( s ), 
+                                  [ getDigit( numCnpj, s ), getDigit( numCnpj, ++s ) ] 
+                                )
+}
+
+```
+
+<br>
