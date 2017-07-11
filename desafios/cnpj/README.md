@@ -1879,7 +1879,7 @@ Logo iremos separar essas lógicas, primeiramente separando o teste inválido:
 
 ```js
 
-const isInvalidCPNJ = ( numCnpj ) =>
+const isInvalidCNPJ = ( numCnpj ) =>
   ( numCnpj.length !== 14 || isSameDigits( numCnpj ) )
 
 const validateCnpj = ( cnpj, id = 0 ) => {
@@ -1888,10 +1888,215 @@ const validateCnpj = ( cnpj, id = 0 ) => {
   const validateThisCNPJUsing = validate( numCnpj )
   let s = ( numCnpj.length - 2 )
 
-  return !( isInvalidCPNJ( numCnpj ) ) &&
+  return !( isInvalidCNPJ( numCnpj ) ) &&
           validateThisCNPJUsing(  numCnpj.substr( s ), 
                                   [ getDigit( numCnpj, s ), getDigit( numCnpj, ++s ) ] 
                                 )
 }
 
 ```
+
+<br>
+
+Então como fizemos isso para o teste inválido vamos fazer o mesmo para o teste válido:
+
+```js
+
+const getValidationDigit = ( numCnpj ) => ( s ) =>
+  [ getDigit( numCnpj, s ), getDigit( numCnpj, ++s ) ] 
+
+const validateCnpj = ( cnpj, id = 0 ) => {
+
+  const numCnpj = unmasker( cnpj )
+  const validateThisCNPJUsing = validate( numCnpj )
+  const testValidationDigit = getValidationDigit( numCnpj )
+
+  let s = ( numCnpj.length - 2 )
+
+  return !( isInvalidCNPJ( numCnpj ) ) &&
+            validateThisCNPJUsing( numCnpj.substr( s ), testValidationDigit( s ) )
+}
+
+```
+
+Porém essa foi apenas a primeira etapa, quero que você tenha em mente que<br>
+nós devemos encapsular apenas UMA chamada o seguinte código:
+
+```js
+
+validateThisCNPJUsing( numCnpj.substr( s ), testValidationDigit( s ) )
+
+```
+
+Para isso vamos criar a função `isValidCNPJ` onde teremos que passar como parâmetro<br>
+`numCnpj` e `s` dessa forma:
+
+```js
+
+const isValidCNPJ = ( numCnpj, s ) => 
+  validate( numCnpj )
+          ( numCnpj.substr( s ), getValidationDigit( numCnpj )( s ) )
+
+```
+
+Usando assim:
+
+```js
+
+const isValidCNPJ = ( numCnpj, s ) => 
+  validate( numCnpj )
+          ( numCnpj.substr( s ), getValidationDigit( numCnpj )( s ) )
+
+const validateCnpj = ( cnpj ) => {
+
+  const numCnpj = unmasker( cnpj )
+
+  return !( isInvalidCNPJ( numCnpj ) ) && isValidCNPJ( numCnpj, numCnpj.length - 2 )
+            
+}
+
+```
+
+Contudo perceba que o `s` virou `numCnpj.length - 2` e como estamos passando como parâmetro<br>
+a constante `numCnpj` podemos reduzir nosso código para isso:
+
+```js
+
+const isValidCNPJ = ( numCnpj, s ) => 
+  validate( numCnpj )
+          ( numCnpj.substr( s ), getValidationDigit( numCnpj )( s ) )
+
+const validateCnpj = ( cnpj ) => {
+
+  const numCnpj = unmasker( cnpj )
+
+  return !( isInvalidCNPJ( numCnpj ) ) && isValidCNPJ( numCnpj, numCnpj.length - 2 )
+            
+}
+
+```
+
+<br>
+
+Todavia se o valor de `numCnpj` já está sendo passado como parâmetro, podemos reduzir<br>
+ainda mais nosso código removendo o parâmetro `s` e fazendo seu cálculo internamente,
+
+
+```js
+
+const isValidCNPJ = ( numCnpj ) => 
+  validate( numCnpj )
+          ( numCnpj.substr( numCnpj.length - 2 ), 
+            getValidationDigit( numCnpj )( numCnpj.length - 2 ) )
+
+const validateCnpj = ( cnpj ) => {
+
+  const numCnpj = unmasker( cnpj )
+
+  return !( isInvalidCNPJ( numCnpj ) ) && isValidCNPJ( numCnpj )
+            
+}
+
+```
+
+<br>
+
+Com isso percebemos que nossa função `validateCnpj` na verdade retorna a execução<br>
+de duas outras funções, `isInvalidCNPJ` e `isValidCNPJ`. Logo podemos reduzir<br>
+mais um pouquinho nossa função principal, deixando-a mais semântica:
+
+```js
+
+const testCNPJ = ( numCnpj ) => 
+  !( isInvalidCNPJ( numCnpj ) ) && isValidCNPJ( numCnpj )
+
+const validateCnpj = ( cnpj ) => testCNPJ( unmasker( cnpj ) )
+
+```
+
+<br>
+
+Confira comigo como está nosso código atual:
+
+```js
+const unmasker = require('./unmaskNumbers')
+const isValidDigit = ( d1, d2 ) => String( d1 ) === String( d2 )
+const isSameDigits = str => str.split( '' ).every( ( elem ) => elem === str[ 0 ] )
+
+const getR = ( t ) => ( t ) < 2 ? 0 : 11 - t
+const getData = ( numCnpj, s ) => [ 
+  numCnpj.substr( 0, s ), 0, s - 7 
+]
+
+const getSomeData = ( t, b, s, p, i ) => [
+  t + ( b.charAt( s - i ) * p ), --p, ( p < 2 ? 9 : p )
+]
+
+const validate = ( numCnpj ) => ( DV, digits = [] ) =>
+  ( digits.length === 2 ) && 
+  ( isValidDigit( digits[ 0 ], DV[ 0 ] ) && 
+    isValidDigit( digits[ 1 ], DV[ 1 ]) )
+
+const getDigit = ( numCnpj, s ) => {
+
+  let [ b, t, p ] = getData( numCnpj, s )
+
+  for ( let i = s; i >= 1; i-- ) {
+    [ t, _, p ] = getSomeData( t, b, s, p, i );
+  }
+
+  return getR( t % 11 )
+}
+
+const isInvalidCNPJ = ( numCnpj ) =>
+  ( numCnpj.length !== 14 || isSameDigits( numCnpj ) )
+
+const getValidationDigit = ( numCnpj ) => ( s ) =>
+  [ getDigit( numCnpj, s ), getDigit( numCnpj, ++s ) ] 
+
+const isValidCNPJ = ( numCnpj ) => 
+  validate( numCnpj )
+          ( numCnpj.substr( numCnpj.length - 2 ), 
+            getValidationDigit( numCnpj )( numCnpj.length - 2 ) )
+
+const testCNPJ = ( numCnpj ) => 
+  !( isInvalidCNPJ( numCnpj ) ) && isValidCNPJ( numCnpj )
+
+const validateCnpj = ( cnpj ) => testCNPJ( unmasker( cnpj ) )
+
+module.exports = validateCnpj
+
+```
+
+<br>
+
+Com a mesma técnica passada podemos refatorar a seguinte parte:
+
+```js
+
+const getValidationDigit = ( numCnpj ) => ( s ) =>
+  [ getDigit( numCnpj, s ), getDigit( numCnpj, ++s ) ] 
+
+const isValidCNPJ = ( numCnpj ) => 
+  validate( numCnpj )
+          ( numCnpj.substr( numCnpj.length - 2 ), 
+            getValidationDigit( numCnpj )( numCnpj.length - 2 ) )
+
+```
+
+Removendo o `s` dos parâmetros da função `getValidationDigit` assim:
+
+```js
+
+const getValidationDigit = ( numCnpj ) => [ 
+  getDigit( numCnpj, numCnpj.length - 2 ), 
+  getDigit( numCnpj, numCnpj.length - 1 ) 
+] 
+
+const isValidCNPJ = ( numCnpj ) => 
+  validate( numCnpj )
+          ( numCnpj.substr( numCnpj.length - 2 ), getValidationDigit( numCnpj ) )
+
+
+```
+
