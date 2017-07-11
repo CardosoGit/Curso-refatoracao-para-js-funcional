@@ -2100,3 +2100,69 @@ const isValidCNPJ = ( numCnpj ) =>
 
 ```
 
+
+## Final
+
+Nosso código final ficou assim:
+
+```js
+
+const unmasker = require('./unmaskNumbers')
+const isValidDigit = ( d1, d2 ) => String( d1 ) === String( d2 )
+const isSameDigits = str => str.split( '' ).every( ( elem ) => elem === str[ 0 ] )
+
+const getR = ( t ) => ( t ) < 2 ? 0 : 11 - t
+const getData = ( numCnpj, s ) => [ 
+  numCnpj.substr( 0, s ), 0, s - 7 
+]
+
+const getSomeData = ( t, b, s, p, i ) => [
+  t + ( b.charAt( s - i ) * p ), --p, ( p < 2 ? 9 : p )
+]
+
+const validate = ( numCnpj ) => ( DV, digits = [] ) =>
+  ( digits.length === 2 ) && 
+  ( isValidDigit( digits[ 0 ], DV[ 0 ] ) && 
+    isValidDigit( digits[ 1 ], DV[ 1 ]) )
+
+const getDigit = ( numCnpj, s ) => {
+
+  let [ b, t, p ] = getData( numCnpj, s )
+
+  for ( let i = s; i >= 1; i-- ) {
+    [ t, _, p ] = getSomeData( t, b, s, p, i );
+  }
+
+  return getR( t % 11 )
+}
+
+const isInvalidCNPJ = ( numCnpj ) =>
+  ( numCnpj.length !== 14 || isSameDigits( numCnpj ) )
+
+const getValidationDigit = ( numCnpj ) => [ 
+  getDigit( numCnpj, numCnpj.length - 2 ), 
+  getDigit( numCnpj, numCnpj.length - 1 ) 
+] 
+
+const isValidCNPJ = ( numCnpj ) => 
+  validate( numCnpj )
+          ( numCnpj.substr( numCnpj.length - 2 ), 
+            getValidationDigit( numCnpj ) )
+
+const testCNPJ = ( numCnpj ) => !( isInvalidCNPJ( numCnpj ) ) && isValidCNPJ( numCnpj )
+
+const validateCnpj = ( cnpj ) => testCNPJ( unmasker( cnpj ) )
+
+module.exports = validateCnpj
+
+```
+
+## Técnicas
+
+As técnicas utilizadas nessa refatoração foram as seguintes:
+
+- nosso code style
+- arrow function
+- if ternário
+- destructuring assignment
+- retorno de função como *Array*
