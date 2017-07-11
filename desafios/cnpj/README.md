@@ -197,7 +197,25 @@ Pois a função [join](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/R
 
 <br>
 
-O método [match](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/String/match) sempre irá retornar um *Array* logo podemos utilizar a função [join](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/join) que converte um *Array* em uma *String*!
+O método [match](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/String/match) sempre irá retornar um *Array* logo podemos utilizar a função [join](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/join)<br>
+que converte um *Array* em uma *String*, deixando nosso código assim:
+
+```js
+
+const unmaskNumbers = ( num ) => num.match( /\d+/g ).join( '' )
+
+module.exports = unmaskNumbers
+
+```
+
+<br>
+
+> **Se você rodar os testes novamente devem dar o mesmo resultado que o inicial!**
+
+<br>
+
+*Caso você não tenha entendido essa parte me envie essa dúvida em privado.*
+
 
 ```js
 
