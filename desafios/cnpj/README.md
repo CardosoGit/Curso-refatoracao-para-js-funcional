@@ -681,7 +681,7 @@ module.exports = validateCnpj;
 
 > **Notou que deixei comentado o código que substituimos né?**
 
-Com isso você conferiu que reusamos a mesma função nas duas partes necessárias.
+Com isso inferimos que mesma função será usada em qualquer parte necessária.
 
 **Ainda temos mais linhas iguais nesse código, então *bora* refatorar!** 
 
