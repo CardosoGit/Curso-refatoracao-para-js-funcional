@@ -1557,12 +1557,9 @@ Para deixarmos nosso código assim:
 
 ```js
 
-const unmasker = require('./unmaskNumbers');
-
+const unmasker = require('./unmaskNumbers')
 const isInvalidDigit = ( d1, d2 ) => String( d1 ) !== String( d2 )
-
-const isSameDigits = str => 
-  str.split( '' ).every( ( elem ) => elem === str[ 0 ] )
+const isSameDigits = str => str.split( '' ).every( ( elem ) => elem === str[ 0 ] )
 
 const getData = ( numCnpj, s ) => [
   numCnpj.substr( 0, s ),
@@ -1594,7 +1591,7 @@ const getDigit = ( numCnpj, s ) => {
   let [ b, t, p ] = getData( numCnpj, s )
 
   for ( let i = s; i >= 1; i-- ) {
-    [ t, _, p ] = getSomeData( t, b, s, p, i );=
+    [ t, _, p ] = getSomeData( t, b, s, p, i );
   }
 
   return getR( t % 11 )
@@ -1604,32 +1601,16 @@ const validateCnpj = ( cnpj, id = 0 ) => {
   const numCnpj = unmasker( cnpj )
 
   let s = ( numCnpj.length - 2 )
-  const DV = numCnpj.substr( s );=
+  const DV = numCnpj.substr( s )
 
-  // let [ b, t, p ] = getData( numCnpj, s )
-
-  // for ( let i = s; i >= 1; i-- ) {
-  //   [ t, _, p ] = getSomeData( t, b, s, p, i );
-  // }
-
-  // let d1 = getR( t % 11 )
   let d1 = getDigit( numCnpj, s )
-
-  // s += 1;
-  // [ b, t, p ] = getData( numCnpj, s )
-
-  // for ( let i = s; i >= 1; i-- ) {
-  //   [ t, _, p ] = getSomeData( t, b, s, p, i )
-  // }
-
-  // let d2 = getR( t % 11 )
   let d2 = getDigit( numCnpj, ++s )
 
   const validateCNPJ = validate( numCnpj )
 
   return ( numCnpj.length !== 14 || isSameDigits( numCnpj ) )
-    ? false
-    :validateCNPJ( [ d1, d2 ], DV )
+            ? false
+            :validateCNPJ( [ d1, d2 ], DV )
 }
 
 module.exports = validateCnpj
