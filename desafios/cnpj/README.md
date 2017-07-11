@@ -1477,8 +1477,14 @@ module.exports = validateCnpj
 
 ```
 
+<br>
+
+
 
 Depois de chegarmos nesse estado, analise o seguinte trecho de código:
+
+<br>
+
 
 ```js
 
@@ -1495,7 +1501,13 @@ let d1 = getR( t % 11 )
 
 ```
 
+
+<br>
+
 E:
+
+<br>
+
 
 ```js
 
@@ -1510,10 +1522,16 @@ let d2 = getR( t % 11 )
 
 ```
 
+<br>
+
+
 Podemos observar claramente que o único valor que irá mudar algo é o `s`, pois sabemos<br>
 que o seu valor é incrementado, `s += 1`, antes de executar `getData` novamente.
 
 Logo podemos encapsular essa lógica na seguinte função:
+
+<br>
+
 
 ```js
 
@@ -1529,7 +1547,13 @@ const getDigit = ( numCnpj, s ) => {
 }
  ```
 
+<br>
+
+
 Para deixarmos nosso código assim:
+
+<br>
+
 
 ```js
 
