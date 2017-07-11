@@ -1,8 +1,8 @@
 # Validação CNPJ
 
-Dessa vez não irei mostrar como fazer essa validação passo-a-passo como fiz<br>
-[com essa validação de CPF], mas sim mostrar como refatorar uma validação<br>
-existente de um projeto já existente.
+Dessa vez não irei mostrar passo-a-passo como fazer essa validação, assim como fiz<br> 
+com a validação de CPF, mas sim como refatorar uma validação de um projeto já existente.
+
 
 O projeto de base será esse [consultaCnpj](https://github.com/antonellisantos/consultaCnpj).
 
