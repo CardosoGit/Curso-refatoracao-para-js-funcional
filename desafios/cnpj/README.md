@@ -2103,7 +2103,9 @@ const isValidCNPJ = ( numCnpj ) =>
 <br>
 
 Com isso deixamos todas nossas funções em **uma linha** com exceção da `getDigit` que<br>
-possui efeito colateral graças ao `for`, por isso deixamos ela em mais de uam linha!
+possui efeito colateral graças ao `for`, por isso deixamos ela em mais de uma linha!
+
+Para que seu efeito colateral seja *enclausurado* nessa função.
 
 <br>
 
