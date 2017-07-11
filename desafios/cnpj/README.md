@@ -2100,6 +2100,15 @@ const isValidCNPJ = ( numCnpj ) =>
 
 ```
 
+<br>
+
+Com isso deixamos todas nossas funções em **uma linha** com exceção da `getDigit` que<br>
+possui efeito colateral graças ao `for`, por isso deixamos ela em mais de uam linha!
+
+<br>
+
+<hr>
+<br>
 
 ## Final
 
@@ -2108,10 +2117,11 @@ Nosso código final ficou assim:
 ```js
 
 const unmasker = require('./unmaskNumbers')
+const NOT = ( x ) => !x
 const isValidDigit = ( d1, d2 ) => String( d1 ) === String( d2 )
 const isSameDigits = str => str.split( '' ).every( ( elem ) => elem === str[ 0 ] )
-
 const getR = ( t ) => ( t ) < 2 ? 0 : 11 - t
+
 const getData = ( numCnpj, s ) => [ 
   numCnpj.substr( 0, s ), 0, s - 7 
 ]
@@ -2149,7 +2159,8 @@ const isValidCNPJ = ( numCnpj ) =>
           ( numCnpj.substr( numCnpj.length - 2 ), 
             getValidationDigit( numCnpj ) )
 
-const testCNPJ = ( numCnpj ) => !( isInvalidCNPJ( numCnpj ) ) && isValidCNPJ( numCnpj )
+const testCNPJ = ( numCnpj ) => NOT( isInvalidCNPJ( numCnpj ) ) && 
+                                isValidCNPJ( numCnpj )
 
 const validateCnpj = ( cnpj ) => testCNPJ( unmasker( cnpj ) )
 
@@ -2166,3 +2177,6 @@ As técnicas utilizadas nessa refatoração foram as seguintes:
 - if ternário
 - destructuring assignment
 - retorno de função como *Array*
+- transparência referencial
+
+## Exercícios
