@@ -1868,3 +1868,30 @@ const validateCnpj = ( cnpj, id = 0 ) => {
 ```
 
 <br>
+
+Entretanto perceba que o `return` principal testa:
+
+- se NÃO `( numCnpj.length !== 14 || isSameDigits( numCnpj ) )`
+- E
+- se É `validateThisCNPJUsing`
+
+Logo iremos separar essas lógicas, primeiramente separando o teste inválido:
+
+```js
+
+const isInvalidCPNJ = ( numCnpj ) =>
+  ( numCnpj.length !== 14 || isSameDigits( numCnpj ) )
+
+const validateCnpj = ( cnpj, id = 0 ) => {
+
+  const numCnpj = unmasker( cnpj )
+  const validateThisCNPJUsing = validate( numCnpj )
+  let s = ( numCnpj.length - 2 )
+
+  return !( isInvalidCPNJ( numCnpj ) ) &&
+          validateThisCNPJUsing(  numCnpj.substr( s ), 
+                                  [ getDigit( numCnpj, s ), getDigit( numCnpj, ++s ) ] 
+                                )
+}
+
+```
