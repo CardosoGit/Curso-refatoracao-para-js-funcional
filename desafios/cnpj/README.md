@@ -4,7 +4,7 @@ Dessa vez não irei mostrar passo-a-passo como fazer essa validação, assim com
 com a validação de CPF, mas sim como refatorar uma validação de um projeto já existente.
 
 
-O projeto de base será esse [consultaCnpj](https://github.com/antonellisantos/consultaCnpj).
+O projeto de base será esse: [consultaCnpj](https://github.com/antonellisantos/consultaCnpj).
 
 Antes de iniciarmos vou mostrar como executar os testes e qual a saída deles.<br>
 Para isso vamos ver o `package.json`:
@@ -102,7 +102,7 @@ Depois basta executar: `npm run test`.
 
 Com isso sabemos que **TODO** o código está funcional e isso será muito importante!
 
-Quando abrimos o arquivo `lib/validateCnpj.js` encontramos de cara isso:
+Quando abrimos o arquivo `lib/validateCnpj.js`, de cara encontramos isso:
 
 <br>
 
@@ -121,7 +121,7 @@ const unmasker = require( './unmaskNumbers' );
 
 ## Helpers
 
-Inicialmente vamos iniciar a refatoração pela função mais simples:
+Primeiramente vamos iniciar a refatoração pela função mais simples:
 
 <br>
 
@@ -197,8 +197,8 @@ Pois a função [join](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/R
 
 <br>
 
-O método [match](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/String/match) sempre irá retornar um *Array* logo podemos utilizar a função [join](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/join)<br>
-que converte um *Array* em uma *String*, deixando nosso código assim:
+O método *[match](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/String/match)* sempre irá retornar um *Array*, logo podemos utilizar a função *[join](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/join)* <br>
+que converte um *Array* para uma *String*, deixando nosso código assim:
 
 ```js
 
@@ -210,11 +210,11 @@ module.exports = unmaskNumbers
 
 <br>
 
-> **Se você rodar os testes novamente devem dar o mesmo resultado que o inicial!**
+> **Se você rodar novamente os testes, então eles devem dar o mesmo resultado que o inicial!**
 
 <br>
 
-*Caso você não tenha entendido essa parte me envie essa dúvida em privado.*
+*Caso você não tenha entendido essa parte, envie-me sua dúvida por mensagem privada.*
 
 
 ## Validate
@@ -593,7 +593,7 @@ Além disso perceba essas 3 linhas idênticas:
 
 ```
 
-**Agora imagine uma forma onde nossa função podemos retornar esses três valores!**
+**Agora imagine uma forma onde a nossa função possa retornar esses três valores!**
 
 Para isso iremos utilizar a técnica do [Destructuring Assignment](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Operators/Atribuicao_via_desestruturacao) onde podemos definir o retorno de <br> 
 cada valor em uma constante/variável pré-escolhida. 
@@ -687,7 +687,7 @@ module.exports = validateCnpj;
 <br>
 
 
-Com isso inferimos que mesma função será usada em qualquer parte necessária.
+Com isso inferimos que a mesma função será usada em qualquer parte necessária.
 
 <br>
 <br>
@@ -1270,7 +1270,7 @@ module.exports = validateCnpj;
 ```
 
 Obviamente você já sabe que mesmo encapsulando o `for` ainda temos efeitos colaterais.<br>
-Depois iremos melhorar essa parte, por hora que que você atenha-se a essa parte:
+Depois iremos melhorar essa parte, por hora quero que você atenha-se a essa parte:
 
 ```js
 
