@@ -2282,7 +2282,7 @@ const getData = ( numCnpj, s ) => [
 ]
 
 const getSomeData = ( t, b, s, p, i ) => [
-  t + ( b.charAt( s - i ) * p ), --p, getP( p )
+  t + ( b.charAt( s - i ) * p ), getP( --p )
 ]
 
 const getValidationDigit = ( numCnpj ) => [ 
@@ -2295,7 +2295,7 @@ const getDigit = ( numCnpj, second = false ) => {
   let [ b, t, p ] = getData( numCnpj, s )
 
   for ( let i = s; i > 0; i-- ) {
-    [ t, _, p ] = getSomeData( t, b, s, p, i );
+    [ t, p ] = getSomeData( t, b, s, p, i );
   }
 
   return getR( t % 11 )
@@ -2331,7 +2331,10 @@ CNPJs.forEach( ( cnpj ) => console.log( `${cnpj}: ${validate( cnpj )}` ) )
 
 <br>
 
-O qual é um tanto diferente do primeiro código refatorado que fiz:
+Esse código está um pouco diferente do que finalizamos em aula, fiz isso para<br>
+você analisar e entender as modificações.
+
+Aliás esse código é um tanto diferente do primeiro código refatorado que fiz:
 
 ```js
 
@@ -2362,7 +2365,8 @@ const validDigit = ( CNPJ, second = false ) => {
 
   let [ b, t, p ] = getData( CNPJ, s )
 
-  for ( let i = s; i >= 1; i-- ) { [ t, _, p ] = getSomeData( t, b, s, p, i )
+  for ( let i = s; i >= 1; i-- ) { 
+    [ t, _, p ] = getSomeData( t, b, s, p, i )
   }
 
   return isValidDigit( getDigit( t % 11 ), DV[ id ] )
