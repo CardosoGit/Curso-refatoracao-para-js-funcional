@@ -2270,7 +2270,7 @@ const getR = ( t ) =>
     : 0 
 const getS = ( numCnpj ) => numCnpj.length - 2 
 const getP = ( p ) => ( p < 2 ? 9 : p )
-const isSameDigits = str => 
+const isSameDigits = ( str ) => 
   str.split( '' ).every( ( elem ) => elem === str[ 0 ] )
 
 const isValidDigits = ( digits, DV ) =>
@@ -2282,7 +2282,7 @@ const getData = ( numCnpj, s ) => [
 ]
 
 const getSomeData = ( t, b, s, p, i ) => [
-  t + ( b.charAt( s - i ) * p ), --p, getP( p )
+  t + ( b.charAt( s - i ) * p ), getP( --p )
 ]
 
 const getValidationDigit = ( numCnpj ) => [ 
@@ -2295,7 +2295,7 @@ const getDigit = ( numCnpj, second = false ) => {
   let [ b, t, p ] = getData( numCnpj, s )
 
   for ( let i = s; i > 0; i-- ) {
-    [ t, _, p ] = getSomeData( t, b, s, p, i );
+    [ t, p ] = getSomeData( t, b, s, p, i );
   }
 
   return getR( t % 11 )
