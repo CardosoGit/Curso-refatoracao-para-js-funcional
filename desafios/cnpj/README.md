@@ -1975,8 +1975,8 @@ const validateCnpj = ( cnpj ) => {
 
 <br>
 
-Todavia se o valor de `numCnpj` já está sendo passado como parâmetro, podemos reduzir<br>
-ainda mais nosso código removendo o parâmetro `s` e fazendo seu cálculo internamente,
+Todavia, como o valor de `numCnpj` já está sendo passado como parâmetro, podemos reduzir<br>
+ainda mais nosso código removendo o parâmetro `s` e fazendo seu cálculo internamente:
 
 
 ```js
