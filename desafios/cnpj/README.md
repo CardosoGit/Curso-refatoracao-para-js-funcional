@@ -2159,15 +2159,24 @@ Nosso código final ficou assim:
 
 const unmask = require('./unmaskNumbers')
 const NOT = ( x ) => !x
-const getR = ( t ) => ( t ) < 2 ? 0 : 11 - t
-const getS = ( numCnpj ) => numCnpj.length - 2 
-const getP = ( p ) => ( p < 2 ? 9 : p )
+
 const isSameDigits = str => 
   str.split( '' ).every( ( elem ) => elem === str[ 0 ] )
 
 const isValidDigit = ( d1, d2, index ) => 
   String( d1[ index ] ) === String( d2[ index ] )
 
+const getS = ( numCnpj ) => numCnpj.length - 2 
+
+const getR = ( t ) => 
+  ( t  < 2 )
+    ? 0 
+    : 11 - t
+
+const getP = ( p ) => 
+  ( p < 2 ) 
+    ? 9 
+    : p 
 
 const getData = ( numCnpj, s ) => [ 
   numCnpj.substr( 0, s ), 0, s - 7 
@@ -2257,7 +2266,10 @@ Porém veja o meu código final:
 
 const unmasker = require('./unmaskNumbers')
 const NOT = ( x ) => !x
-const getR = ( t ) => ( t ) < 2 ? 0 : 11 - t
+const getR = ( t ) => 
+  ( t ) >= 2 
+    ? 11 - t
+    : 0 
 const getS = ( numCnpj ) => numCnpj.length - 2 
 const getP = ( p ) => ( p < 2 ? 9 : p )
 const isSameDigits = str => 
