@@ -2400,6 +2400,7 @@ As técnicas utilizadas nessa refatoração foram as seguintes:
 - nosso code style
 - arrow function
 - if ternário
+- negação semântica (NOT)
 - destructuring assignment
 - retorno de função como *Array*
 - transparência referencial
