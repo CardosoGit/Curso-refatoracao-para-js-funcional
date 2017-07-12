@@ -1845,7 +1845,7 @@ const validate = ( numCnpj ) => ( DV, digits = [] ) =>
 
 <br>
 
-Agora sim podemos utilizar a função `validate` ela na função `validateCnpj` trocando<br>
+Agora sim podemos utilizar a função `validate` na função `validateCnpj`, trocando<br>
 a constante `DV` por `numCnpj.substr( s )`, pois **seu valor é SEMPRE esse!**
 
 ```js
