@@ -2381,8 +2381,8 @@ module.exports = validateCnpj
 
 <br>
 
-Esse último código ficou menor que o demonstrado em aula, porém EU gostei<br>
-mais do que foi ensinado para você, agora o porquê você terá que me dizer!
+Esse último código ficou menor que o demonstrado na aula, porém EU gostei mais do<br> 
+código que construimos durante essa explicação, agora o porquê você terá que me dizer!
 
 <br>
 <br>
