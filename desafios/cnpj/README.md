@@ -163,6 +163,7 @@ undefined
 
 <br>
 
+### Técnica - Arrow Function (one line)
 
 Com isso sabemos que essa função retira a máscara do CNPJ e perceba que<br> 
 essa função retorna `String(unmasked)`, ou seja, retorna uma *String*!
@@ -313,7 +314,7 @@ Primeira parte do código que iremos atacar e que já temos a solução é:
 
 <br>
 
-Só olhe essa função da validação do CPF:
+Olhe essa função que usei na validação do CPF o qual [explico nesse artigo](https://medium.com/@osuissa/javascript-validacao-de-cpf-passo-a-passo-9428ee32c104):
 
 <br>
 
@@ -592,6 +593,8 @@ Além disso perceba essas 3 linhas idênticas:
   p = s - 7;
 
 ```
+
+### Técnica - Destructuring Assignment
 
 **Agora imagine uma forma onde a nossa função possa retornar esses três valores!**
 
@@ -2401,6 +2404,7 @@ As técnicas utilizadas nessa refatoração foram as seguintes:
 - arrow function
 - if ternário
 - negação semântica (NOT)
+- agrupamento de testes lógicos
 - destructuring assignment
 - retorno de função como *Array*
 - transparência referencial
