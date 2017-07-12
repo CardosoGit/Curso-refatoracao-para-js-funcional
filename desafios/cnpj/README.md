@@ -1623,7 +1623,6 @@ module.exports = validateCnpj
 
 <br>
 
-Notou que 
 
 <br>
 
