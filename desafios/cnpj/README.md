@@ -2157,7 +2157,7 @@ Nosso código final ficou assim:
 
 ```js
 
-const unmasker = require('./unmaskNumbers')
+const unmask = require('./unmaskNumbers')
 const NOT = ( x ) => !x
 const getR = ( t ) => ( t ) < 2 ? 0 : 11 - t
 const getS = ( numCnpj ) => numCnpj.length - 2 
@@ -2208,7 +2208,7 @@ const isValidCNPJ = ( numCnpj ) =>
 const testCNPJ = ( numCnpj ) => NOT( isInvalidCNPJ( numCnpj ) ) && 
                                 isValidCNPJ( numCnpj )
 
-const validate = ( cnpj ) => testCNPJ( unmasker( cnpj ) )
+const validate = ( cnpj ) => testCNPJ( unmask( cnpj ) )
 
 module.exports = validate
 
@@ -2221,6 +2221,16 @@ const CNPJs = [
 CNPJs.forEach( ( cnpj ) => console.log( `${cnpj}: ${validate( cnpj )}` ) )
 
 ```
+
+<br>
+
+Note como ficou a escrita da nossa função principal: 
+
+`const validate = ( cnpj ) => testCNPJ( unmask( cnpj ) )`
+
+<br>
+
+> Valide CNPJ testando se o CNPJ sem máscara.
 
 <br>
 
