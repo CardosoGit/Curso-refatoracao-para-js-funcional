@@ -2138,10 +2138,10 @@ const isValidCNPJ = ( numCnpj ) =>
 **Não irei explicar mais, pois essa aula já está deveras GIGANTE!**
 
 
-Com isso deixamos todas nossas funções em **uma linha** com exceção da `getDigit` que<br>
-possui efeito colateral graças ao `for`, por isso deixamos ela em mais de uma linha!
+Com isso deixamos todas nossas funções em **uma linha**, com exceção da `getDigit` que<br>
+possui efeito colateral, graças ao `for`, por isso deixamos ela em mais de uma linha.
 
-Para que seu efeito colateral seja *enclausurado* nessa função.
+Para que seu efeito colateral seja *enclausurado* nessa função!
 
 <br>
 
@@ -2230,6 +2230,7 @@ CNPJs.forEach( ( cnpj ) => console.log( `${cnpj}: ${validate( cnpj )}` ) )
 
 <br>
 
+
 Note como ficou a escrita da nossa função principal: 
 `const validate = ( cnpj ) => testCNPJ( unmask( cnpj ) )`
 
@@ -2252,9 +2253,9 @@ const testCNPJ = ( numCnpj ) =>
 
 <br>
 
-Usamos como primeiro teste **SEMPRE** a função que invalida, aí sim a função<br>
-que valida, por isso utilizamos o `&&` para garantir que se no primeiro teste<br>
-retornar `false` nossa função não necessite executar o resto. 
+Executamos **SEMPRE** primeiramente o teste da função que invalida esse caso, aí sim<br> 
+será executada a função que valida, por isso utilizamos o `&&` para garantir que<br>  
+se o primeiro teste retornar `false` a nossa função não necessitará executar o resto. 
 
 
 Porém veja o meu código final:
