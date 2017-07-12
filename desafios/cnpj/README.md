@@ -2135,7 +2135,7 @@ const isValidCNPJ = ( numCnpj ) =>
 
 <br>
 
-**Não irei explicar mais pois essa aula já se está deveras GIGANTE!**
+**Não irei explicar mais, pois essa aula já está deveras GIGANTE!**
 
 
 Com isso deixamos todas nossas funções em **uma linha** com exceção da `getDigit` que<br>
