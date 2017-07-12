@@ -1555,8 +1555,6 @@ const getDigit = ( numCnpj, s ) => {
 
 Para deixarmos nosso código assim:
 
-<br>
-
 
 ```js
 
@@ -1624,10 +1622,7 @@ module.exports = validateCnpj
 <br>
 
 
-<br>
-
-
-Quero que você analise essas linhas comigo:
+Antes de continuarmos quero que você analise essas linhas comigo:
 
 ```js
 
