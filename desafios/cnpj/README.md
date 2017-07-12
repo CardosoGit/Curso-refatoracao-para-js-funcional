@@ -2225,7 +2225,6 @@ CNPJs.forEach( ( cnpj ) => console.log( `${cnpj}: ${validate( cnpj )}` ) )
 <br>
 
 Note como ficou a escrita da nossa função principal: 
-
 `const validate = ( cnpj ) => testCNPJ( unmask( cnpj ) )`
 
 <br>
@@ -2234,7 +2233,25 @@ Note como ficou a escrita da nossa função principal:
 
 <br>
 
-Porém o meu final, dessa aula, ficou dessa forma:
+E a nossa função de validação:
+
+```js
+const testCNPJ = ( numCnpj ) => 
+  NOT( isInvalidCNPJ( numCnpj ) ) && isValidCNPJ( numCnpj )
+```
+
+<br>
+
+> Teste CNPJ se NÃO for um CNPJ inválido E for um CNPJ válido.
+
+<br>
+
+Usamos como primeiro teste **SEMPRE** a função que invalida, aí sim a função<br>
+que valida, por isso utilizamos o `&&` para garantir que se no primeiro teste<br>
+retornar `false` nossa função não necessite executar o resto. 
+
+
+Porém veja o meu código final:
 
 ```js
 
@@ -2304,15 +2321,15 @@ CNPJs.forEach( ( cnpj ) => console.log( `${cnpj}: ${validate( cnpj )}` ) )
 
 <br>
 
-Contudo, entretanto, todavia o meu primeiro código refatorado foi esse:
+O qual é um tanto diferente do primeiro código refatorado que fiz:
 
 ```js
 
-const unmasker = require( './unmaskNumbers' )
+const unmask = require( './unmaskNumbers' )
 
 const getDigit = t => ( t >= 2 ) ? 11 - t : 0
-const getData = ( numCnpj, s ) => [ 
-  numCnpj.substr( 0, s ), 0, s - 7 
+const getData = ( CNPJ, s ) => [ 
+  CNPJ.substr( 0, s ), 0, s - 7 
 ]
 const getSomeData = ( t, b, s, p, i ) => [ 
   t + ( b.charAt( s - i ) * p ), --p, ( p < 2 ? 9 : p ) 
@@ -2322,18 +2339,18 @@ const isValidDigit = ( d1, d2 ) => ( String( d1 ) === String( d2 ) )
 const isSameDigits = array => 
   array.split( '' ).every( ( elem ) => elem === array[ 0 ] )
 
-const validDigit = ( numCnpj, second = false ) => {
+const validDigit = ( CNPJ, second = false ) => {
 
-  let s = ( numCnpj.length - 2 )
+  let s = ( CNPJ.length - 2 )
   let id = 0
-  const DV = numCnpj.substr( s )
+  const DV = CNPJ.substr( s )
 
   if ( second ) {
     ++s;
     ++id
   }
 
-  let [ b, t, p ] = getData( numCnpj, s )
+  let [ b, t, p ] = getData( CNPJ, s )
 
   for ( let i = s; i >= 1; i-- ) { [ t, _, p ] = getSomeData( t, b, s, p, i )
   }
@@ -2341,17 +2358,23 @@ const validDigit = ( numCnpj, second = false ) => {
   return isValidDigit( getDigit( t % 11 ), DV[ id ] )
 }
 
-const validate = numCnpj => 
-  !( numCnpj.length !== 14 || isSameDigits( numCnpj ) )
-    ? ( validDigit( numCnpj ) && validDigit( numCnpj, true ) )
+const validate = ( CNPJ ) => 
+  !( CNPJ.length !== 14 || isSameDigits( CNPJ ) )
+    ? ( validDigit( CNPJ ) && validDigit( CNPJ, true ) )
     : false
 
-const validateCnpj = cnpj => validate( unmasker( cnpj ) )
+const validateCnpj = ( CNPJ ) => validate( unmask( CNPJ ) )
 
 module.exports = validateCnpj
 
 ```
 
+<br>
+
+Esse último código ficou menor que o demonstrado em aula, porém EU gostei<br>
+mais do que foi ensinado para você, agora o porquê você terá que me dizer!
+
+<br>
 <br>
 
 <hr>
@@ -2369,7 +2392,7 @@ As técnicas utilizadas nessa refatoração foram as seguintes:
 - retorno de função como *Array*
 - transparência referencial
 
-## Exercício
+## Exercícios
 
 
 <br>
@@ -2385,3 +2408,10 @@ As técnicas utilizadas nessa refatoração foram as seguintes:
 refatore-a utilizando as técnicas já ensinadas.
 
 *ps: pode ser qualquer validação, porém quem refatorar a MAIOR ganha!*
+
+<br>
+
+<br>
+<br>
+
+<br>
