@@ -2254,7 +2254,7 @@ const testCNPJ = ( numCnpj ) =>
 <br>
 
 Executamos **SEMPRE** primeiramente o teste da função que invalida esse caso, aí sim<br> 
-será executada a função que valida, por isso utilizamos o `&&` para garantir que<br>  
+será executada a função que valida, por isso utilizamos o `&&` para garantir que<br>
 se o primeiro teste retornar `false` a nossa função não necessitará executar o resto. 
 
 
