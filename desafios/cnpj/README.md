@@ -2097,10 +2097,49 @@ const isValidCNPJ = ( numCnpj ) =>
   validate( numCnpj )
           ( numCnpj.substr( numCnpj.length - 2 ), getValidationDigit( numCnpj ) )
 
+```
+
+<br>
+
+Todavia perceba como é a função `validate` e a sua chamada:
+
+
+```js
+
+const validate = ( numCnpj ) => ( DV, digits = [] ) =>
+  ( digits.length === 2 ) && 
+  ( isValidDigit( digits[ 0 ], DV[ 0 ] ) && 
+    isValidDigit( digits[ 1 ], DV[ 1 ]) )
+
+const isValidCNPJ = ( numCnpj ) => 
+  validate( numCnpj )
+          ( numCnpj.substr( numCnpj.length - 2 ), 
+            getValidationDigit( numCnpj ) )
 
 ```
 
 <br>
+
+Notou que passamos `numCnpj` mas esse valor não é usado internamente na função?
+
+Sabendo disso, podemos refatorar essa função, e sua chamada, da seguinte maneira:
+
+```js
+
+const validate = ( DV, digits = [] ) =>
+  ( digits.length === 2 ) && 
+  ( isValidDigit( digits[ 0 ], DV[ 0 ] ) && 
+    isValidDigit( digits[ 1 ], DV[ 1 ] ) )
+
+const isValidCNPJ = ( numCnpj ) => 
+  validate( numCnpj.substr( numCnpj.length - 2 ), getValidationDigit( numCnpj ) )
+
+```
+
+<br>
+
+**Não irei explicar mais pois essa aula já se está deveras GIGANTE!**
+
 
 Com isso deixamos todas nossas funções em **uma linha** com exceção da `getDigit` que<br>
 possui efeito colateral graças ao `for`, por isso deixamos ela em mais de uma linha!
@@ -2120,28 +2159,34 @@ Nosso código final ficou assim:
 
 const unmasker = require('./unmaskNumbers')
 const NOT = ( x ) => !x
-const isValidDigit = ( d1, d2 ) => String( d1 ) === String( d2 )
-const isSameDigits = str => str.split( '' ).every( ( elem ) => elem === str[ 0 ] )
 const getR = ( t ) => ( t ) < 2 ? 0 : 11 - t
+const getS = ( numCnpj ) => numCnpj.length - 2 
+const getP = ( p ) => ( p < 2 ? 9 : p )
+const isSameDigits = str => 
+  str.split( '' ).every( ( elem ) => elem === str[ 0 ] )
+
+const isValidDigit = ( d1, d2, index ) => 
+  String( d1[ index ] ) === String( d2[ index ] )
+
 
 const getData = ( numCnpj, s ) => [ 
   numCnpj.substr( 0, s ), 0, s - 7 
 ]
 
 const getSomeData = ( t, b, s, p, i ) => [
-  t + ( b.charAt( s - i ) * p ), --p, ( p < 2 ? 9 : p )
+  t + ( b.charAt( s - i ) * p ), --p, getP( p )
 ]
 
-const validate = ( numCnpj ) => ( DV, digits = [] ) =>
-  ( digits.length === 2 ) && 
-  ( isValidDigit( digits[ 0 ], DV[ 0 ] ) && 
-    isValidDigit( digits[ 1 ], DV[ 1 ]) )
+const getValidationDigit = ( numCnpj ) => [ 
+  getDigit( numCnpj ), getDigit( numCnpj, 'second' ) 
+] 
 
-const getDigit = ( numCnpj, s ) => {
+const getDigit = ( numCnpj, second = false ) => {
 
+  let s = ( !second ) ? getS( numCnpj ) : getS( numCnpj ) + 1
   let [ b, t, p ] = getData( numCnpj, s )
 
-  for ( let i = s; i >= 1; i-- ) {
+  for ( let i = s; i > 0; i-- ) {
     [ t, _, p ] = getSomeData( t, b, s, p, i );
   }
 
@@ -2151,24 +2196,157 @@ const getDigit = ( numCnpj, s ) => {
 const isInvalidCNPJ = ( numCnpj ) =>
   ( numCnpj.length !== 14 || isSameDigits( numCnpj ) )
 
-const getValidationDigit = ( numCnpj ) => [ 
-  getDigit( numCnpj, numCnpj.length - 2 ), 
-  getDigit( numCnpj, numCnpj.length - 1 ) 
-] 
+
+const validateCnpj = ( DV, digits = [] ) =>
+  ( digits.length === 2 ) && 
+  ( isValidDigit( digits, DV, 0 ) && 
+    isValidDigit( digits, DV, 1 ) )
 
 const isValidCNPJ = ( numCnpj ) => 
-  validate( numCnpj )
-          ( numCnpj.substr( numCnpj.length - 2 ), 
-            getValidationDigit( numCnpj ) )
+  validateCnpj( numCnpj.substr( getS( numCnpj ) ), getValidationDigit( numCnpj ) )
 
 const testCNPJ = ( numCnpj ) => NOT( isInvalidCNPJ( numCnpj ) ) && 
                                 isValidCNPJ( numCnpj )
 
-const validateCnpj = ( cnpj ) => testCNPJ( unmasker( cnpj ) )
+const validate = ( cnpj ) => testCNPJ( unmasker( cnpj ) )
+
+module.exports = validate
+
+
+const CNPJs = [
+  '03376337/0001-96', '49402415/0001-80',
+  '00000000/0001-96', '11111111/0001-80',
+]
+
+CNPJs.forEach( ( cnpj ) => console.log( `${cnpj}: ${validate( cnpj )}` ) )
+
+```
+
+<br>
+
+Porém o meu final, dessa aula, ficou dessa forma:
+
+```js
+
+const unmasker = require('./unmaskNumbers')
+const NOT = ( x ) => !x
+const getR = ( t ) => ( t ) < 2 ? 0 : 11 - t
+const getS = ( numCnpj ) => numCnpj.length - 2 
+const getP = ( p ) => ( p < 2 ? 9 : p )
+const isSameDigits = str => 
+  str.split( '' ).every( ( elem ) => elem === str[ 0 ] )
+
+const isValidDigits = ( digits, DV ) =>
+  ( String( digits[ 0 ] ) === String( DV[ 0 ] ) ) && 
+  ( String( digits[ 1 ] ) === String( DV[ 1 ] ) )
+
+const getData = ( numCnpj, s ) => [ 
+  numCnpj.substr( 0, s ), 0, s - 7 
+]
+
+const getSomeData = ( t, b, s, p, i ) => [
+  t + ( b.charAt( s - i ) * p ), --p, getP( p )
+]
+
+const getValidationDigit = ( numCnpj ) => [ 
+  getDigit( numCnpj ), getDigit( numCnpj, 'second' ) 
+] 
+
+const getDigit = ( numCnpj, second = false ) => {
+
+  let s = ( !second ) ? getS( numCnpj ) : getS( numCnpj ) + 1
+  let [ b, t, p ] = getData( numCnpj, s )
+
+  for ( let i = s; i > 0; i-- ) {
+    [ t, _, p ] = getSomeData( t, b, s, p, i );
+  }
+
+  return getR( t % 11 )
+}
+
+const isInvalidCNPJ = ( numCnpj ) =>
+  ( numCnpj.length !== 14 || isSameDigits( numCnpj ) )
+
+
+const validateCnpj = ( DV, digits = [] ) =>
+  ( digits.length === 2 ) && isValidDigits( digits, DV )
+  
+
+const isValidCNPJ = ( numCnpj ) => 
+  validateCnpj( numCnpj.substr( getS( numCnpj ) ), getValidationDigit( numCnpj ) )
+
+const testCNPJ = ( numCnpj ) => NOT( isInvalidCNPJ( numCnpj ) ) && 
+                                isValidCNPJ( numCnpj )
+
+const validate = ( cnpj ) => testCNPJ( unmasker( cnpj ) )
+
+module.exports = validate
+
+
+const CNPJs = [
+  '03376337/0001-96', '49402415/0001-80',
+  '00000000/0001-96', '22222222/0001-80',
+]
+
+CNPJs.forEach( ( cnpj ) => console.log( `${cnpj}: ${validate( cnpj )}` ) )
+
+```
+
+<br>
+
+Contudo, entretanto, todavia o meu primeiro código refatorado foi esse:
+
+```js
+
+const unmasker = require( './unmaskNumbers' )
+
+const getDigit = t => ( t >= 2 ) ? 11 - t : 0
+const getData = ( numCnpj, s ) => [ 
+  numCnpj.substr( 0, s ), 0, s - 7 
+]
+const getSomeData = ( t, b, s, p, i ) => [ 
+  t + ( b.charAt( s - i ) * p ), --p, ( p < 2 ? 9 : p ) 
+]
+
+const isValidDigit = ( d1, d2 ) => ( String( d1 ) === String( d2 ) )
+const isSameDigits = array => 
+  array.split( '' ).every( ( elem ) => elem === array[ 0 ] )
+
+const validDigit = ( numCnpj, second = false ) => {
+
+  let s = ( numCnpj.length - 2 )
+  let id = 0
+  const DV = numCnpj.substr( s )
+
+  if ( second ) {
+    ++s;
+    ++id
+  }
+
+  let [ b, t, p ] = getData( numCnpj, s )
+
+  for ( let i = s; i >= 1; i-- ) { [ t, _, p ] = getSomeData( t, b, s, p, i )
+  }
+
+  return isValidDigit( getDigit( t % 11 ), DV[ id ] )
+}
+
+const validate = numCnpj => 
+  !( numCnpj.length !== 14 || isSameDigits( numCnpj ) )
+    ? ( validDigit( numCnpj ) && validDigit( numCnpj, true ) )
+    : false
+
+const validateCnpj = cnpj => validate( unmasker( cnpj ) )
 
 module.exports = validateCnpj
 
 ```
+
+<br>
+
+<hr>
+
+<br>
 
 ## Técnicas
 
@@ -2181,4 +2359,19 @@ As técnicas utilizadas nessa refatoração foram as seguintes:
 - retorno de função como *Array*
 - transparência referencial
 
-## Exercícios
+## Exercício
+
+
+<br>
+
+1) Analise meus dois últimos códigos e escolha o qual você achou melhor e por quê?
+
+<br>
+
+<br>
+
+
+2) Encontre uma função de validação que esteja na forma imperativa e<br>
+refatore-a utilizando as técnicas já ensinadas.
+
+*ps: pode ser qualquer validação, porém quem refatorar a MAIOR ganha!*
