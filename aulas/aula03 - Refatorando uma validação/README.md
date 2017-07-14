@@ -320,7 +320,7 @@ Olhe essa função que usei na validação do CPF o qual [explico nesse artigo](
 
 ```js
 
-const isSameDigits = str => 
+const isRepeatingChars = str => 
   str.split( '' ).every( ( elem ) => elem === str[ 0 ] );
 
 ```
@@ -334,7 +334,7 @@ Bora trocar aquele `if` gigantesco pela nossa função:
 ```js
 const unmasker = require('./unmaskNumbers');
 
-const isSameDigits = str => 
+const isRepeatingChars = str => 
   str.split( '' ).every( ( elem ) => elem === str[ 0 ] );
 
 // Valida o CNPJ informado, conforme parâmetros da RFB.
@@ -344,7 +344,7 @@ function validateCnpj(cnpj) {
   if (numCnpj.length !== 14) {
     return false;
   }
-  if ( isSameDigits( numCnpj ) ) {
+  if ( isRepeatingChars( numCnpj ) ) {
     return false;
   }
 
@@ -397,7 +397,7 @@ Antes de continuarmos quero que você preste atenção nessa parte:
   if (numCnpj.length !== 14) {
     return false;
   }
-  if ( isSameDigits( numCnpj ) ) {
+  if ( isRepeatingChars( numCnpj ) ) {
     return false;
   }
 
@@ -407,7 +407,7 @@ Como já aprendemos anteriormente podemos agrupar esses testes assim:
 
 ```js
 
-  if ( numCnpj.length !== 14 || isSameDigits( numCnpj ) ) {
+  if ( numCnpj.length !== 14 || isRepeatingChars( numCnpj ) ) {
     return false;
   }
 
@@ -620,7 +620,7 @@ como utilizaremos essa função:
 
 const unmasker = require('./unmaskNumbers');
 
-const isSameDigits = str => 
+const isRepeatingChars = str => 
   str.split( '' ).every( ( elem ) => elem === str[ 0 ] );
 
 const getData = ( numCnpj, s ) => [
@@ -633,7 +633,7 @@ const getData = ( numCnpj, s ) => [
 function validateCnpj(cnpj) {
   const numCnpj = unmasker(cnpj);
 
-  if (numCnpj.length !== 14 ||  isSameDigits( numCnpj ) ) {
+  if (numCnpj.length !== 14 ||  isRepeatingChars( numCnpj ) ) {
     return false;
   }
 
@@ -726,7 +726,7 @@ Para usarmos assim:
 
 const unmasker = require('./unmaskNumbers');
 
-const isSameDigits = str => 
+const isRepeatingChars = str => 
   str.split( '' ).every( ( elem ) => elem === str[ 0 ] );
 
 const getData = ( numCnpj, s ) => [
@@ -743,7 +743,7 @@ const getR = ( t ) =>
 function validateCnpj(cnpj) {
   const numCnpj = unmasker(cnpj);
 
-  if (numCnpj.length !== 14 ||  isSameDigits( numCnpj ) ) {
+  if (numCnpj.length !== 14 ||  isRepeatingChars( numCnpj ) ) {
     return false;
   }
 
@@ -843,7 +843,7 @@ Deixando nosso código nesse estado:
 
 const unmasker = require('./unmaskNumbers');
 
-const isSameDigits = str => 
+const isRepeatingChars = str => 
   str.split( '' ).every( ( elem ) => elem === str[ 0 ] );
 
 const getData = ( numCnpj, s ) => [
@@ -862,7 +862,7 @@ const isInvalidDigit = ( d1, d2 ) => String( d1 ) !== String( d2 )
 function validateCnpj(cnpj) {
   const numCnpj = unmasker(cnpj);
 
-  if (numCnpj.length !== 14 ||  isSameDigits( numCnpj ) ) {
+  if (numCnpj.length !== 14 ||  isRepeatingChars( numCnpj ) ) {
     return false;
   }
 
@@ -979,7 +979,7 @@ const unmasker = require('./unmaskNumbers');
 
 const isInvalidDigit = ( d1, d2 ) => String( d1 ) !== String( d2 )
 
-const isSameDigits = str => 
+const isRepeatingChars = str => 
   str.split( '' ).every( ( elem ) => elem === str[ 0 ] );
 
 const getData = ( numCnpj, s ) => [
@@ -996,7 +996,7 @@ const getR = ( t ) =>
 function validateCnpj(cnpj) {
   const numCnpj = unmasker(cnpj);
 
-  if (numCnpj.length !== 14 ||  isSameDigits( numCnpj ) ) {
+  if (numCnpj.length !== 14 ||  isRepeatingChars( numCnpj ) ) {
     return false;
   }
 
@@ -1072,7 +1072,7 @@ Antes de refatorarmos analise bem nosso código atual:
 
 const unmasker = require('./unmaskNumbers');
 
-const isSameDigits = str => 
+const isRepeatingChars = str => 
   str.split( '' ).every( ( elem ) => elem === str[ 0 ] );
 
 const getData = ( numCnpj, s ) => [
@@ -1091,7 +1091,7 @@ const isInvalidDigit = ( d1, d2 ) => String( d1 ) !== String( d2 )
 function validateCnpj(cnpj) {
   const numCnpj = unmasker(cnpj);
 
-  if (numCnpj.length !== 14 ||  isSameDigits( numCnpj ) ) {
+  if (numCnpj.length !== 14 ||  isRepeatingChars( numCnpj ) ) {
     return false;
   }
 
@@ -1200,7 +1200,7 @@ const unmasker = require('./unmaskNumbers');
 
 const isInvalidDigit = ( d1, d2 ) => String( d1 ) !== String( d2 )
 
-const isSameDigits = str => 
+const isRepeatingChars = str => 
   str.split( '' ).every( ( elem ) => elem === str[ 0 ] );
 
 const getData = ( numCnpj, s ) => [
@@ -1223,7 +1223,7 @@ const getSomeData = ( t, b, s, p, i ) => [
 function validateCnpj(cnpj) {
   const numCnpj = unmasker(cnpj);
 
-  if (numCnpj.length !== 14 ||  isSameDigits( numCnpj ) ) {
+  if (numCnpj.length !== 14 ||  isRepeatingChars( numCnpj ) ) {
     return false;
   }
 
@@ -1314,7 +1314,7 @@ const unmasker = require('./unmaskNumbers');
 
 const isInvalidDigit = ( d1, d2 ) => String( d1 ) !== String( d2 )
 
-const isSameDigits = str => 
+const isRepeatingChars = str => 
   str.split( '' ).every( ( elem ) => elem === str[ 0 ] );
 
 const getData = ( numCnpj, s ) => [
@@ -1347,7 +1347,7 @@ const validateCnpj = ( cnpj ) => {
 
   const validateCNPJ = validate( cnpj )
 
-  if (numCnpj.length !== 14 || isSameDigits( numCnpj ) ) {
+  if (numCnpj.length !== 14 || isRepeatingChars( numCnpj ) ) {
     return false
   }
 
@@ -1418,7 +1418,7 @@ const unmasker = require('./unmaskNumbers');
 
 const isInvalidDigit = ( d1, d2 ) => String( d1 ) !== String( d2 )
 
-const isSameDigits = str => 
+const isRepeatingChars = str => 
   str.split( '' ).every( ( elem ) => elem === str[ 0 ] );
 
 const getData = ( numCnpj, s ) => [
@@ -1471,7 +1471,7 @@ const validateCnpj = ( cnpj, id = 0 ) => {
 
   const validateCNPJ = validate( numCnpj )
 
-  return ( numCnpj.length !== 14 || isSameDigits( numCnpj ) )
+  return ( numCnpj.length !== 14 || isRepeatingChars( numCnpj ) )
     ? false
     :validateCNPJ( [ d1, d2 ], DV )
 }
@@ -1560,7 +1560,7 @@ Para deixarmos nosso código assim:
 
 const unmasker = require('./unmaskNumbers')
 const isInvalidDigit = ( d1, d2 ) => String( d1 ) !== String( d2 )
-const isSameDigits = str => str.split( '' ).every( ( elem ) => elem === str[ 0 ] )
+const isRepeatingChars = str => str.split( '' ).every( ( elem ) => elem === str[ 0 ] )
 
 const getData = ( numCnpj, s ) => [
   numCnpj.substr( 0, s ),
@@ -1610,7 +1610,7 @@ const validateCnpj = ( cnpj, id = 0 ) => {
   let d2 = getDigit( numCnpj, ++s )
 
 
-  return ( numCnpj.length !== 14 || isSameDigits( numCnpj ) )
+  return ( numCnpj.length !== 14 || isRepeatingChars( numCnpj ) )
             ? false
             :validateCNPJ( [ d1, d2 ], DV )
 }
@@ -1630,7 +1630,7 @@ let d1 = getDigit( numCnpj, s )
 let d2 = getDigit( numCnpj, ++s )
 
 
-return ( numCnpj.length !== 14 || isSameDigits( numCnpj ) )
+return ( numCnpj.length !== 14 || isRepeatingChars( numCnpj ) )
           ? false
           :validateCNPJ( [ d1, d2 ], DV )
 
@@ -1657,7 +1657,7 @@ Caso você tenha feito o exercício entenderá facilmente o que farei em seguida
 
 ```js
 
-return ( numCnpj.length !== 14 || isSameDigits( numCnpj ) )
+return ( numCnpj.length !== 14 || isRepeatingChars( numCnpj ) )
           ? false
           : validateCNPJ( [ getDigit( numCnpj, s ), getDigit( numCnpj, ++s ) ], DV )
 
@@ -1669,7 +1669,7 @@ Agora para melhorar nosso `if` ternário podemos inverter a lógica assim:
 
 ```js
 
-return !( numCnpj.length !== 14 || isSameDigits( numCnpj ) )
+return !( numCnpj.length !== 14 || isRepeatingChars( numCnpj ) )
           ? validateThisCNPJUsing( [ getDigit( numCnpj, s ), getDigit( numCnpj, ++s ) ], DV )
           : false
 
@@ -1738,7 +1738,7 @@ Levando conosco essa mesma técnica iremos refatorar a seguinte parte:
 
 ```js
 
-return !( numCnpj.length !== 14 || isSameDigits( numCnpj ) )
+return !( numCnpj.length !== 14 || isRepeatingChars( numCnpj ) )
           ? validateThisCNPJUsing( [ getDigit( numCnpj, s ), getDigit( numCnpj, ++s ) ], DV )
           : false
 
@@ -1748,7 +1748,7 @@ Para isso:
 
 ```js
 
-return !( numCnpj.length !== 14 || isSameDigits( numCnpj ) ) &&
+return !( numCnpj.length !== 14 || isRepeatingChars( numCnpj ) ) &&
         validateThisCNPJUsing( [ getDigit( numCnpj, s ), getDigit( numCnpj, ++s ) ], DV )
 
 ```
@@ -1856,7 +1856,7 @@ const validateCnpj = ( cnpj, id = 0 ) => {
   const validateThisCNPJUsing = validate( numCnpj )
   let s = ( numCnpj.length - 2 )
 
-  return !( numCnpj.length !== 14 || isSameDigits( numCnpj ) ) &&
+  return !( numCnpj.length !== 14 || isRepeatingChars( numCnpj ) ) &&
           validateThisCNPJUsing(  numCnpj.substr( s ), 
                                   [ getDigit( numCnpj, s ), getDigit( numCnpj, ++s ) ] 
                                 )
@@ -1868,7 +1868,7 @@ const validateCnpj = ( cnpj, id = 0 ) => {
 
 Entretanto perceba que o `return` principal testa:
 
-- se NÃO `( numCnpj.length !== 14 || isSameDigits( numCnpj ) )`
+- se NÃO `( numCnpj.length !== 14 || isRepeatingChars( numCnpj ) )`
 - E
 - se É `validateThisCNPJUsing`
 
@@ -1877,7 +1877,7 @@ Logo iremos separar essas lógicas, primeiramente separando o teste inválido:
 ```js
 
 const isInvalidCNPJ = ( numCnpj ) =>
-  ( numCnpj.length !== 14 || isSameDigits( numCnpj ) )
+  ( numCnpj.length !== 14 || isRepeatingChars( numCnpj ) )
 
 const validateCnpj = ( cnpj, id = 0 ) => {
 
@@ -2018,7 +2018,7 @@ Confira comigo como está nosso código atual:
 ```js
 const unmasker = require('./unmaskNumbers')
 const isValidDigit = ( d1, d2 ) => String( d1 ) === String( d2 )
-const isSameDigits = str => str.split( '' ).every( ( elem ) => elem === str[ 0 ] )
+const isRepeatingChars = str => str.split( '' ).every( ( elem ) => elem === str[ 0 ] )
 
 const getR = ( t ) => ( t ) < 2 ? 0 : 11 - t
 const getData = ( numCnpj, s ) => [ 
@@ -2046,7 +2046,7 @@ const getDigit = ( numCnpj, s ) => {
 }
 
 const isInvalidCNPJ = ( numCnpj ) =>
-  ( numCnpj.length !== 14 || isSameDigits( numCnpj ) )
+  ( numCnpj.length !== 14 || isRepeatingChars( numCnpj ) )
 
 const getValidationDigit = ( numCnpj ) => ( s ) =>
   [ getDigit( numCnpj, s ), getDigit( numCnpj, ++s ) ] 
@@ -2157,7 +2157,7 @@ Nosso código final ficou assim:
 const unmask = require('./unmaskNumbers')
 const NOT = ( x ) => !x
 
-const isSameDigits = str => 
+const isRepeatingChars = str => 
   str.split( '' ).every( ( elem ) => elem === str[ 0 ] )
 
 const isValidDigit = ( d1, d2, index ) => 
@@ -2200,7 +2200,7 @@ const getDigit = ( numCnpj, second = false ) => {
 }
 
 const isInvalidCNPJ = ( numCnpj ) =>
-  ( numCnpj.length !== 14 || isSameDigits( numCnpj ) )
+  ( numCnpj.length !== 14 || isRepeatingChars( numCnpj ) )
 
 
 const validateCnpj = ( DV, digits = [] ) =>
@@ -2270,7 +2270,7 @@ const getR = ( t ) =>
     : 0 
 const getS = ( numCnpj ) => numCnpj.length - 2 
 const getP = ( p ) => ( p < 2 ? 9 : p )
-const isSameDigits = ( str ) => 
+const isRepeatingChars = ( str ) => 
   str.split( '' ).every( ( elem ) => elem === str[ 0 ] )
 
 const isValidDigits = ( digits, DV ) =>
@@ -2302,7 +2302,7 @@ const getDigit = ( numCnpj, second = false ) => {
 }
 
 const isInvalidCNPJ = ( numCnpj ) =>
-  ( numCnpj.length !== 14 || isSameDigits( numCnpj ) )
+  ( numCnpj.length !== 14 || isRepeatingChars( numCnpj ) )
 
 
 const validateCnpj = ( DV, digits = [] ) =>
@@ -2346,7 +2346,7 @@ const getSomeData = ( t, b, s, p, i ) => [
 ]
 
 const isValidDigit = ( d1, d2 ) => ( String( d1 ) === String( d2 ) )
-const isSameDigits = array => 
+const isRepeatingChars = array => 
   array.split( '' ).every( ( elem ) => elem === array[ 0 ] )
 
 const validDigit = ( CNPJ, second = false ) => {
@@ -2369,7 +2369,7 @@ const validDigit = ( CNPJ, second = false ) => {
 }
 
 const validate = ( CNPJ ) => 
-  !( CNPJ.length !== 14 || isSameDigits( CNPJ ) )
+  !( CNPJ.length !== 14 || isRepeatingChars( CNPJ ) )
     ? ( validDigit( CNPJ ) && validDigit( CNPJ, true ) )
     : false
 
