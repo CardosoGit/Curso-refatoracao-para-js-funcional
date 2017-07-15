@@ -6,6 +6,10 @@ npm-debug.log*
 .DS_Store
 */.DS_Store
 
+node_modules
+*/node_modules
+desafios/cnpj/consultaCnpj-base/node_modules
+
 # Runtime data
 pids
 *.pid
