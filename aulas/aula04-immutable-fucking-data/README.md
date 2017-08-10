@@ -21,9 +21,10 @@ Quando cheguei nesse tópico, durante o início dos meus estudos, ele fez-me <br
 > Você também se questionou isso??
 
 <br>
+
 **Que bom!** Espero que eu possa lhe explicar esse conceito **CABULOSO**.
 
-I
+
 <br> 
 <br> 
 
