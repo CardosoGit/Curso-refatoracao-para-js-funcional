@@ -5,10 +5,6 @@
 <br>
 <br>
 
-> "A pure function is a function that, given the same input, will 
-> always return the same output and does not have any observable side effect."
-
-*fonte: [Chapter 3: Pure Happiness with Pure Functions](https://github.com/MostlyAdequate/mostly-adequate-guide/blob/master/ch3.md)*
 
 Quando cheguei nesse tópico, durante o início dos meus estudos, ele fez-me <br> 
  questionar o seguinte:
@@ -25,17 +21,21 @@ Quando cheguei nesse tópico, durante o início dos meus estudos, ele fez-me <br
 > Você também se questionou isso??
 
 <br>
-Que bom! Então antes de explicar esse conceito precisamos entender que existe <br> 
-um grande problema ao usar-se uma linguagem que também suporta classes. Como <br> 
-uma classe é uma estrutura que oculta dados e, além disso, contém funções, ele <br> 
-apresenta muita complexidade. Para entender o motivo dessa complexidade, primeiro <br> 
-precisamos falar sobre funções puras e impuras.
+**Que bom!** Espero que eu possa lhe explicar esse conceito **CABULOSO**.
 
-
+I
 <br> 
 <br> 
 
 ## λPure Functions
+
+
+> "A pure function is a function that, given the same input, will 
+> always return the same output and does not have any observable side effect."
+
+*fonte: [Chapter 3: Pure Happiness with Pure Functions](https://github.com/MostlyAdequate/mostly-adequate-guide/blob/master/ch3.md)*
+
+
 
 ![What does a pure function look like?](http://i.imgur.com/frhBrUH.jpg)
 
