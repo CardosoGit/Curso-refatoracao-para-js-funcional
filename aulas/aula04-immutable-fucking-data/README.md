@@ -5,11 +5,13 @@
 <br>
 <br>
 
-> "A pure function is a function that, given the same input, will always return the same output and does not have any observable side effect."
+> "A pure function is a function that, given the same input, will 
+> always return the same output and does not have any observable side effect."
 
 *fonte: [Chapter 3: Pure Happiness with Pure Functions](https://github.com/MostlyAdequate/mostly-adequate-guide/blob/master/ch3.md)*
 
-Quando cheguei nesse tópico, durante o início dos meus estudos, ele fez-me questionar o seguinte:
+Quando cheguei nesse tópico, durante o início dos meus estudos, ele fez-me <br> 
+ questionar o seguinte:
 
 > **Se eu não posso mudar nenhum valor das variáveis como é que eu vou programar?**
 
@@ -23,9 +25,11 @@ Quando cheguei nesse tópico, durante o início dos meus estudos, ele fez-me que
 > Você também se questionou isso??
 
 <br>
-<br>
-
-Que bom! Então antes de explicar esse conceito precisamos entender que existe um grande problema ao usar-se uma linguagem que também suporta classes. Como uma classe é uma estrutura que oculta dados e, além disso, contém funções, ele apresenta muita complexidade. Para entender o motivo dessa complexidade, primeiro precisamos falar sobre funções puras e impuras.
+Que bom! Então antes de explicar esse conceito precisamos entender que existe <br> 
+um grande problema ao usar-se uma linguagem que também suporta classes. Como <br> 
+uma classe é uma estrutura que oculta dados e, além disso, contém funções, ele <br> 
+apresenta muita complexidade. Para entender o motivo dessa complexidade, primeiro <br> 
+precisamos falar sobre funções puras e impuras.
 
 
 <br> 
@@ -43,11 +47,13 @@ const checkAge = ( age ) => age >= minimum
 
 ```
 
-Na parte impura, `checkAge` depende da constante `minimum` para determinar o resultado, porém esse valor se encontra "fora do escopo interno" da função `checkAge`. 
+Na parte impura, `checkAge` depende da constante `minimum` para determinar o <br> 
+resultado, porém esse valor se encontra "fora do escopo interno" da função `checkAge`. 
 
 **Para resolver esse problema é bem simples!**
 
-Basta passarmos esse valor via parâmetro e de preferência definindo um valor padrão, como podemos ver abaixo:
+Basta passarmos esse valor via parâmetro e de preferência definindo um <br> 
+valor padrão, como podemos ver abaixo:
 
 
 ```js
@@ -62,7 +68,8 @@ const checkAge = ( age, minimum = 18 ) => age >= minimum
 
 ## λSide Effects
 
-> "A side effect is a change of system state or observable interaction with the outside world that occurs during the calculation of a result."
+> "A side effect is a change of system state or observable interaction 
+> with the outside world that occurs during the calculation of a result."
 
 *fonte: [Chapter 3: Pure Happiness with Pure Functions](https://github.com/MostlyAdequate/mostly-adequate-guide/blob/master/ch3.md)*
 
