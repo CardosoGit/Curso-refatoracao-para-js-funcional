@@ -24,6 +24,8 @@ Quando cheguei nesse tópico, durante o início dos meus estudos, ele fez-me <br
 
 **Que bom!** Espero que eu possa lhe explicar esse conceito **CABULOSO**.
 
+E para entendermos como trabalhar com dados imutáveis precisamos<br>
+entender antes o que são Funções Puras(Pure Functions).
 
 <br> 
 <br> 
