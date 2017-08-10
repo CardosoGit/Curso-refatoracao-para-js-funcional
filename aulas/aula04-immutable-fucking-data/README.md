@@ -30,6 +30,7 @@ Quando cheguei nesse tópico, durante o início dos meus estudos, ele fez-me <br
 
 ## λPure Functions
 
+![desenho de uma freira](http://i.imgur.com/xHpYORO.gif)
 
 > "A pure function is a function that, given the same input, will 
 > always return the same output and does not have any observable side effect."
