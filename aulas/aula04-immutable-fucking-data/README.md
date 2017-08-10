@@ -40,12 +40,26 @@ entender antes o que são Funções Puras(Pure Functions).
 *fonte: [Chapter 3: Pure Happiness with Pure Functions](https://github.com/MostlyAdequate/mostly-adequate-guide/blob/master/ch3.md)*
 
 Já conhecemos esse conceito das aulas anteriores, porém agora veremos sua <br>
-enorme importância para a Programação Funcional. Pois esse mesmo conceito <br>
-engloba outros como:
+enorme importância para a Programação Funcional. 
 
-- efeitos colaterais;
-- transparência referencial;
-- e obviamente dados imutáveis.
+
+
+### λSide Effects
+
+> "A side effect is a change of system state or observable interaction 
+> with the outside world that occurs during the calculation of a result."
+
+*fonte: [Chapter 3: Pure Happiness with Pure Functions](https://github.com/MostlyAdequate/mostly-adequate-guide/blob/master/ch3.md)*
+
+Os efeitos colaterais(*side effects*) podem incluir, mas não estão limitados a:
+
+- alteração em arquivos;
+- inserção um registro em um banco de dados;
+- requições HTTP;
+- mudanças de valor/estado;
+- impressão na tela / logging;
+- entrada de dados do usuário;
+- consultas no DOM;
 
 
 ```js
@@ -221,26 +235,6 @@ createOrder:  [ { product_id: 1, price: 180 },
 <br>
 
 
-## λSide Effects
-
-> "A side effect is a change of system state or observable interaction 
-> with the outside world that occurs during the calculation of a result."
-
-*fonte: [Chapter 3: Pure Happiness with Pure Functions](https://github.com/MostlyAdequate/mostly-adequate-guide/blob/master/ch3.md)*
-
-Os efeitos colaterais(*side effects*) podem incluir, mas não estão limitados a:
-
-- alteração em arquivos;
-- inserção um registro em um banco de dados;
-- requições HTTP;
-- mudanças de valor/estado;
-- impressão na tela / logging;
-- entrada de dados do usuário;
-- consultas no DOM;
-
-
-<br>
-<br>
 
 ## λImmutable Data 
 
