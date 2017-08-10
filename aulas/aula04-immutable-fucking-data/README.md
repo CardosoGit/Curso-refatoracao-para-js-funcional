@@ -138,9 +138,9 @@ const order = [
 ]
 
 const applyingDiscount = ( obj, i ) => {
-  let product_id = obj.product_id
-  let quantity = obj.quantity
-  let price = ( obj.price ) - ( obj.price * ( obj.discount / 100 ) )
+  const product_id = obj.product_id
+  const quantity = obj.quantity
+  const price = ( obj.price ) - ( obj.price * ( obj.discount / 100 ) )
 
   return {
     product_id,
@@ -150,7 +150,7 @@ const applyingDiscount = ( obj, i ) => {
   
 }
 
-const createOrder = ( list ) => list.map( applyDiscount ) 
+const createOrder = ( list ) => list.map( applyingDiscount ) 
 
 console.log( "createOrder: ", createOrder( order ) )
 
@@ -163,6 +163,59 @@ createOrder:  [ { product_id: 1, quantity: 1, price: 90 },
 */
 ```
 
+Como visto o desconto foi aplicado a cada produto e o objeto retornado<br>
+já não possui mais o campo de desconto. Para melhorar nosso exemplo vamos<br>
+mudar os valores de `quantity` e vamos fazer **outra** função para fazer<br>
+o cálculo do valor final de cada produto a partir da sua quantidade.
+
+Sabendo disso iremos criar a função `multiplyByQuantity` bem parecida com<br>
+a que fizemos anteriormente, confira comigo abaixo:
+
+```js
+const order = [
+  { product_id: 1, quantity: 2, price: 100, discount: 10 },
+  { product_id: 2, quantity: 2, price: 100, discount: 20 },
+  { product_id: 3, quantity: 10, price: 100, discount: 30 },
+]
+
+const applyingDiscount = ( obj, i ) => {
+  const product_id = obj.product_id
+  const quantity = obj.quantity
+  const price = ( obj.price ) - ( obj.price * ( obj.discount / 100 ) )
+
+  return {
+    product_id,
+    quantity,
+    price
+  }
+  
+}
+
+const multiplyByQuantity = ( obj, i ) => {
+  const product_id = obj.product_id
+  const price = obj.price * obj.quantity
+
+  return {
+    product_id,
+    price
+  }
+  
+}
+
+const createOrder = ( list ) => 
+  list.map( applyingDiscount )
+      .map( multiplyByQuantity )
+
+console.log( "createOrder: ", createOrder( order ) )
+
+/**
+ 
+createOrder:  [ { product_id: 1, price: 180 },
+  { product_id: 2, price: 160 },
+  { product_id: 3, price: 700 } ]
+
+*/
+```
 
 <br>
 <br>

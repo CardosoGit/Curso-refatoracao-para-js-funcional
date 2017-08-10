@@ -5,9 +5,9 @@ const order = [
 ]
 
 const applyingDiscount = ( obj, i ) => {
-  let product_id = obj.product_id
-  let quantity = obj.quantity
-  let price = ( obj.price ) - ( obj.price * ( obj.discount / 100 ) )
+  const product_id = obj.product_id
+  const quantity = obj.quantity
+  const price = ( obj.price ) - ( obj.price * ( obj.discount / 100 ) )
 
   return {
     product_id,
