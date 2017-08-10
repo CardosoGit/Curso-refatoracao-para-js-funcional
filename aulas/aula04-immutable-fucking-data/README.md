@@ -11,11 +11,11 @@
 
 Quando cheguei nesse tópico, durante o início dos meus estudos, ele fez-me questionar o seguinte:
 
-<br>
-<br>
-
 > **Se eu não posso mudar nenhum valor das variáveis como é que eu vou programar?**
 
+<br>
+
+![](http://www.reactiongifs.com/r/hmmrhed.gif)
 
 <br>
 <br>
@@ -57,6 +57,9 @@ const checkAge = ( age, minimum = 18 ) => age >= minimum
 
 ```
 
+<br>
+<br>
+
 ## λSide Effects
 
 > "A side effect is a change of system state or observable interaction with the outside world that occurs during the calculation of a result."
@@ -73,66 +76,15 @@ Os efeitos colaterais(*side effects*) podem incluir, mas não estão limitados a
 - entrada de dados do usuário
 - consultas no DOM
 
+
+<br>
+<br>
+
 ## λImmutable Data 
 
 
 <br>
-
+<br>
 
 ## λExercício
 
-O exercício dessa aula é **BEM SIMPLES**. Quero apenas que você<br> 
-envie de 3 a 5 códigos, o original e o refatorado, aplicando o nosso<br> 
-*codestyle* e as técnicas aprendidas até agora.
-
-Os códigos podem ou não serem seus, você que decide!
-
-
-## λAviso
-
-O meu código refatorado "final" foi esse, fiz mais para testar algumas coisas. :p
-
-```js
-
-const CYPHER_LIMIT = 78
-const A = 65
-const Z = 90
-const getCharCode = String.fromCharCode
-
-const add = ( c ) => ( s ) => s.concat( c )
-const isSpace = ( x ) => ( x === 32 )
-
-const isInRange = ( min, max ) => ( x ) => 
-  ( ( x >= min ) &&  ( x <= max ) )
-
-const toCharCode = ( letter, i, str ) => 
-  str.join( '' ).charCodeAt( i )
-
-const getPosition = ( CYPHER_LENGTH ) => ( x ) =>
-  ( x >= CYPHER_LIMIT ) ? x - CYPHER_LENGTH  : x + CYPHER_LENGTH 
-
-const getCharCodeFromCypher = ( CYPHER_LENGTH ) => ( x ) => 
-  ( isInRange( A, Z )( x ) ) ? getPosition( CYPHER_LENGTH )( x ) : x
-
-const cypherThis = ( CYPHER_LENGTH ) => ( x, isSpace ) =>
-  getCharCode( isSpace ?  x : getCharCodeFromCypher( CYPHER_LENGTH )( x ) )
-
-const toCypher = ( CYPHER_LENGTH ) => ( result, x, i ) => 
-  add ( cypherThis( CYPHER_LENGTH )( x ), isSpace( x )  )( result )
-
-const rot = ( CYPHER_LENGTH ) => ( str ) => 
-  str.toUpperCase()
-      .split( '' )
-      .map( toCharCode )
-      .reduce( toCypher( CYPHER_LENGTH ), '' )
-
-const rot13 = rot( 13 )
-
-console.log('rot13 LBH QVQ VG!', rot13( 'LBH QVQ VG!' ) )
-console.log('rot13 suissa', rot13( 'suissa' ) )
-
-```
-
-
-> **Logo mais você também chegará nisso facilmente,**<br> 
-> **não que seja o melhor apenas diferente hehehhehe!**
