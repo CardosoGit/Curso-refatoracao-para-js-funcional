@@ -33,7 +33,44 @@ Que bom! Então antes de explicar esse conceito precisamos entender que existe u
 
 ## λPure Functions
 
+
+```js
+
+// impure
+const minimum = 21
+const checkAge = ( age ) => age >= minimum
+
+```
+
+Na parte impura, `checkAge` depende da constante `minimum` para determinar o resultado, porém esse valor se encontra "fora do escopo interno" da função `checkAge`. 
+
+**Para resolver esse problema é bem simples!**
+
+Basta passarmos esse valor via parâmetro e de preferência definindo um valor padrão, como podemos ver abaixo:
+
+
+```js
+
+// pure
+const checkAge = ( age, minimum = 18 ) => age >= minimum
+
+```
+
 ## λSide Effects
+
+> "A side effect is a change of system state or observable interaction with the outside world that occurs during the calculation of a result."
+
+*fonte: [Chapter 3: Pure Happiness with Pure Functions](https://github.com/MostlyAdequate/mostly-adequate-guide/blob/master/ch3.md)*
+
+Os efeitos colaterais(*side effects*) podem incluir, mas não estão limitados a:
+
+- alteração em arquivos
+- inserção um registro em um banco de dados
+- requições HTTP
+- mutações
+- impressão na tela / logging
+- entrada de dados do usuário
+- consultas no DOM
 
 ## λImmutable Data 
 
