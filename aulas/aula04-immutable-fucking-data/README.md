@@ -1,6 +1,6 @@
 # λAula04.(Immutable Fucking Data)
 
-![Hadouken](https://www.thinkful.com/learn/static/guides/intro-to-jquery/images/ryu_hadoken_pose.png)
+![Immutable Awesomeness](http://i.imgur.com/l4JkguX.jpg)
 
 <br>
 <br>
@@ -33,6 +33,7 @@ Que bom! Então antes de explicar esse conceito precisamos entender que existe u
 
 ## λPure Functions
 
+![What does a pure function look like?](http://i.imgur.com/frhBrUH.jpg)
 
 ```js
 
