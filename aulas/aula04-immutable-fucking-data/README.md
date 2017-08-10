@@ -35,9 +35,14 @@ I
 
 *fonte: [Chapter 3: Pure Happiness with Pure Functions](https://github.com/MostlyAdequate/mostly-adequate-guide/blob/master/ch3.md)*
 
+Já conhecemos esse conceito das aulas anteriores, porém agora veremos sua <br>
+enorme importância para a Programação Funcional. Pois esse mesmo conceito <br>
+engloba outros como:
 
+- efeitos colaterais;
+- transparência referencial;
+- e obviamente dados imutáveis.
 
-![What does a pure function look like?](http://i.imgur.com/frhBrUH.jpg)
 
 ```js
 
@@ -50,10 +55,15 @@ const checkAge = ( age ) => age >= minimum
 Na parte impura, `checkAge` depende da constante `minimum` para determinar o <br> 
 resultado, porém esse valor se encontra "fora do escopo interno" da função `checkAge`. 
 
+
+
 **Para resolver esse problema é bem simples!**
 
 Basta passarmos esse valor via parâmetro e de preferência definindo um <br> 
-valor padrão, como podemos ver abaixo:
+valor padrão.
+
+
+![What does a pure function look like?](http://i.imgur.com/frhBrUH.jpg)
 
 
 ```js
@@ -75,13 +85,13 @@ const checkAge = ( age, minimum = 18 ) => age >= minimum
 
 Os efeitos colaterais(*side effects*) podem incluir, mas não estão limitados a:
 
-- alteração em arquivos
-- inserção um registro em um banco de dados
-- requições HTTP
-- mutações
-- impressão na tela / logging
-- entrada de dados do usuário
-- consultas no DOM
+- alteração em arquivos;
+- inserção um registro em um banco de dados;
+- requições HTTP;
+- mudanças de valor/estado;
+- impressão na tela / logging;
+- entrada de dados do usuário;
+- consultas no DOM;
 
 
 <br>
