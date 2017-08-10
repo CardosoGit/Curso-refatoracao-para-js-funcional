@@ -73,8 +73,96 @@ const checkAge = ( age, minimum = 18 ) => age >= minimum
 
 ```
 
+Obviamente esse exemplo é muito simples, então vamos utilizar um exemplo<br>
+do mundo real. 
+
+Em um sistema de *ecommerce* iremos receber um *Array* de Pedidos, bem simples, <br>
+onde precisamos aplicar o desconto no valor de cada produto e retornar um<br>
+*Array* novo com os valores atualizados e sem o valor do desconto.
+
+Quando trabalhamos de forma mutável vemos o código abaixo diversas vezes:
+
+
+```js
+const order = [
+  { product_id: 1, quantity: 1, price: 100, discount: 10 },
+  { product_id: 2, quantity: 1, price: 100, discount: 20 },
+  { product_id: 3, quantity: 1, price: 100, discount: 30 },
+]
+
+const orderWithDiscount = []
+
+for ( let i = 0; i < order.length; i++ ) {
+  let product_id = order[ i ].product_id
+  let quantity = order[ i ].quantity
+  let price = ( order[ i ].price ) - ( order[ i ].price * ( order[ i ].discount / 100 ) )
+
+  let result = {
+    product_id,
+    quantity,
+    price
+  }
+
+  orderWithDiscount.push( result )
+  
+}
+
+console.log( "orderWithDiscount: ", orderWithDiscount )
+
+/**
+ 
+orderWithDiscount:  [ { product_id: 1, quantity: 1, price: 90 },
+  { product_id: 2, quantity: 1, price: 80 },
+  { product_id: 3, quantity: 1, price: 70 } ]
+
+*/
+```
+
+Logo mais veremos que o código acima além de ser mutável ainda possui<br>
+efeitos colaterais, que abordarei na sequência dessa aula.
+
+Para refatorar o código acima faremos o seguinte:
+
+- criar uma função que receba o *Array* e aplique o `map`: `createOrder`
+- criar uma função para o `map` que retornará os valores novos: `applyingDiscount`
+
+```js
+const order = [
+  { product_id: 1, quantity: 1, price: 100, discount: 10 },
+  { product_id: 2, quantity: 1, price: 100, discount: 20 },
+  { product_id: 3, quantity: 1, price: 100, discount: 30 },
+]
+
+const applyingDiscount = ( obj, i ) => {
+  let product_id = obj.product_id
+  let quantity = obj.quantity
+  let price = ( obj.price ) - ( obj.price * ( obj.discount / 100 ) )
+
+  return {
+    product_id,
+    quantity,
+    price
+  }
+  
+}
+
+const createOrder = ( list ) => list.map( applyDiscount ) 
+
+console.log( "createOrder: ", createOrder( order ) )
+
+/**
+ 
+createOrder:  [ { product_id: 1, quantity: 1, price: 90 },
+  { product_id: 2, quantity: 1, price: 80 },
+  { product_id: 3, quantity: 1, price: 70 } ]
+
+*/
+```
+
+
 <br>
 <br>
+
 
 ## λSide Effects
 
