@@ -24,13 +24,21 @@ Quando cheguei nesse tópico, durante o início dos meus estudos, ele fez-me <br
 
 **Que bom!** Espero que eu possa lhe explicar esse conceito **CABULOSO**.
 
-E para entendermos como trabalhar com dados imutáveis precisamos<br>
-entender antes o que são Funções Puras(Pure Functions).
+
+
+## λImmutable Data 
+
+Você trabalha com alguns tipos de dados que por si só já são imutáveis, por<br>
+exemplo:
+
+- String
+- Number
+- Boolean
 
 <br> 
 <br> 
 
-## λPure Functions
+### λPure Functions
 
 ![desenho de uma freira](http://i.imgur.com/xHpYORO.gif)
 
@@ -39,10 +47,16 @@ entender antes o que são Funções Puras(Pure Functions).
 
 *fonte: [Chapter 3: Pure Happiness with Pure Functions](https://github.com/MostlyAdequate/mostly-adequate-guide/blob/master/ch3.md)*
 
-Já conhecemos esse conceito das aulas anteriores, porém agora veremos sua <br>
+> **Sabe onde TODAS as funções são PURAS?**
+>
+> - Na Mate(sua LINDA)mática!
+
+Bom já conhecemos esse conceito das aulas anteriores, porém agora veremos sua <br>
 enorme importância para a Programação Funcional. 
 
 
+<br> 
+<br> 
 
 ### λSide Effects
 
@@ -235,8 +249,6 @@ createOrder:  [ { product_id: 1, price: 180 },
 <br>
 
 
-
-## λImmutable Data 
 
 
 <br>
