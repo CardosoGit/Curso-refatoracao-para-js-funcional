@@ -42,10 +42,6 @@ Esse curso iria sair gratuitamente, porém por acasos da vida estou necessitado 
 Como a maioria que me conhece, sabe que todos meus conteúdos sao gratuitos. Logo quando a meta for alcançada irei liberar 
 para todos o curso que contara' com um certificado emitido pela Webschool.
 
-- custo: R$35
-- meta: 100 alunos
-- data: quando alcançar a meta
-
 
 <br>
 
@@ -126,14 +122,6 @@ Que entrarei em contato para passar a forma de pagamento.
 
 <br>
 
-### Forma de pagamento
-
-Será feito via depósito diretamente na minha conta, ou se quiser via Paypal custará R$40. 
-
-> **Nada daquele lixo do Pagseguro!**
-
-
-<br>
 
 ### Exercícios
 
