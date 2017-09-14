@@ -4,16 +4,16 @@ const empregados = [
   { nome: 'C', valor: 23, horas: 180 },
 ]
 
-const salariosDosEmpregados = []
+const calculaSalarioPorHora = ( empregado ) => {
+  const total = empregado.valor * empregado.horas
 
-for ( let i = 0; i < empregados.length; i++ ) {
-  const total = empregados[ i ].valor * empregados[ i ].horas
-
-  salariosDosEmpregados.push( {
-    nome: empregados[ i ].nome,
+  return {
+    nome: empregado.nome,
     total
-  } )
+  }
 }
+
+const salariosDosEmpregados = empregados.map( calculaSalarioPorHora )
 
 console.log( "salariosDosEmpregados: \n", salariosDosEmpregados )
 

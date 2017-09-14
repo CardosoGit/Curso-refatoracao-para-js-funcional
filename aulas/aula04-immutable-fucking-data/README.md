@@ -108,6 +108,22 @@ const checkAge = ( age, minimum = 18 ) => age >= minimum
 Obviamente esse exemplo é muito simples, então vamos utilizar um exemplo<br>
 do mundo real. 
 
+Imagine que possuímos um Array de Objetos que possuem os seguintes dados:
+
+- nome do empregado;
+- valor da sua hora trabalhada;
+- quantidade de horas trabalhada sno mês.
+
+```js
+const empregados = [
+  { nome: 'A', valor: 30, horas: 140 },
+  { nome: 'B', valor: 45, horas: 100 },
+  { nome: 'C', valor: 23, horas: 180 },
+]
+```
+
+
+
 ```js
 const empregados = [
   { nome: 'A', valor: 30, horas: 140 },
@@ -119,12 +135,11 @@ const salariosDosEmpregados = []
 
 for ( let i = 0; i < empregados.length; i++ ) {
   const total = empregados[ i ].valor * empregados[ i ].horas
-  const empregado = {
+
+  salariosDosEmpregados.push( {
     nome: empregados[ i ].nome,
     total
-  }
-
-  salariosDosEmpregados.push( empregado )
+  } )
 }
 
 console.log( "salariosDosEmpregados: \n", salariosDosEmpregados )
@@ -138,6 +153,124 @@ salariosDosEmpregados:
 
 */
 ```
+
+Como você deve ter notado nós criamos um *Array* vazio `salariosDosEmpregados` <br>
+para que fossemos adicionando um Objeto novo com as informações que queremos.
+
+Com isso nós estamos **MUDANDO** o estado inicial do *Array*, para que possamos<br>
+refatorar esse código utilizando o conceito de dados imutáveis é bem simples.
+
+Você pode seguir a seguinte dica:
+
+> Se você encontrar um `push` dentro de um *loop* onde o mesmo adiciona valores<br>
+> em um Array vazio, você pode criar esse mesmo Array com o resultado final do<br>
+> seu processamento.
+
+<br>
+
+![](https://media.giphy.com/media/91fEJqgdsnu4E/giphy.gif)
+
+<br>
+
+> Mais fácil eu demonstrar isso com código!
+
+```js
+const empregados = [
+  { nome: 'A', valor: 30, horas: 140 },
+  { nome: 'B', valor: 45, horas: 100 },
+  { nome: 'C', valor: 23, horas: 180 },
+]
+
+const calculeSalarioPorHora = ( empregado ) => {
+  const total = empregado.valor * empregado.horas
+
+  return {
+    nome: empregado.nome,
+    total
+  }
+}
+
+const salariosDosEmpregados = empregados.map( calculeSalarioPorHora )
+
+console.log( "salariosDosEmpregados: \n", salariosDosEmpregados )
+
+/**
+ 
+salariosDosEmpregados: 
+ [ { nome: 'A', total: 4200 },
+  { nome: 'B', total: 4500 },
+  { nome: 'C', total: 4140 } ]
+
+*/
+```
+
+Podemos ainda aplicar a técnica de *one line* na função `calculeSalarioPorHora` assim:
+
+```js
+const empregados = [
+  { nome: 'A', valor: 30, horas: 140 },
+  { nome: 'B', valor: 45, horas: 100 },
+  { nome: 'C', valor: 23, horas: 180 },
+]
+
+const calculeSalarioPorHora = ( empregado ) => ({
+  nome: empregado.nome,
+  total: empregado.valor * empregado.horas
+})
+
+const salariosDosEmpregados = empregados.map( calculeSalarioPorHora )
+
+console.log( "salariosDosEmpregados: \n", salariosDosEmpregados )
+```
+
+E ainda podemos refatorar para encapsular a lógica do `map`dessa forma:
+
+```js
+const calculeSalarioPorHora = ( empregado ) => ({
+  nome: empregado.nome,
+  total: empregado.valor * empregado.horas
+})
+
+const calculeSalario = ( empregados ) => empregados.map( calculeSalarioPorHora )
+
+const empregados = [
+  { nome: 'A', valor: 30, horas: 140 },
+  { nome: 'B', valor: 45, horas: 100 },
+  { nome: 'C', valor: 23, horas: 180 },
+]
+const salariosDosEmpregados = calculeSalario( empregados )
+
+console.log( "salariosDosEmpregados: \n", salariosDosEmpregados )
+```
+
+Ficou bem mais simples e legível que esse código:
+
+```js
+const empregados = [
+  { nome: 'A', valor: 30, horas: 140 },
+  { nome: 'B', valor: 45, horas: 100 },
+  { nome: 'C', valor: 23, horas: 180 },
+]
+
+const salariosDosEmpregados = []
+
+for ( let i = 0; i < empregados.length; i++ ) {
+  const total = empregados[ i ].valor * empregados[ i ].horas
+
+  salariosDosEmpregados.push( {
+    nome: empregados[ i ].nome,
+    total
+  } )
+}
+```
+
+<br>
+
+![tá certo isso?](http://www.criarmeme.com.br/meme/meme-1581--ta-certo-isso-.jpg)
+
+<br>
+
+## Exercício
 
 Em um sistema de *ecommerce* iremos receber um *Array* de Pedidos, bem simples, <br>
 onde precisamos aplicar o desconto no valor de cada produto e retornar um<br>
