@@ -108,6 +108,8 @@ const checkAge = ( age, minimum = 18 ) => age >= minimum
 Obviamente esse exemplo é muito simples, então vamos utilizar um exemplo<br>
 do mundo real. 
 
+## Exemplo real
+
 Imagine que possuímos um Array de Objetos que possuem os seguintes dados:
 
 - nome do empregado;
