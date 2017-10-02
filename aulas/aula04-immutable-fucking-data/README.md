@@ -80,8 +80,12 @@ Os efeitos colaterais(*side effects*) podem incluir, mas não estão limitados a
 
 ```js
 
+// impure
+let count = 0
+const inc = () => count += 1
+
 // pure
-const inc = ( x ) => x + 1
+const inc = ( count ) => count + 1
 
 ```
 
