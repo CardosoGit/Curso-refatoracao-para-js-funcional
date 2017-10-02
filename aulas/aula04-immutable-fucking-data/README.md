@@ -75,33 +75,13 @@ Os efeitos colaterais(*side effects*) podem incluir, mas não estão limitados a
 - entrada de dados do usuário;
 - consultas no DOM;
 
-
-```js
-
-// impure
-const minimum = 21
-const checkAge = ( age ) => age >= minimum
-
-```
-
-Na parte impura, `checkAge` depende da constante `minimum` para determinar o <br> 
-resultado, porém esse valor se encontra "fora do escopo interno" da função `checkAge`. 
-
-
-
-**Para resolver esse problema é bem simples!**
-
-Basta passarmos esse valor via parâmetro e de preferência definindo um <br> 
-valor padrão.
-
-
 ![What does a pure function look like?](http://i.imgur.com/frhBrUH.jpg)
 
 
 ```js
 
 // pure
-const checkAge = ( age, minimum = 18 ) => age >= minimum
+const inc = ( x ) => x + 1
 
 ```
 
