@@ -58,7 +58,9 @@ Então vamos ao que interessa: as nossas regras.
   }
   ```
 
-* **Use aspas simples para strings**. [#02]()
+
+**Use aspas simples para strings**. [#02]()
+
 
   ```js
   console.log( 'Salve galera do JS Funcional!!!' )   // ✓ ok
@@ -66,7 +68,10 @@ Então vamos ao que interessa: as nossas regras.
   console.log( "Salve galera do JS Funcional!!!" )   // ✗ evite
   ```
 
-* **Use *[template string](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/template_strings)* em *Strings* com concatenação**. [#03]()
+
+
+**Use *[template string](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/template_strings)* em *Strings* com concatenação**. [#03]()
+
 
   ```js
   const hello = ( name ) => {   // ✓ ok
@@ -81,7 +86,8 @@ Então vamos ao que interessa: as nossas regras.
   ```
 
 
-* **Sem variáveis/constantes não-utilizadas.** [#04]()
+
+**Sem variáveis/constantes não-utilizadas.** [#04]()
 
   ```js
   const myFunction = () => {
@@ -99,12 +105,15 @@ Então vamos ao que interessa: as nossas regras.
 
   <br>
 
-* **Adicione um espaço após as keywords.** [#05]()
+
+**Adicione um espaço após as keywords.** [#05]()
+
 
   ```js
   if ( condition ) { ... }   // ✓ ok
   if(condition) { ... }    // ✗ evite
   ```
+
 
 * **Adicione um espaço antes do parêntese de declaração de funções.** [#06]()
 
