@@ -469,10 +469,12 @@ escreva cada declaração na sua própria instrução.
   const silent = true,
       verbose = true
   ```
+
   
 ## Ponto-e-vírgula  [#23]()
 
-* Não use. (veja: [1](http://blog.izs.me/post/2353458699/an-open-letter-to-javascript-leaders-regarding), [2](http://inimino.org/%7Einimino/blog/javascript_semicolons), [3](https://www.youtube.com/watch?v=gsfbh17Ax9I))
+**Não use. (veja: [1](http://blog.izs.me/post/2353458699/an-open-letter-to-javascript-leaders-regarding), [2](http://inimino.org/%7Einimino/blog/javascript_semicolons), [3](https://www.youtube.com/watch?v=gsfbh17Ax9I))**
+
 
   ```js
   window.alert( 'hi' )   // ✓ ok
@@ -484,6 +486,7 @@ escreva cada declaração na sua própria instrução.
 **Nunca comece uma linha com `(`, `[`, ou `` ` ``.**  [#24]() <br>
 Esse é o único problema em omitir ponto-e-vírgula, o Standard <br> 
 te protege desse problema em potencial.
+
 
   ```js
   // ✓ ok
@@ -497,6 +500,8 @@ te protege desse problema em potencial.
   }() )
   ```
 
+<hr>
+
   ```js
   // ✓ ok
   ;[ 1, 2, 3 ].join( ' - ' )
@@ -504,6 +509,9 @@ te protege desse problema em potencial.
   // ✗ evite
   [ 1, 2, 3 ].join( ' - ' )
   ```
+  
+<hr>
+
 
   ```js
   // ✓ ok
@@ -522,9 +530,11 @@ te protege desse problema em potencial.
 
   Ao invés disso:
 
+
   ```js
   ;[ 1, 2, 3 ].forEach( odd )
   ```
+
 
   **Isso é bem melhor!**
 
@@ -532,3 +542,4 @@ te protege desse problema em potencial.
   const nums = [ 1, 2, 3, 4 ]
   const evens = nums.filter( theEvens )
   ```
+
